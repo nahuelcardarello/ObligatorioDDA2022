@@ -2,14 +2,14 @@
 El objetivo del presente trabajo obligatorio es modelar e implementar la primera versión prototipo de un sistema de atención telefónica.
 ##Descripcion flujos casos de uso
 
-###CU: Ingresar a la aplicación
+### CU: Ingresar a la aplicación
 
 1) El trabajador ingresa su número de cédula y su contraseña.
 Data en inputs de texto 2) El sistema registra que ese trabajador estará atendiendo clientes en su sector, asignándole un puesto de trabajo (El primero que esté libre).
 3) El sistema ejecuta directamente el caso de uso Atender llamadas (en otra interfaz de usuario)
 Ejecuta metodo login, que va a pasarle las credenciales a través del controlador y fachada al sistema trabajadores, este chequea que exista un trabajador con esas credenciales. Busca un puesto libre, asigna al trabajador a este. Y finalmente se retorna el puesto, y se le pasa este puesto a ejecutarSiguienteCasoDeUso(p : Puesto) para que se instancia una nueva vista Atender Llamadas pasándole el puesto por constructor.
 
-###C.U. Atender llamada
+### C.U. Atender llamada
 
 1)El sistema muestra el nombre completo del trabajador, el nombre del sector, el número del puesto de trabajo asignado, la cantidad de llamadas atendidas (inicialmente 0), y el tiempo promedio (en segundos) de las llamadas en ese puesto de trabajo (inicialmente 0). 2) El sistema espera una llamada entrante de un cliente.
 Toda esta data se accede a través del puesto del controlador. La vista ejecuta el metodo incialixar, que llamada a inicializar del controlador y finalmente el controlador le manda a la vista el puesto junto con todos los datos por medio del metodo mostrarDatos(Puesto p).
