@@ -1,5 +1,7 @@
 package Logica;
 
+import Modelo.Llamada;
+import Modelo.Sector;
 import java.util.Collection;
 
 public class SistemaLlamadas {

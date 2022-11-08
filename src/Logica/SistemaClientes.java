@@ -8,6 +8,6 @@ package Logica;
  *
  * @author matiasan-ot
  */
-class SistemaClientes {
+public class SistemaClientes {
     
 }
