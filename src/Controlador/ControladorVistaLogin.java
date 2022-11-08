@@ -4,16 +4,22 @@
  */
 package Controlador;
 
+import Logica.Fachada;
+import Modelo.Puesto;
+import iuEscritorio.VistaLogin;
+
 /**
  *
  * @author matiasan-ot
  */
-public abstract class ControladorVistaLogin {
+public  class ControladorVistaLogin {
 
     private VistaLogin vista;
+    private Fachada modelo;
 
     public ControladorVistaLogin(VistaLogin vista) {
         this.vista = vista;
+        this.modelo = Fachada.getInstancia();
     }
 
     public void login(String ci, String contrasena) {
@@ -26,5 +32,7 @@ public abstract class ControladorVistaLogin {
         }
     }
 
-    public abstract Object llamarLogin(String ci, String contrasena);
+    private Object llamarLogin(String ci, String contrasena) {
+        return null;
+    };
 }

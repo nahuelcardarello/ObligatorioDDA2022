@@ -5,7 +5,7 @@
 package iuEscritorio;
 
 
-public abstract class VistaAplicacionInicio extends javax.swing.JFrame {
+public  class VistaAplicacionInicio extends javax.swing.JFrame {
     
     public VistaAplicacionInicio() {
         initComponents();
@@ -27,8 +27,9 @@ public abstract class VistaAplicacionInicio extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
-        jMenu4 = new javax.swing.JMenu();
-        jMenu5 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
 
         jMenu1.setText("jMenu1");
 
@@ -59,29 +60,39 @@ public abstract class VistaAplicacionInicio extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jMenu3.setText("Login");
+        jMenu3.setText("Aplicaciones");
         jMenu3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AbrirLogin(evt);
             }
         });
+
+        jMenuItem1.setText("Login");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                abrirLogin(evt);
+            }
+        });
+        jMenu3.add(jMenuItem1);
+        jMenuItem1.getAccessibleContext().setAccessibleName("menuItemLogin");
+
+        jMenuItem2.setText("Simular llamada");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                abrirSimularLlamada(evt);
+            }
+        });
+        jMenu3.add(jMenuItem2);
+
+        jMenuItem3.setText("Monitor");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                abrirMonitor(evt);
+            }
+        });
+        jMenu3.add(jMenuItem3);
+
         jMenuBar1.add(jMenu3);
-
-        jMenu4.setText("Simular Llamada");
-        jMenu4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AbrirSimulador(evt);
-            }
-        });
-        jMenuBar1.add(jMenu4);
-
-        jMenu5.setText("Monitor");
-        jMenu5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AbrirMonitor(evt);
-            }
-        });
-        jMenuBar1.add(jMenu5);
 
         setJMenuBar(jMenuBar1);
 
@@ -102,16 +113,21 @@ public abstract class VistaAplicacionInicio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AbrirLogin(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AbrirLogin
-        VistaLogin vistaLogin = new VistaLogin(null,false).setVisible(true);
+        
     }//GEN-LAST:event_AbrirLogin
 
-    private void AbrirSimulador(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AbrirSimulador
-        // TODO add your handling code here:
-    }//GEN-LAST:event_AbrirSimulador
+    private void abrirLogin(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirLogin
+       VistaLoginImpl vistaLogin = new VistaLoginImpl(this,false,"Login");
+        vistaLogin.setVisible(true);
+    }//GEN-LAST:event_abrirLogin
 
-    private void AbrirMonitor(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AbrirMonitor
+    private void abrirSimularLlamada(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirSimularLlamada
+
+    }//GEN-LAST:event_abrirSimularLlamada
+
+    private void abrirMonitor(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirMonitor
         // TODO add your handling code here:
-    }//GEN-LAST:event_AbrirMonitor
+    }//GEN-LAST:event_abrirMonitor
 
     
 
@@ -120,30 +136,11 @@ public abstract class VistaAplicacionInicio extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 
-    
-    private void login() {
-        String ci = tfNombre.getText();
-        String contrasena = new String(tfPassword.getPassword());
-        controlador.login(ci, contrasena);
-        
-    }
-  
-    public abstract ControladorVistaLogin crearControlador();
-
-    @Override
-    public void cerrar() {
-        dispose();
-    }
-   
-
-    @Override
-    public void mostrarError(String msg) {
-        JOptionPane.showMessageDialog(this, msg);
-    }
 }

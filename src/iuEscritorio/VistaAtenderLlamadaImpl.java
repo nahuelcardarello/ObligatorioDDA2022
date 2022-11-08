@@ -12,12 +12,12 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import Modelo.Puesto;
 
-public class AtenderLlamadaImpl extends javax.swing.JFrame {
+public class VistaAtenderLlamadaImpl extends javax.swing.JFrame implements VistaAtenderLlamadas {
 
     private Puesto puestoTrabajador;
 
-    public AtenderLlamadaImpl(java.awt.Frame parent, boolean modal, Puesto p) {
-        super(parent, modal);
+    public VistaAtenderLlamadaImpl(java.awt.Frame parent, boolean modal, Puesto p) {
+        super();
         setLocationRelativeTo(parent);
         puestoTrabajador = p;
     }
@@ -257,6 +257,7 @@ public class AtenderLlamadaImpl extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        /*
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -270,24 +271,37 @@ public class AtenderLlamadaImpl extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AtenderLlamadaImpl.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VistaAtenderLlamadaImpl.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AtenderLlamadaImpl.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VistaAtenderLlamadaImpl.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AtenderLlamadaImpl.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VistaAtenderLlamadaImpl.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AtenderLlamadaImpl.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VistaAtenderLlamadaImpl.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
+        /*
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new AtenderLlamadaImpl().setVisible(true);
             }
         });
+        //</editor-fold>
+        //</editor-fold>
+
+        /* Create and display the form */
+        /*
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new AtenderLlamadaImpl().setVisible(true);
+            }
+        });
+        */
     }
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFinalizarLlamada;
