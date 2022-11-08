@@ -6,12 +6,11 @@ package iuEscritorio;
 
 import Controlador.ControladorVistaLogin;
 import javax.swing.JOptionPane;
+import Logica.Fachada;
+import Modelo.Trabajador;
+import Modelo.Puesto;
 
-/**
- *
- * @author Dario
- */
-public class VistaLogin extends javax.swing.JDialog implements VistaLogin{
+public abstract class VistaLogin extends javax.swing.JDialog{
 
     /**
      * Creates new form DialogoLogin
@@ -137,7 +136,6 @@ public class VistaLogin extends javax.swing.JDialog implements VistaLogin{
         login();
     }//GEN-LAST:event_tfPasswordActionPerformed
 
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bIngresar;
@@ -149,23 +147,18 @@ public class VistaLogin extends javax.swing.JDialog implements VistaLogin{
     private javax.swing.JPasswordField tfPassword;
     // End of variables declaration//GEN-END:variables
 
-    
     private void login() {
-        String nom = tfNombre.getText();
-        String pwd = new String(tfPassword.getPassword());
-        controlador.login(nom, pwd);
-        
+        String ci = tfNombre.getText();
+        String contrasena = new String(tfPassword.getPassword());
+        controlador.login(ci, contrasena);
     }
-  
+    
     public abstract ControladorVistaLogin crearControlador();
-
-    @Override
+    
     public void cerrar() {
         dispose();
     }
-   
-
-    @Override
+    
     public void mostrarError(String msg) {
         JOptionPane.showMessageDialog(this, msg);
     }

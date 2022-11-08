@@ -26,5 +26,5 @@ public abstract class ControladorVistaLogin {
         }
     }
 
-    public abstract Object llamarLogin(String usr, String pwd);
+    public abstract Object llamarLogin(String ci, String contrasena);
 }

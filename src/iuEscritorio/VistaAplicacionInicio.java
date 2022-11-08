@@ -4,26 +4,12 @@
  */
 package iuEscritorio;
 
-import Controlador.ControladorVistaLogin;
-import javax.swing.JOptionPane;
 
-/**
- *
- * @author Dario
- */
-public abstract class VistaAplicacionInicio extends javax.swing.JDialog implements VistaLogin{
-
-    /**
-     * Creates new form DialogoLogin
-     */
-    private ControladorVistaLogin controlador;
+public abstract class VistaAplicacionInicio extends javax.swing.JFrame {
     
-    public VistaAplicacionInicio(java.awt.Frame parent, boolean modal, String tit) {
-        super(parent, modal);
+    public VistaAplicacionInicio() {
         initComponents();
-        setLocationRelativeTo(parent);
-        setTitle(tit);
-        controlador = crearControlador();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -116,7 +102,7 @@ public abstract class VistaAplicacionInicio extends javax.swing.JDialog implemen
     }// </editor-fold>//GEN-END:initComponents
 
     private void AbrirLogin(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AbrirLogin
-        new VistaLogin(null,false).setVisible(true);
+        VistaLogin vistaLogin = new VistaLogin(null,false).setVisible(true);
     }//GEN-LAST:event_AbrirLogin
 
     private void AbrirSimulador(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AbrirSimulador
@@ -142,9 +128,9 @@ public abstract class VistaAplicacionInicio extends javax.swing.JDialog implemen
 
     
     private void login() {
-        String nom = tfNombre.getText();
-        String pwd = new String(tfPassword.getPassword());
-        controlador.login(nom, pwd);
+        String ci = tfNombre.getText();
+        String contrasena = new String(tfPassword.getPassword());
+        controlador.login(ci, contrasena);
         
     }
   

@@ -2,6 +2,9 @@ package Logica;
 
 import java.util.Collection;
 import java.util.ArrayList;
+import Modelo.Trabajador;
+import Modelo.Sector;
+import Modelo.Puesto;
 
 public class SistemaTrabajadores {
 

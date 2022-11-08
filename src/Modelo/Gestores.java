@@ -1,11 +1,10 @@
 package Modelo;
 
-import Logica.Cliente;
+public class Gestores extends TipoCliente {
 
-public class Gestores extends Cliente, TipoCliente {
+    public float calculoDeCostos(int duracion) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
 
-	public float calculoDeCostos(int duracion) {
-		return 0;
-	}
+    }
 
 }
