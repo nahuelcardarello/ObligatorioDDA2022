@@ -19,6 +19,7 @@ public class VistaLoginImpl extends javax.swing.JDialog implements IVistaLogin {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(parent);
+        this.controlador = new ControladorVistaLogin(this);
     }
 
     private ControladorVistaLogin controlador;
