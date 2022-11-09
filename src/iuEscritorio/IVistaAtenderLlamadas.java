@@ -4,10 +4,21 @@
  */
 package iuEscritorio;
 
+import Modelo.Puesto;
+
 /**
  *
  * @author guillermorecoba
  */
 public interface IVistaAtenderLlamadas {
-    
+
+    void inicializar();
+
+    void mostrarDatosPuesto(Puesto p);
+
+    void iniciarLlamada(Puesto p);
+
+    void finalizarLlamada(); //creo que tendria que recibir puesto
+
+    void reset();
 }

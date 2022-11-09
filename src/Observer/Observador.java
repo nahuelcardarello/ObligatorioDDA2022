@@ -11,6 +11,10 @@ package Observer;
  */
 public interface Observador {
     
+    public enum Eventos {
+        INICIAR_LLAMADA,
+        FINALIZAR_LLAMADA
+    }
     public void actualizar(Object evento,Observable origen);
     
 }

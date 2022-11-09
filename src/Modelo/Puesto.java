@@ -1,6 +1,7 @@
 package Modelo;
 
 import Observer.Observable;
+import Observer.Observador;
 
 public class Puesto extends Observable {
 
@@ -21,6 +22,8 @@ public class Puesto extends Observable {
     }
 
     public boolean finalizarLlamada(String descripcion) {
+        this.llamada = null;
+        avisar(Observador.Eventos.FINALIZAR_LLAMADA);
         return false;
     }
 
@@ -68,7 +71,10 @@ public class Puesto extends Observable {
         return llamada;
     }
 
+    //ver finalixar llamada
     public void setLlamada(Llamada llamada) {
         this.llamada = llamada;
+        cantidadLlamadas++;
+        this.avisar(Observador.Eventos.INICIAR_LLAMADA);
     }
 }

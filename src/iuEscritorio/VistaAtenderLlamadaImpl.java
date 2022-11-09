@@ -8,18 +8,21 @@ package iuEscritorio;
  *
  * @author matiasan-ot
  */
+import Controlador.ControladorVistaAtenderLlamadas;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import Modelo.Puesto;
+import Modelo.Sector;
+import Modelo.Trabajador;
 
 public class VistaAtenderLlamadaImpl extends javax.swing.JFrame implements IVistaAtenderLlamadas {
-
-    private Puesto puestoTrabajador;
-
+    private ControladorVistaAtenderLlamadas controlador;
     public VistaAtenderLlamadaImpl(java.awt.Frame parent, boolean modal, Puesto p) {
         super();
         setLocationRelativeTo(parent);
-        puestoTrabajador = p;
+        this.controlador = new ControladorVistaAtenderLlamadas(this,p);
+        inicializar();
+        
     }
 
     /**
@@ -35,7 +38,7 @@ public class VistaAtenderLlamadaImpl extends javax.swing.JFrame implements IVist
         jLabel1 = new javax.swing.JLabel();
         nombreTrabajador = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        nombreSecor = new javax.swing.JLabel();
+        nombreSector = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         numeroPuesto = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -47,7 +50,7 @@ public class VistaAtenderLlamadaImpl extends javax.swing.JFrame implements IVist
         jScrollPane1 = new javax.swing.JScrollPane();
         estadoLlamada = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        nombreCliente = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
@@ -87,7 +90,7 @@ public class VistaAtenderLlamadaImpl extends javax.swing.JFrame implements IVist
 
         jLabel3.setText("Sector: ");
 
-        nombreSecor.setText("Nombre sector");
+        nombreSector.setText("Nombre sector");
 
         jLabel5.setText("Puesto Nro.");
 
@@ -125,8 +128,8 @@ public class VistaAtenderLlamadaImpl extends javax.swing.JFrame implements IVist
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jLabel2.setText("Cliente:");
 
-        jLabel4.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jLabel4.setText("Nombre cliente");
+        nombreCliente.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        nombreCliente.setText("Nombre cliente");
 
         jLabel6.setText("Descripción:");
 
@@ -154,7 +157,7 @@ public class VistaAtenderLlamadaImpl extends javax.swing.JFrame implements IVist
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(nombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(133, 133, 133))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -176,7 +179,7 @@ public class VistaAtenderLlamadaImpl extends javax.swing.JFrame implements IVist
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel3)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(nombreSecor, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(nombreSector, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jLabel5)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -223,7 +226,7 @@ public class VistaAtenderLlamadaImpl extends javax.swing.JFrame implements IVist
                                 .addGap(19, 19, 19)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel3)
-                                    .addComponent(nombreSecor)
+                                    .addComponent(nombreSector)
                                     .addComponent(jLabel5)
                                     .addComponent(numeroPuesto)))
                             .addGroup(layout.createSequentialGroup()
@@ -234,7 +237,7 @@ public class VistaAtenderLlamadaImpl extends javax.swing.JFrame implements IVist
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel4))
+                    .addComponent(nombreCliente))
                 .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
@@ -262,7 +265,6 @@ public class VistaAtenderLlamadaImpl extends javax.swing.JFrame implements IVist
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -273,9 +275,45 @@ public class VistaAtenderLlamadaImpl extends javax.swing.JFrame implements IVist
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel llamadasAtendidas;
-    private javax.swing.JLabel nombreSecor;
+    private javax.swing.JLabel nombreCliente;
+    private javax.swing.JLabel nombreSector;
     private javax.swing.JLabel nombreTrabajador;
     private javax.swing.JLabel numeroPuesto;
     private javax.swing.JLabel tiempoPromedio;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void inicializar() {
+        controlador.inicializar(); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void mostrarDatosPuesto(Puesto p) {
+         Trabajador t = p.getTrabajador();
+         Sector s = p.getSector();
+         nombreTrabajador.setText(t.getNombreCompleto());
+         nombreSector.setText(s.getNombre());
+         numeroPuesto.setText(Integer.toString(p.getNumero()));
+         llamadasAtendidas.setText(Integer.toString(p.getCantidadLlamadas()));
+         tiempoPromedio.setText(Integer.toString(p.getTiempoPromedio()));
+         estadoLlamada.setText("Esperando llamada...");
+    }
+
+    @Override
+    public void iniciarLlamada(Puesto p) {
+        llamadasAtendidas.setText(Integer.toString(p.getCantidadLlamadas()));
+        nombreCliente.setText(p.getLlamada().getCliente().getNombrecompleto());
+        estadoLlamada.setText("Llamada en curso");
+        //revisar triple get
+    }
+
+    @Override
+    public void finalizarLlamada() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void reset() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

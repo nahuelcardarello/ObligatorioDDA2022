@@ -5,18 +5,38 @@
 package Controlador;
 
 import Modelo.Puesto;
+import Observer.Observable;
+import Observer.Observador;
 import iuEscritorio.IVistaAtenderLlamadas;
 
 /**
  *
  * @author matiasan-ot
  */
-public class ControladorVistaAtenderLlamadas {
+public class ControladorVistaAtenderLlamadas implements Observador {
     private IVistaAtenderLlamadas vista;
     private Puesto modelo;
     
     public ControladorVistaAtenderLlamadas(IVistaAtenderLlamadas vista, Puesto modelo) {
         this.vista = vista;
         this.modelo = modelo;
+        modelo.agregarObservador(this);
+    }
+    public void inicializar()
+    {
+        vista.mostrarDatosPuesto(modelo);
+    }
+    @Override
+    public void actualizar(Object evento, Observable origen) {
+        Observador.Eventos e  = (Observador.Eventos)evento;
+        switch(e) {
+            case INICIAR_LLAMADA:
+                vista.iniciarLlamada((Puesto) origen);
+            break;
+            case FINALIZAR_LLAMADA:
+                //
+            break;
+                
+        }
     }
 }
