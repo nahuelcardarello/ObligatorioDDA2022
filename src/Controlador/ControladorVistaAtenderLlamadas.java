@@ -5,17 +5,17 @@
 package Controlador;
 
 import Modelo.Puesto;
-import iuEscritorio.VistaAtenderLlamadas;
+import iuEscritorio.IVistaAtenderLlamadas;
 
 /**
  *
  * @author matiasan-ot
  */
 public class ControladorVistaAtenderLlamadas {
-    private VistaAtenderLlamadas vista;
+    private IVistaAtenderLlamadas vista;
     private Puesto modelo;
     
-    public ControladorVistaAtenderLlamadas(VistaAtenderLlamadas vista, Puesto modelo) {
+    public ControladorVistaAtenderLlamadas(IVistaAtenderLlamadas vista, Puesto modelo) {
         this.vista = vista;
         this.modelo = modelo;
     }

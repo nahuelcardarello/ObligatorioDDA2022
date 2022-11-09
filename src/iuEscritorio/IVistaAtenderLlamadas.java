@@ -8,6 +8,6 @@ package iuEscritorio;
  *
  * @author guillermorecoba
  */
-public interface VistaAtenderLlamadas {
+public interface IVistaAtenderLlamadas {
     
 }

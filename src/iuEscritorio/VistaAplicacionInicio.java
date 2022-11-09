@@ -1,15 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
- */
 package iuEscritorio;
 
+import Modelo.Puesto;
 
-public  class VistaAplicacionInicio extends javax.swing.JFrame {
-    
+public class VistaAplicacionInicio extends javax.swing.JFrame {
+
     public VistaAplicacionInicio() {
         initComponents();
-        setLocationRelativeTo(null);
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -61,11 +58,6 @@ public  class VistaAplicacionInicio extends javax.swing.JFrame {
         );
 
         jMenu3.setText("Aplicaciones");
-        jMenu3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AbrirLogin(evt);
-            }
-        });
 
         jMenuItem1.setText("Login");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -112,13 +104,8 @@ public  class VistaAplicacionInicio extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void AbrirLogin(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AbrirLogin
-        
-    }//GEN-LAST:event_AbrirLogin
-
     private void abrirLogin(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirLogin
-       VistaLoginImpl vistaLogin = new VistaLoginImpl(this,false,"Login");
-        vistaLogin.setVisible(true);
+        this.login();
     }//GEN-LAST:event_abrirLogin
 
     private void abrirSimularLlamada(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirSimularLlamada
@@ -129,7 +116,6 @@ public  class VistaAplicacionInicio extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_abrirMonitor
 
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel3;
@@ -142,5 +128,9 @@ public  class VistaAplicacionInicio extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+
+    private void login() {
+        new VistaLoginImpl(this, false).setVisible(true);
+    }
 
 }

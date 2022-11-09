@@ -24,6 +24,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
+          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace pref="36" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -40,12 +41,11 @@
                       <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <Component id="bIngresar" min="-2" pref="178" max="-2" attributes="0"/>
+                      <Component id="bIngresar" min="-2" pref="231" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
-          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -83,9 +83,6 @@
     <Component class="javax.swing.JTextField" name="tfNombre">
     </Component>
     <Component class="javax.swing.JPasswordField" name="tfPassword">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfPasswordActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="bIngresar">
       <Properties>

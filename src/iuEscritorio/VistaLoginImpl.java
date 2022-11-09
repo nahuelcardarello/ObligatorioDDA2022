@@ -10,20 +10,18 @@ import Logica.Fachada;
 import Modelo.Trabajador;
 import Modelo.Puesto;
 
-public  class VistaLoginImpl extends javax.swing.JDialog implements VistaLogin{
+public class VistaLoginImpl extends javax.swing.JDialog implements IVistaLogin {
 
     /**
      * Creates new form DialogoLogin
      */
-    private ControladorVistaLogin controlador;
-    
-    public VistaLoginImpl(java.awt.Frame parent, boolean modal, String tit) {
+    public VistaLoginImpl(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(parent);
-        setTitle(tit);
-        controlador = crearControlador();
     }
+
+    private ControladorVistaLogin controlador;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -48,12 +46,6 @@ public  class VistaLoginImpl extends javax.swing.JDialog implements VistaLogin{
         jLabel1.setText("Cédula:");
 
         jLabel2.setText("Contraseña:");
-
-        tfPassword.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfPasswordActionPerformed(evt);
-            }
-        });
 
         bIngresar.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         bIngresar.setText("Atender llamadas");
@@ -89,6 +81,7 @@ public  class VistaLoginImpl extends javax.swing.JDialog implements VistaLogin{
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(36, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -102,9 +95,8 @@ public  class VistaLoginImpl extends javax.swing.JDialog implements VistaLogin{
                             .addComponent(tfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(73, 73, 73))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(bIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(bIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(84, 84, 84))))
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -128,13 +120,8 @@ public  class VistaLoginImpl extends javax.swing.JDialog implements VistaLogin{
 
     private void bIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bIngresarActionPerformed
         // TODO add your handling code here:
-        login();
+        this.login();
     }//GEN-LAST:event_bIngresarActionPerformed
-
-    private void tfPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfPasswordActionPerformed
-        // TODO add your handling code here:
-        //login();
-    }//GEN-LAST:event_tfPasswordActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -150,30 +137,32 @@ public  class VistaLoginImpl extends javax.swing.JDialog implements VistaLogin{
     private void login() {
         String ci = tfNombre.getText();
         String contrasena = new String(tfPassword.getPassword());
-        try {
-            //Puesto p = controlador.l
-        } catch(Exception ex) {
-        
-        }
-        
+        controlador.login(ci, contrasena);
+
     }
-    private ControladorVistaLogin crearControlador() {
-        return new ControladorVistaLogin(this);
+
+    protected void setControlador(ControladorVistaLogin controlador) {
+        this.controlador = controlador;
     }
-    
-    public void cerrar() {
-        dispose();
+
+    public ControladorVistaLogin getControlador() {
+        return this.controlador;
     }
-    
+
     public void mostrarError(String msg) {
         JOptionPane.showMessageDialog(this, msg);
     }
 
     @Override
-    public void proximoCasoUso(Object obj) {
-        Puesto p = (Puesto)obj;
-        VistaAtenderLlamadaImpl vista = new VistaAtenderLlamadaImpl(null,false,p);
+    public void ejecutarCasoDeUsoInicial(Puesto unP) {
+        Puesto p = unP;
+        VistaAtenderLlamadaImpl vista = new VistaAtenderLlamadaImpl(null, false, p);
         vista.setVisible(true);
-        cerrar();
+        cerrarVista();
+    }
+
+    @Override
+    public void cerrarVista() {
+        dispose();
     }
 }

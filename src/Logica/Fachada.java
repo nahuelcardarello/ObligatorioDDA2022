@@ -10,23 +10,29 @@ import Modelo.Sector;
 
 public class Fachada extends Observable {
 
+    private static Fachada instancia;
+
     private SistemaTrabajadores sistemaTrabajadores;
 
     private SistemaLlamadas sistemaLlamadas;
 
     private SistemaClientes sistemaClientes;
 
-    private static Fachada instancia = new Fachada();
-
-    public static Fachada getInstancia() {
+    public synchronized static Fachada getInstancia() {
+        if (instancia == null) {
+            instancia = new Fachada();
+        }
         return instancia;
     }
 
     private Fachada() {
+        sistemaClientes = new SistemaClientes();
+        sistemaLlamadas = new SistemaLlamadas();
+        sistemaTrabajadores = new SistemaTrabajadores();
     }
 
     public Puesto login(String CI, String contrasena) {
-        return null;
+        return sistemaTrabajadores.login(CI, contrasena);
     }
 
     public void salirDeAplicacion(Trabajador unT) {

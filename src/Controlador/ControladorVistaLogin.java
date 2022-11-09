@@ -6,33 +6,29 @@ package Controlador;
 
 import Logica.Fachada;
 import Modelo.Puesto;
-import iuEscritorio.VistaLogin;
+import iuEscritorio.VistaLoginImpl;
 
 /**
  *
  * @author matiasan-ot
  */
-public  class ControladorVistaLogin {
+public class ControladorVistaLogin{
 
-    private VistaLogin vista;
-    private Fachada modelo;
+    private VistaLoginImpl vista;
+    private Fachada fachada;
 
-    public ControladorVistaLogin(VistaLogin vista) {
+    public ControladorVistaLogin(VistaLoginImpl vista) {
         this.vista = vista;
-        this.modelo = Fachada.getInstancia();
+        this.fachada = Fachada.getInstancia();
     }
 
     public void login(String ci, String contrasena) {
-        Object obj = llamarLogin(ci, contrasena);
-        if (obj != null) {
-            vista.cerrar();
-            vista.proximoCasoUso(obj);
+        Puesto unPuesto = fachada.login(ci, contrasena);
+        if (unPuesto != null) {
+            vista.ejecutarCasoDeUsoInicial(unPuesto);
+            vista.cerrarVista();
         } else {
-            vista.mostrarError("Login incorrecto");
+            vista.mostrarError("Acceso denegado");
         }
     }
-
-    private Object llamarLogin(String ci, String contrasena) {
-        return null;
-    };
 }
