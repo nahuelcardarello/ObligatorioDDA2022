@@ -2,8 +2,7 @@ package Logica;
 
 public class DatosdePrueba {
 
-	public void cargar() {
-
+	public static void cargar() {
 	}
 
 }
