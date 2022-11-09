@@ -2,24 +2,63 @@ package Modelo;
 
 import Logica.SistemaClientes;
 import Modelo.TipoCliente;
+import java.util.ArrayList;
 import java.util.Collection;
 
 public class Cliente {
 
-	private String CI;
+    private String CI;
 
-	private String nombrecompleto;
+    private String nombrecompleto;
 
-	private float saldo;
+    private float saldo;
 
-	private Collection<Llamada> llamada;
+    private ArrayList<Llamada> llamadas;
 
-	private TipoCliente tipoCliente;
+    private TipoCliente tipoCliente;
 
-	private SistemaClientes sistemaClientes;
+    public float calculoDeCostos(int duracion) {
+        return 0;
+    }
 
-	public float calculoDeCostos(int duracion) {
-		return 0;
-	}
+    public String getCI() {
+        return CI;
+    }
+
+    public void setCI(String CI) {
+        this.CI = CI;
+    }
+
+    public String getNombrecompleto() {
+        return nombrecompleto;
+    }
+
+    public void setNombrecompleto(String nombrecompleto) {
+        this.nombrecompleto = nombrecompleto;
+    }
+
+    public float getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(float saldo) {
+        this.saldo = saldo;
+    }
+
+    public ArrayList<Llamada> getLlamadas() {
+        return llamadas;
+    }
+
+    public void setLlamadas(ArrayList<Llamada> llamada) {
+        this.llamadas = llamada;
+    }
+
+    public TipoCliente getTipoCliente() {
+        return tipoCliente;
+    }
+
+    public void setTipoCliente(TipoCliente tipoCliente) {
+        this.tipoCliente = tipoCliente;
+    }
 
 }

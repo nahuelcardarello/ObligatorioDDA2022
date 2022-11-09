@@ -6,13 +6,14 @@ package Controlador;
 
 import Logica.Fachada;
 import Modelo.Puesto;
+import Modelo.TrabajadorException;
 import iuEscritorio.VistaLoginImpl;
 
 /**
  *
  * @author matiasan-ot
  */
-public class ControladorVistaLogin{
+public class ControladorVistaLogin {
 
     private VistaLoginImpl vista;
     private Fachada fachada;
@@ -23,12 +24,12 @@ public class ControladorVistaLogin{
     }
 
     public void login(String ci, String contrasena) {
-        Puesto unPuesto = fachada.login(ci, contrasena);
-        if (unPuesto != null) {
+        try {
+            Puesto unPuesto = fachada.login(ci, contrasena);
             vista.ejecutarCasoDeUsoInicial(unPuesto);
             vista.cerrarVista();
-        } else {
-            vista.mostrarError("Acceso denegado");
+        } catch (TrabajadorException ex) {
+            vista.mostrarError(ex.getMessage());
         }
     }
 }

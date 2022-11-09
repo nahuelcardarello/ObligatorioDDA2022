@@ -7,6 +7,7 @@ import Modelo.Puesto;
 import Modelo.Trabajador;
 import Modelo.Cliente;
 import Modelo.Sector;
+import Modelo.TrabajadorException;
 
 public class Fachada extends Observable {
 
@@ -31,7 +32,7 @@ public class Fachada extends Observable {
         sistemaTrabajadores = new SistemaTrabajadores();
     }
 
-    public Puesto login(String CI, String contrasena) {
+    public Puesto login(String CI, String contrasena) throws TrabajadorException {
         return sistemaTrabajadores.login(CI, contrasena);
     }
 

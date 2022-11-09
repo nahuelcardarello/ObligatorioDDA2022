@@ -5,29 +5,48 @@ import java.util.ArrayList;
 import Modelo.Trabajador;
 import Modelo.Sector;
 import Modelo.Puesto;
+import Modelo.TrabajadorException;
 
 public class SistemaTrabajadores {
 
-	private Collection <Trabajador> trabajador;
+    private ArrayList<Trabajador> trabajadores;
 
-	private Collection<Sector> sector;
+    private ArrayList<Sector> sectores;
 
-	private Fachada fachada;
+    private Trabajador buscarTrabajador(String CI) {
+        Trabajador trabajador = null;
+        int i = 0;
+        while (i < trabajadores.size() && trabajador == null) {
+            Trabajador t = trabajadores.get(i);
+            if (t.getCI() == CI) {
+                trabajador = t;
+            }
+            i++;
+        }
+        return trabajador;
+    }
 
-	public Trabajador buscarTrabajador(String CI) {
-		return null;
-	}
+    public Puesto login(String CI, String contrasena) throws TrabajadorException {
+        Puesto puesto = null;
+        Trabajador t = buscarTrabajador(CI);
+        if(t != null && t.contrasenaValida(contrasena)) {
+            puesto = t.getSector().altaPuestoTrabajo(t);
+            if(puesto == null) {
+                throw new TrabajadorException("No hay puestos disponibles");
+            }
+        } else {
+            throw new TrabajadorException("Acceso denegado");
+        }
+        
+        return puesto;
+    }
 
-	public Puesto login(String CI, String contrasena) {
-		return null;
-	}
+    public boolean salirDelSistema(Trabajador unT) {
+        return false;
+    }
 
-	public boolean salirDelSistema(Trabajador unT) {
-		return false;
-	}
-
-	public ArrayList<Sector> getSectores() {
-		return null;
-	}
+    public ArrayList<Sector> getSectores() {
+        return sectores;
+    }
 
 }
