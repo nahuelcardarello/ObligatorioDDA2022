@@ -38,16 +38,18 @@ public class VistaAplicacionInicio extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(102, 102, 102));
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel3.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Inicio");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jLabel3)
-                .addContainerGap(352, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 401, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,11 +111,11 @@ public class VistaAplicacionInicio extends javax.swing.JFrame {
     }//GEN-LAST:event_abrirLogin
 
     private void abrirSimularLlamada(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirSimularLlamada
-
+        this.SimularLlamada();
     }//GEN-LAST:event_abrirSimularLlamada
 
     private void abrirMonitor(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirMonitor
-        // TODO add your handling code here:
+        this.Monitor();
     }//GEN-LAST:event_abrirMonitor
 
 
@@ -131,6 +133,14 @@ public class VistaAplicacionInicio extends javax.swing.JFrame {
 
     private void login() {
         new VistaLoginImpl(this, false).setVisible(true);
+    }
+
+    private void SimularLlamada() {
+        new VistaSimularLlamadaImpl(this, false).setVisible(true);
+    }
+
+    private void Monitor() {
+        new VistaMonitorImpl(this, false).setVisible(true);
     }
 
 }

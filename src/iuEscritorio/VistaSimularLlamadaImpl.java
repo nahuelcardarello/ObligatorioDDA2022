@@ -4,20 +4,27 @@
  */
 package iuEscritorio;
 
+import Controlador.ControladorVistaLogin;
 import Modelo.Puesto;
 
 /**
  *
  * @author Nahue
  */
+
+import Controlador.ControladorVistaSimularLlamada;
+
 public class VistaSimularLlamadaImpl extends javax.swing.JFrame implements IVistaSimularLlamada {
 
     /**
      * Creates new form VistaAtenderLlamadasImpl
      */
-    public VistaSimularLlamadaImpl() {
+    public VistaSimularLlamadaImpl(java.awt.Frame parent, boolean modal) {
         initComponents();
+        setLocationRelativeTo(parent);
     }
+    
+        private ControladorVistaSimularLlamada controlador;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -376,6 +383,8 @@ public class VistaSimularLlamadaImpl extends javax.swing.JFrame implements IVist
     private javax.swing.JButton salirBtn;
     // End of variables declaration//GEN-END:variables
 
+    
+    
     @Override
     public void inicializar() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

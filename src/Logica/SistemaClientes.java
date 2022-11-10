@@ -4,10 +4,16 @@
  */
 package Logica;
 
+import Modelo.Cliente;
+
 /**
  *
  * @author matiasan-ot
  */
 public class SistemaClientes {
+
+    void agregar(Cliente c) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
 }

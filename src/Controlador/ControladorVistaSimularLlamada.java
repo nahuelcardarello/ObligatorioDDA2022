@@ -8,6 +8,6 @@ package Controlador;
  *
  * @author matiasan-ot
  */
-class ControladorVistaSimularLlamada {
+public class ControladorVistaSimularLlamada {
     
 }

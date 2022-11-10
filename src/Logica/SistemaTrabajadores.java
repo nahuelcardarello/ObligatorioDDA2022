@@ -49,4 +49,8 @@ public class SistemaTrabajadores {
         return sectores;
     }
 
+    void agregar(Trabajador t) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
 }

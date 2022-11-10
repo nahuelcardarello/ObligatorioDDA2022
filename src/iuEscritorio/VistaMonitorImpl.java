@@ -8,14 +8,20 @@ package iuEscritorio;
  *
  * @author Nahue
  */
+import javax.swing.JOptionPane;
+import Controlador.ControladorVistaMonitor;
+
 public class VistaMonitorImpl extends javax.swing.JFrame implements IVistaMonitor {
 
     /**
      * Creates new form VistaMonitorImpl
      */
-    public VistaMonitorImpl() {
+    public VistaMonitorImpl(java.awt.Frame parent, boolean modal) {
         initComponents();
+        setLocationRelativeTo(parent);
     }
+
+    private ControladorVistaMonitor controlador;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -163,4 +169,12 @@ public class VistaMonitorImpl extends javax.swing.JFrame implements IVistaMonito
     private javax.swing.JTable jTable1;
     private javax.swing.JToolBar jToolBar1;
     // End of variables declaration//GEN-END:variables
+
+    protected void setControlador(ControladorVistaMonitor controlador) {
+        this.controlador = controlador;
+    }
+
+    public ControladorVistaMonitor getControlador() {
+        return this.controlador;
+    }
 }
