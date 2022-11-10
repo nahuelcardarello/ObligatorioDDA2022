@@ -15,6 +15,14 @@ public class Sector {
 
     private ArrayList<Puesto> puestos;
 
+    public Sector(String nombre, int numero, int cantidadPuestos, ArrayList<Trabajador> trabajadores, ArrayList<Puesto> puestos) {
+        this.nombre = nombre;
+        this.numero = numero;
+        this.cantidadPuestos = cantidadPuestos;
+        this.trabajadores = new ArrayList<Trabajador>();
+        this.puestos = new ArrayList<Puesto>();
+    }
+
     public Puesto altaPuestoTrabajo(Trabajador unT) {
         Puesto puesto = null;
         int i = 0;

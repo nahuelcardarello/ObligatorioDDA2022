@@ -16,6 +16,15 @@ public class Puesto extends Observable {
 
     private Llamada llamada;
 
+    public Puesto(int numero, int cantidadLlamadas, int tiempoPromedio, Trabajador trabajador, Sector sector, Llamada llamada) {
+        this.numero = numero;
+        this.cantidadLlamadas = cantidadLlamadas;
+        this.tiempoPromedio = tiempoPromedio;
+        this.trabajador = trabajador;
+        this.sector = sector;
+        this.llamada = llamada;
+    }
+
     public int calcularTiempoPromedio() {
         return 0;
     }

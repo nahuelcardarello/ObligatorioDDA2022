@@ -12,7 +12,11 @@ public class SistemaTrabajadores {
     private ArrayList<Trabajador> trabajadores;
 
     private ArrayList<Sector> sectores;
-
+    
+    public SistemaTrabajadores() {
+        this.sectores = new ArrayList<Sector>();
+        this.trabajadores = new ArrayList<Trabajador>();
+    }
     private Trabajador buscarTrabajador(String CI) {
         Trabajador trabajador = null;
         int i = 0;
