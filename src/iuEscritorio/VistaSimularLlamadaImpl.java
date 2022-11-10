@@ -389,9 +389,7 @@ public class VistaSimularLlamadaImpl extends javax.swing.JFrame implements IVist
 
     @Override
     public void iniciarllamada() {
-        try {
-            
-        }
+        
     }
 
     @Override
