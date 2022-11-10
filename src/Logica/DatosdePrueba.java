@@ -1,8 +1,12 @@
 package Logica;
 
-public class DatosdePrueba {
+import Excepciones.Excepcion;
 
-	public static void cargar() {
+public class DatosDePrueba {
+
+	public static void cargar()throws Excepcion {
+            
+            
 	}
 
 }
