@@ -2,12 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Controlador;
+package Modelo;
 
 /**
  *
- * @author matiasan-ot
+ * @author guillermorecoba
  */
-public class ControladorVistaSimularLlamada {
-    
+public class LlamadaException extends Exception {
+    public LlamadaException(String msg) {
+        super(msg);
+    }
 }
