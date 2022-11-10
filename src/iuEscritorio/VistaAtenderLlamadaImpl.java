@@ -16,13 +16,15 @@ import Modelo.Sector;
 import Modelo.Trabajador;
 
 public class VistaAtenderLlamadaImpl extends javax.swing.JFrame implements IVistaAtenderLlamadas {
+
     private ControladorVistaAtenderLlamadas controlador;
+
     public VistaAtenderLlamadaImpl(java.awt.Frame parent, boolean modal, Puesto p) {
         super();
         setLocationRelativeTo(parent);
-        this.controlador = new ControladorVistaAtenderLlamadas(this,p);
+        this.controlador = new ControladorVistaAtenderLlamadas(this, p);
         inicializar();
-        
+
     }
 
     /**
@@ -53,7 +55,7 @@ public class VistaAtenderLlamadaImpl extends javax.swing.JFrame implements IVist
         nombreCliente = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        descripcion = new javax.swing.JTextArea();
         btnFinalizarLlamada = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
 
@@ -133,9 +135,9 @@ public class VistaAtenderLlamadaImpl extends javax.swing.JFrame implements IVist
 
         jLabel6.setText("Descripción:");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
+        descripcion.setColumns(20);
+        descripcion.setRows(5);
+        jScrollPane2.setViewportView(descripcion);
 
         btnFinalizarLlamada.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         btnFinalizarLlamada.setText("Finalizar llamada");
@@ -260,6 +262,7 @@ public class VistaAtenderLlamadaImpl extends javax.swing.JFrame implements IVist
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFinalizarLlamada;
     private javax.swing.JButton btnSalir;
+    private javax.swing.JTextArea descripcion;
     private javax.swing.JTextArea estadoLlamada;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -273,7 +276,6 @@ public class VistaAtenderLlamadaImpl extends javax.swing.JFrame implements IVist
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel llamadasAtendidas;
     private javax.swing.JLabel nombreCliente;
     private javax.swing.JLabel nombreSector;
@@ -289,14 +291,14 @@ public class VistaAtenderLlamadaImpl extends javax.swing.JFrame implements IVist
 
     @Override
     public void mostrarDatosPuesto(Puesto p) {
-         Trabajador t = p.getTrabajador();
-         Sector s = p.getSector();
-         nombreTrabajador.setText(t.getNombreCompleto());
-         nombreSector.setText(s.getNombre());
-         numeroPuesto.setText(Integer.toString(p.getNumero()));
-         llamadasAtendidas.setText(Integer.toString(p.getCantidadLlamadas()));
-         tiempoPromedio.setText(Integer.toString(p.getTiempoPromedio()));
-         estadoLlamada.setText("Esperando llamada...");
+        Trabajador t = p.getTrabajador();
+        Sector s = p.getSector();
+        nombreTrabajador.setText(t.getNombreCompleto());
+        nombreSector.setText(s.getNombre());
+        numeroPuesto.setText(Integer.toString(p.getNumero()));
+        llamadasAtendidas.setText(Integer.toString(p.getCantidadLlamadas()));
+        tiempoPromedio.setText(Integer.toString(p.getTiempoPromedio()));
+        estadoLlamada.setText("Esperando llamada...");
     }
 
     @Override
@@ -309,12 +311,29 @@ public class VistaAtenderLlamadaImpl extends javax.swing.JFrame implements IVist
 
     @Override
     public void finalizarLlamada() {
-        nombreCliente.setText(" ");
-        estadoLlamada.setText("Esperando llamada...");
+        String desc = descripcion.getText();
+        if (desc.length() > 0) {
+            controlador.finalizarLlamada(desc);
+        } else {
+            mostrarError("Descripcion vacia");
+        }
+
     }
 
     @Override
     public void reset() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void finalizarLlamada(Puesto p) {
+        nombreCliente.setText(" ");
+        estadoLlamada.setText("Esperando llamada...");
+        tiempoPromedio.setText(Integer.toString(p.getTiempoPromedio()));
+
+    }
+
+    public void mostrarError(String msg) {
+        JOptionPane.showMessageDialog(this, msg);
     }
 }

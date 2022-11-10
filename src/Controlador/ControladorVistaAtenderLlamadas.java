@@ -26,6 +26,10 @@ public class ControladorVistaAtenderLlamadas implements Observador {
     {
         vista.mostrarDatosPuesto(modelo);
     }
+    public void finalizarLlamada(String desc) {
+        
+        modelo.finalizarLlamada(desc);
+    }
     @Override
     public void actualizar(Object evento, Observable origen) {
         Observador.Eventos e  = (Observador.Eventos)evento;
@@ -34,7 +38,7 @@ public class ControladorVistaAtenderLlamadas implements Observador {
                 vista.iniciarLlamada((Puesto) origen);
             break;
             case FINALIZAR_LLAMADA:
-                //
+                vista.finalizarLlamada((Puesto) origen);
             break;
                 
         }
