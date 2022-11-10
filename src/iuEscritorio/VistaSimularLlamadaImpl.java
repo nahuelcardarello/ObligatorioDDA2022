@@ -6,6 +6,7 @@ package iuEscritorio;
 
 import Controlador.ControladorVistaLogin;
 import Modelo.Puesto;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -338,7 +339,7 @@ public class VistaSimularLlamadaImpl extends javax.swing.JFrame implements IVist
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void iniciarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarBtnActionPerformed
-        // TODO add your handling code here:
+        iniciarllamada();
     }//GEN-LAST:event_iniciarBtnActionPerformed
 
     private void iniciarBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_iniciarBtnMousePressed
@@ -391,22 +392,33 @@ public class VistaSimularLlamadaImpl extends javax.swing.JFrame implements IVist
     }
 
     @Override
-    public void mostrarDatosPuesto(Puesto p) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void iniciarllamada(Puesto p) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void finalizarLlamada() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
     public void reset() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void iniciarllamada() {
+        try {
+            
+        }
+    }
+
+    @Override
+    public void ingresarUsuario() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void mostrarSectores() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public void mostrarError(String msg) {
+        JOptionPane.showMessageDialog(this, msg);
+    }
+
+    @Override
+    public void ingresarSector() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

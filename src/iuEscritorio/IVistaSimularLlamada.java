@@ -8,18 +8,19 @@ package iuEscritorio;
  *
  * @author matiasan-ot
  */
-
 import Modelo.Puesto;
 
 interface IVistaSimularLlamada {
 
     public void inicializar();
 
-    public void mostrarDatosPuesto(Puesto p);
+    public void iniciarllamada();
 
-    public void iniciarllamada(Puesto p);
+    public void ingresarUsuario();
 
-    public void finalizarLlamada();
+    public void mostrarSectores();
+
+    public void ingresarSector();
 
     public void reset();
 }
