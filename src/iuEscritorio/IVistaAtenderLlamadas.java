@@ -20,5 +20,6 @@ public interface IVistaAtenderLlamadas {
 
     void finalizarLlamada(); //creo que tendria que recibir puesto
 
+    void finalizarLlamada(Puesto p);
     void reset();
 }

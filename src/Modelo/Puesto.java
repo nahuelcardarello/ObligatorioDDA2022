@@ -33,6 +33,8 @@ public class Puesto extends Observable {
     public boolean finalizarLlamada(String descripcion) {
         this.llamada = null;
         avisar(Observador.Eventos.FINALIZAR_LLAMADA);
+        
+        /*ver como almacenar llamadas*/
         return false;
     }
 
@@ -80,7 +82,7 @@ public class Puesto extends Observable {
         return llamada;
     }
 
-    //ver finalixar llamada
+    
     public void setLlamada(Llamada llamada) {
         this.llamada = llamada;
         cantidadLlamadas++;
