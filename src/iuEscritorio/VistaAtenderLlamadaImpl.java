@@ -21,10 +21,10 @@ public class VistaAtenderLlamadaImpl extends javax.swing.JFrame implements IVist
 
     public VistaAtenderLlamadaImpl(java.awt.Frame parent, boolean modal, Puesto p) {
         super();
+        initComponents();
         setLocationRelativeTo(parent);
         this.controlador = new ControladorVistaAtenderLlamadas(this, p);
         inicializar();
-
     }
 
     /**
@@ -86,7 +86,6 @@ public class VistaAtenderLlamadaImpl extends javax.swing.JFrame implements IVist
         );
 
         nombreTrabajador.setBackground(new java.awt.Color(0, 0, 0));
-        nombreTrabajador.setDisplayedMnemonic('n');
         nombreTrabajador.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         nombreTrabajador.setText("Nombre trabajador");
 
@@ -286,7 +285,7 @@ public class VistaAtenderLlamadaImpl extends javax.swing.JFrame implements IVist
 
     @Override
     public void inicializar() {
-        controlador.inicializar(); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        controlador.inicializar();
     }
 
     @Override
@@ -299,6 +298,7 @@ public class VistaAtenderLlamadaImpl extends javax.swing.JFrame implements IVist
         llamadasAtendidas.setText(Integer.toString(p.getCantidadLlamadas()));
         tiempoPromedio.setText(Integer.toString(p.getTiempoPromedio()));
         estadoLlamada.setText("Esperando llamada...");
+        this.setVisible(true);
     }
 
     @Override

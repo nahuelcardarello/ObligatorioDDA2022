@@ -13,7 +13,7 @@ public class Trabajador {
     private Puesto puesto;
 
     public boolean contrasenaValida(String contrasena) {
-        return contrasena == this.contrasena;
+        return contrasena.equals(this.contrasena);
     }
 
     public String getCI() {

@@ -14,37 +14,36 @@ public class Sector {
     private ArrayList<Trabajador> trabajadores;
 
     private ArrayList<Puesto> puestos;
-    
-    
 
-    public Sector(String nombre, int numero, int cantidadPuestos, ArrayList<Trabajador> trabajadores, ArrayList<Puesto> puestos) {
-        this.nombre = nombre;
-        this.numero = numero;
-        this.cantidadPuestos = cantidadPuestos;
-        this.trabajadores = new ArrayList<Trabajador>();
+    public Sector() {
         this.puestos = new ArrayList<Puesto>();
+        this.trabajadores = new ArrayList<Trabajador>();
     }
 
     public Puesto altaPuestoTrabajo(Trabajador unT) {
         Puesto puesto = puestoDisponible();
-        if(puesto == null && puestos.size() < cantidadPuestos) {
-            Puesto puestoNuevo = new Puesto(0,0,unT,this,null);
+        if (puesto == null && puestos.size() < cantidadPuestos) {
+            Puesto puestoNuevo = new Puesto(0, 0, unT, this, null);
             puesto = puestoNuevo;
+            puestos.add(puesto);
         }
         return puesto;
-        
+
     }
+
     public Puesto puestoDisponible() {
         Puesto puesto = null;
         int i = 0;
-        while(i < puestos.size() && puesto == null) {
+        while (i < puestos.size() && puesto == null) {
             Puesto p = puestos.get(i);
-            if(p.getTrabajador() == null)
+            if (p.getTrabajador() == null) {
                 puesto = p;
+            }
             i++;
         }
         return puesto;
     }
+
     public boolean bajaPuestoTrabajo(Trabajador unT) {
         return false;
     }

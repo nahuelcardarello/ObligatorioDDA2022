@@ -53,11 +53,14 @@ public class Fachada extends Observable {
     }
 
     public void AgregarTrabajador(Trabajador t) {
-        sistemaTrabajadores.agregar(t);
+        sistemaTrabajadores.agregarTrabajador(t);
     }
 
     void AgregarCliente(Cliente c) {
         sistemaClientes.agregar(c);
     }
 
+    void AgregarSector(Sector s) {
+        sistemaTrabajadores.agregarSector(s);
+    }
 }

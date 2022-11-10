@@ -5,7 +5,7 @@ package iuEscritorio;
  * @author matiasan-ot
  */
 
-import Logica.DatosDePrueba;
+import Logica.DatosdePrueba;
 import Excepciones.Excepcion;
 
 public class ObligatorioDDA2022 {
@@ -16,7 +16,7 @@ public class ObligatorioDDA2022 {
     public static void main(String[] args) {
 
         try {
-            DatosDePrueba.cargar();
+            DatosdePrueba.cargar();
         } catch (Excepcion ex) {
             System.out.println("No se pudo completar la carga de prueba.");
         }

@@ -17,7 +17,7 @@ public class Puesto extends Observable {
 
     private Llamada llamada;
     
-    private static int numeroAcumulativo = 0;
+    private static int numeroAcumulativo = 1;
 
     public Puesto(int cantidadLlamadas, int tiempoPromedio, Trabajador trabajador, Sector sector, Llamada llamada) {
         this.numero = numeroAcumulativo;

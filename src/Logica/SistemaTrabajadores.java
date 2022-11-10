@@ -12,17 +12,18 @@ public class SistemaTrabajadores {
     private ArrayList<Trabajador> trabajadores;
 
     private ArrayList<Sector> sectores;
-    
+
     public SistemaTrabajadores() {
         this.sectores = new ArrayList<Sector>();
         this.trabajadores = new ArrayList<Trabajador>();
     }
+
     private Trabajador buscarTrabajador(String CI) {
         Trabajador trabajador = null;
         int i = 0;
         while (i < trabajadores.size() && trabajador == null) {
             Trabajador t = trabajadores.get(i);
-            if (t.getCI() == CI) {
+            if (t.getCI().equalsIgnoreCase(CI)) {
                 trabajador = t;
             }
             i++;
@@ -33,15 +34,15 @@ public class SistemaTrabajadores {
     public Puesto login(String CI, String contrasena) throws TrabajadorException {
         Puesto puesto = null;
         Trabajador t = buscarTrabajador(CI);
-        if(t != null && t.contrasenaValida(contrasena)) {
+        if (t != null && t.contrasenaValida(contrasena)) {
             puesto = t.getSector().altaPuestoTrabajo(t);
-            if(puesto == null) {
+            if (puesto == null) {
                 throw new TrabajadorException("No hay puestos disponibles");
             }
         } else {
             throw new TrabajadorException("Acceso denegado");
         }
-        
+
         return puesto;
     }
 
@@ -53,8 +54,16 @@ public class SistemaTrabajadores {
         return sectores;
     }
 
-    void agregar(Trabajador t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    void agregarTrabajador(Trabajador t) {
+        if (t != null) {
+            trabajadores.add(t);
+        }
+    }
+
+    void agregarSector(Sector s) {
+        if (s != null) {
+            sectores.add(s);
+        }
     }
 
 }
