@@ -5,7 +5,7 @@ import Modelo.Cliente;
 import Modelo.Sector;
 import Modelo.Trabajador;
 
-public class DatosDePrueba {
+public class DatosdePrueba {
 
     public static void cargar() throws Excepcion {
 
