@@ -32,15 +32,17 @@ public class Puesto extends Observable {
     public int calcularTiempoPromedio() {
         return 0;
     }
-
+    /*tema guardar varias llamadas, calcular tiempo promedio*/
+    
+    
     public boolean finalizarLlamada(String descripcion) {
+        this.llamada.finalizarLlamada(descripcion, this);
         this.llamada = null;
         avisar(Observador.Eventos.FINALIZAR_LLAMADA);
         
-        /*ver como almacenar llamadas*/
+        
         return false;
     }
-
     public int getNumero() {
         return numero;
     }
