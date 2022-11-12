@@ -8,19 +8,19 @@ package iuEscritorio;
  *
  * @author matiasan-ot
  */
+import Excepciones.LlamadaException;
 import Modelo.Puesto;
 
-interface IVistaSimularLlamada {
+public interface IVistaSimularLlamada {
 
-    public void inicializar();
+    public void inicializar() throws LlamadaException;
 
-    public void iniciarllamada();
+    public void altaLlamada(String numeroSectorElegido);
 
     public void ingresarUsuario();
 
     public void mostrarSectores();
 
-    public void ingresarSector();
-
     public void reset();
+    
 }
