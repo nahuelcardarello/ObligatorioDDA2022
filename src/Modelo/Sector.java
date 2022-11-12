@@ -14,6 +14,8 @@ public class Sector {
     private ArrayList<Trabajador> trabajadores;
 
     private ArrayList<Puesto> puestos;
+    
+    private ArrayList<Llamada> llamadas;
 
     public Sector() {
         this.puestos = new ArrayList<Puesto>();

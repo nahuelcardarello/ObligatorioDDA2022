@@ -5,7 +5,7 @@ import java.time.LocalTime;
 
 public class Llamada {
 
-    private boolean enCurso;
+    private String estado;
 
     private LocalDate fechaInicio;
 
@@ -18,14 +18,18 @@ public class Llamada {
     private String descripcion;
 
     private String numeroLlamada;
+    
+    private int ultimoNumeroLlamada;
 
-    private float costo;
+    private float costoTotal;
 
     private Cliente cliente;
 
     private Puesto puesto;
 
     private Trabajador trabajador;
+    
+    private final int costoPorSegundo=1;
 
     public void finalizarLlamada(String descripcion) {
 
@@ -39,12 +43,12 @@ public class Llamada {
         return 0;
     }
 
-    public boolean isEnCurso() {
-        return enCurso;
+    public String getEstado() {
+        return estado;
     }
 
-    public void setEnCurso(boolean enCurso) {
-        this.enCurso = enCurso;
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     public LocalDate getFechaInicio() {
@@ -95,12 +99,12 @@ public class Llamada {
         this.numeroLlamada = numeroLlamada;
     }
 
-    public float getCosto() {
-        return costo;
+    public float getCostoTotal() {
+        return costoTotal;
     }
 
-    public void setCosto(float costo) {
-        this.costo = costo;
+    public void setCostoTotal(float costo) {
+        this.costoTotal = costo;
     }
 
     public Cliente getCliente() {

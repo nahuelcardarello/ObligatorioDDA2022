@@ -5,6 +5,7 @@
 package Logica;
 
 import Modelo.Cliente;
+import java.util.ArrayList;
 
 /**
  *
@@ -12,8 +13,25 @@ import Modelo.Cliente;
  */
 public class SistemaClientes {
 
-    void agregar(Cliente c) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    private ArrayList<Cliente> clientes = new ArrayList<Cliente>();
+
+    public void agregarCliente(Cliente c) {
+        if (c != null) {
+            clientes.add(c);
+        }
     }
-    
+
+    public Cliente buscarCliente(String CI) {
+        Cliente unC = null;
+        int i = 0;
+        while (i < clientes.size() && unC == null) {
+            Cliente c = clientes.get(i);
+            if (c.getCI().equalsIgnoreCase(CI)) {
+                unC = c;
+            }
+            i++;
+        }
+        return unC;
+    }
+
 }
