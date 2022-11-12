@@ -1,5 +1,6 @@
 package Modelo;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -31,8 +32,11 @@ public class Llamada {
     
     private final int costoPorSegundo=1;
 
-    public void finalizarLlamada(String descripcion) {
-
+    public void finalizarLlamada(String descripcion,Puesto p) {
+        this.descripcion  = descripcion;
+        this.horaFin = LocalTime.now();
+        this.fechaFin = LocalDate.now();
+        this.trabajador = p.getTrabajador();
     }
 
     public float calcularCostoLlamada() {
@@ -40,7 +44,9 @@ public class Llamada {
     }
 
     public int calcularDuracionLlamada() {
-        return 0;
+        Duration diff = Duration.between(horaFin,horaInicio);
+        int segundosLlamada = (int)diff.toSeconds();
+        return segundosLlamada;
     }
 
     public String getEstado() {
