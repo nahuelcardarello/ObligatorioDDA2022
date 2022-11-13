@@ -536,20 +536,24 @@ public class VistaSimularLlamadaImpl extends javax.swing.JFrame implements IVist
 
     @Override
     public void altaLlamada(String numeroSectorElegido) {
-       Puesto unPuesto = controlador.altaLlamada(unCliente,numeroSectorElegido, fechaInicio, horaInicio);
+        try {
+            Puesto unPuesto = controlador.altaLlamada(unCliente,numeroSectorElegido, fechaInicio, horaInicio);
+        } catch (LlamadaException ex) {
+            mostrarError(ex.getMessage());
+        }
+       
 
     }
 
     @Override
     public void ingresarUsuario() {
-
+        try {
         unCliente = controlador.ingresarUsuario(CI);
-        if (unCliente != null) {
-            mostrarSectores();
-        } else {
-            //cambiar por manejo de errores
-            jTextAreaMensaje.setText("No existe cliente ingresado");
+         mostrarSectores();
         }
+         catch(CIException ex) {
+             mostrarError(ex.getMessage());
+         }
     }
 
     @Override

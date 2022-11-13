@@ -48,8 +48,8 @@ public class Fachada extends Observable {
         return sistemaLlamadas.iniciarLlamada();
     }
     
-    public Puesto altaLlamada(Cliente uncliente, Sector unSector, LocalDate fechaInicio, LocalTime horaInicio){
-        return sistemaLlamadas.altaLlamada(uncliente, unSector, fechaInicio, horaInicio);
+    public Puesto altaLlamada(Cliente uncliente, Sector unSector, LocalDate fechaInicio, LocalTime horaInicio) throws LlamadaException{
+        return sistemaTrabajadores.altaLlamada(uncliente, unSector, fechaInicio, horaInicio);
     }
 
     public Cliente getCliente(String ci) {

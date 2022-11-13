@@ -58,8 +58,7 @@ public class VistaAtenderLlamadaImpl extends javax.swing.JFrame implements IVist
         descripcion = new javax.swing.JTextArea();
         btnFinalizarLlamada = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        textAreaMensajes = new javax.swing.JTextArea();
+        estadoLLamadaText = new javax.swing.JTextField();
 
         estadoLlamada.setEditable(false);
         estadoLlamada.setColumns(20);
@@ -156,11 +155,6 @@ public class VistaAtenderLlamadaImpl extends javax.swing.JFrame implements IVist
             }
         });
 
-        textAreaMensajes.setEditable(false);
-        textAreaMensajes.setColumns(20);
-        textAreaMensajes.setRows(5);
-        jScrollPane3.setViewportView(textAreaMensajes);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -169,7 +163,7 @@ public class VistaAtenderLlamadaImpl extends javax.swing.JFrame implements IVist
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
-                .addGap(256, 256, 256)
+                .addGap(18, 18, 18)
                 .addComponent(nombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(133, 133, 133))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -208,12 +202,11 @@ public class VistaAtenderLlamadaImpl extends javax.swing.JFrame implements IVist
                                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel8))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(tiempoPromedio)))))
+                                .addComponent(tiempoPromedio))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(53, 53, 53)
+                                .addComponent(estadoLLamadaText)))))
                 .addGap(56, 56, 56))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(115, 115, 115)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 616, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -221,33 +214,33 @@ public class VistaAtenderLlamadaImpl extends javax.swing.JFrame implements IVist
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(88, 88, 88))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(llamadasAtendidas, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tiempoPromedio, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(67, 67, 67))
+                        .addGap(64, 64, 64))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(nombreTrabajador)
-                            .addComponent(jLabel9))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(19, 19, 19)
+                                .addGap(6, 6, 6)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel3)
-                                    .addComponent(nombreSector)
-                                    .addComponent(jLabel5)
-                                    .addComponent(numeroPuesto)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel10)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)))
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                                    .addComponent(nombreTrabajador)
+                                    .addComponent(jLabel9))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(19, 19, 19)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(jLabel3)
+                                            .addComponent(nombreSector)
+                                            .addComponent(jLabel5)
+                                            .addComponent(numeroPuesto)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel10)))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)))
+                .addComponent(estadoLLamadaText, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(nombreCliente))
@@ -259,7 +252,7 @@ public class VistaAtenderLlamadaImpl extends javax.swing.JFrame implements IVist
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnFinalizarLlamada)
                     .addComponent(btnSalir))
-                .addContainerGap(71, Short.MAX_VALUE))
+                .addContainerGap(102, Short.MAX_VALUE))
         );
 
         pack();
@@ -278,6 +271,7 @@ public class VistaAtenderLlamadaImpl extends javax.swing.JFrame implements IVist
     private javax.swing.JButton btnFinalizarLlamada;
     private javax.swing.JButton btnSalir;
     private javax.swing.JTextArea descripcion;
+    private javax.swing.JTextField estadoLLamadaText;
     private javax.swing.JTextArea estadoLlamada;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -291,13 +285,11 @@ public class VistaAtenderLlamadaImpl extends javax.swing.JFrame implements IVist
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel llamadasAtendidas;
     private javax.swing.JLabel nombreCliente;
     private javax.swing.JLabel nombreSector;
     private javax.swing.JLabel nombreTrabajador;
     private javax.swing.JLabel numeroPuesto;
-    private javax.swing.JTextArea textAreaMensajes;
     private javax.swing.JLabel tiempoPromedio;
     // End of variables declaration//GEN-END:variables
 
@@ -315,7 +307,7 @@ public class VistaAtenderLlamadaImpl extends javax.swing.JFrame implements IVist
         numeroPuesto.setText(Integer.toString(p.getNumero()));
         llamadasAtendidas.setText(Integer.toString(p.getCantidadLlamadas()));
         tiempoPromedio.setText(Integer.toString(p.getTiempoPromedio()));
-        textAreaMensajes.setText("Esperando llamada...");
+        estadoLlamada.setText("Esperando llamada...");
         this.setVisible(true);
     }
 
@@ -323,7 +315,7 @@ public class VistaAtenderLlamadaImpl extends javax.swing.JFrame implements IVist
     public void iniciarLlamada(Puesto p) {
         llamadasAtendidas.setText(Integer.toString(p.getCantidadLlamadas()));
         nombreCliente.setText(p.getLlamada().getCliente().getNombrecompleto());
-        textAreaMensajes.setText("Llamada en curso");
+        estadoLlamada.setText("Llamada en curso");
         //revisar triple get
     }
 
@@ -346,7 +338,7 @@ public class VistaAtenderLlamadaImpl extends javax.swing.JFrame implements IVist
     @Override
     public void finalizarLlamada(Puesto p) {
         nombreCliente.setText(" ");
-        textAreaMensajes.setText("Esperando llamada...");
+        estadoLlamada.setText("Esperando llamada...");
         tiempoPromedio.setText(Integer.toString(p.getTiempoPromedio()));
 
     }
