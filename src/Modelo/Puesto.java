@@ -59,6 +59,7 @@ public class Puesto extends Observable {
         ultimaDuracionLlamada = llamada.calcularDuracionLlamada();
         ultimoCosto = llamada.calcularCostoLlamada();
         ultimoSaldo = llamada.getSaldoCliente();
+        tiempoPromedio = (tiempoPromedio + ultimaDuracionLlamada) / cantidadLlamadas;
         this.llamada = null;
         avisar(Observador.Eventos.FINALIZAR_LLAMADA);
     }

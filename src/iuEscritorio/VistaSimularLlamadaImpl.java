@@ -537,34 +537,41 @@ public class VistaSimularLlamadaImpl extends javax.swing.JFrame implements IVist
     @Override
     public void altaLlamada(String numeroSectorElegido) {
         try {
-            Puesto unPuesto = controlador.altaLlamada(unCliente,numeroSectorElegido, fechaInicio, horaInicio);
+            Puesto unPuesto = controlador.altaLlamada(unCliente, numeroSectorElegido, fechaInicio, horaInicio);
             String msg = "Llamada en curso... ud. se está comunicando con el sector ";
             msg += unPuesto.getSector() + "\n";
             msg += "Y está siendo atendido por " + unPuesto.getTrabajador() + "\n";
-            msg += " Su llamada se ha iniciado en " + this.fechaInicio + " "  + this.horaInicio;
+            msg += " Su llamada se ha iniciado en " + this.fechaInicio + " " + this.horaInicio;
             jTextAreaMensaje.setText(msg);
         } catch (LlamadaException ex) {
             mostrarError(ex.getMessage());
         }
-       
 
     }
-       @Override
+
+    @Override
     public void finalizarLlamada(int ultimaDuracionLlamada, float ultimoCosto, float ultimoSaldo) {
         String msg = "Llamada finalizada...Duracion: " + ultimaDuracionLlamada + "\n ";
-         msg += "Costo: " + ultimoCosto;
-         msg += "Su saldo es de: " + ultimoSaldo;
+        msg += "Costo: " + ultimoCosto;
+        msg += "Su saldo es de: " + ultimoSaldo;
+        jTextAreaMensaje.setText(msg);
+        fechaInicio = null;
+        horaInicio = null;
+        CI = "";
+        CIIngresada = false;
+        unCliente = null;
+        iniciarBtn.setEnabled(true);
     }
 
     @Override
     public void ingresarUsuario() {
         try {
-        unCliente = controlador.ingresarUsuario(CI);
-         mostrarSectores();
+            unCliente = controlador.ingresarUsuario(CI);
+            mostrarSectores();
+        } catch (CIException ex) {
+            mostrarError(ex.getMessage());
+            CI = " ";
         }
-         catch(CIException ex) {
-             mostrarError(ex.getMessage());
-         }
     }
 
     @Override
@@ -669,5 +676,4 @@ public class VistaSimularLlamadaImpl extends javax.swing.JFrame implements IVist
         }
     }
 
- 
 }

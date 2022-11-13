@@ -64,7 +64,7 @@ public class Llamada {
     }
 
     public int calcularDuracionLlamada() {
-        return (int)Duration.between(horaFin,horaInicio).toSeconds();
+        return (int)Duration.between(horaInicio,horaFin).toSeconds();
     }
 
     public EstadoLlamada getEstado() {

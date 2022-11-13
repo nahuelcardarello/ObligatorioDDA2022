@@ -22,5 +22,7 @@ public interface IVistaSimularLlamada {
     public void mostrarSectores();
 
     public void reset();
+
+    public void finalizarLlamada(int ultimaDuracionLlamada, float ultimoCosto, float ultimoSaldo);
     
 }

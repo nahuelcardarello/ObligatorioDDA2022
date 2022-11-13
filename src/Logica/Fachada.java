@@ -45,7 +45,7 @@ public class Fachada extends Observable {
     
     //Se comprueba que existe lugar para comenzar una llamada
     public boolean iniciarLlamada()  throws LlamadaException {
-        return sistemaLlamadas.iniciarLlamada();
+        return sistemaTrabajadores.iniciarLlamada();
     }
     
     public Puesto altaLlamada(Cliente uncliente, Sector unSector, LocalDate fechaInicio, LocalTime horaInicio) throws LlamadaException{

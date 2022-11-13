@@ -259,7 +259,10 @@ public class VistaAtenderLlamadaImpl extends javax.swing.JFrame implements IVist
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnFinalizarLlamadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarLlamadaActionPerformed
-        // TODO add your handling code here:
+        if(controlador.enLlamada()) {
+            finalizarLlamada();
+        }
+        
     }//GEN-LAST:event_btnFinalizarLlamadaActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
@@ -316,6 +319,7 @@ public class VistaAtenderLlamadaImpl extends javax.swing.JFrame implements IVist
         llamadasAtendidas.setText(Integer.toString(p.getCantidadLlamadas()));
         nombreCliente.setText(p.getLlamada().getCliente().getNombrecompleto());
         estadoLlamada.setText("Llamada en curso");
+        btnFinalizarLlamada.setEnabled(true);
         //revisar triple get
     }
 
@@ -340,6 +344,8 @@ public class VistaAtenderLlamadaImpl extends javax.swing.JFrame implements IVist
         nombreCliente.setText(" ");
         estadoLlamada.setText("Esperando llamada...");
         tiempoPromedio.setText(Integer.toString(p.getTiempoPromedio()));
+        descripcion.setText(" ");
+        btnFinalizarLlamada.setEnabled(false);
 
     }
 

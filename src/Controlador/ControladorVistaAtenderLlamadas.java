@@ -27,8 +27,10 @@ public class ControladorVistaAtenderLlamadas implements Observador {
         vista.mostrarDatosPuesto(modelo);
     }
     public void finalizarLlamada(String desc) {
-        
         modelo.finalizarLlamada(desc);
+    }
+    public boolean enLlamada() {
+        return modelo.getLlamada() != null;
     }
     @Override
     public void actualizar(Object evento, Observable origen) {
