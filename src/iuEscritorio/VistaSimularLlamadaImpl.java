@@ -538,11 +538,22 @@ public class VistaSimularLlamadaImpl extends javax.swing.JFrame implements IVist
     public void altaLlamada(String numeroSectorElegido) {
         try {
             Puesto unPuesto = controlador.altaLlamada(unCliente,numeroSectorElegido, fechaInicio, horaInicio);
+            String msg = "Llamada en curso... ud. se está comunicando con el sector ";
+            msg += unPuesto.getSector() + "\n";
+            msg += "Y está siendo atendido por " + unPuesto.getTrabajador() + "\n";
+            msg += " Su llamada se ha iniciado en " + this.fechaInicio + " "  + this.horaInicio;
+            jTextAreaMensaje.setText(msg);
         } catch (LlamadaException ex) {
             mostrarError(ex.getMessage());
         }
        
 
+    }
+       @Override
+    public void finalizarLlamada(int ultimaDuracionLlamada, float ultimoCosto, float ultimoSaldo) {
+        String msg = "Llamada finalizada...Duracion: " + ultimaDuracionLlamada + "\n ";
+         msg += "Costo: " + ultimoCosto;
+         msg += "Su saldo es de: " + ultimoSaldo;
     }
 
     @Override
@@ -657,4 +668,6 @@ public class VistaSimularLlamadaImpl extends javax.swing.JFrame implements IVist
             CI += numero;
         }
     }
+
+ 
 }

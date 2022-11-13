@@ -24,7 +24,7 @@ public class Sector {
         this.puestos = new ArrayList<Puesto>();
         this.trabajadores = new ArrayList<Trabajador>();
     }
-
+    
     public Puesto altaPuestoTrabajo(Trabajador unT) {
         Puesto puesto = puestoDisponible();
         if (puesto == null && puestos.size() < cantidadPuestos) {
@@ -41,7 +41,7 @@ public class Sector {
             Puesto p = puestoDisponible();
             if (p != null) {
                 Llamada llamada = new Llamada(Llamada.EstadoLlamada.enCurso, fechaInicio, horaInicio, uncliente, p, p.getTrabajador());
-                p.setLlamada(llamada);
+                p.agregarLlamada(llamada);
                 return p;
             } else {
                 return null;
@@ -50,7 +50,10 @@ public class Sector {
             throw new Excepciones.LlamadaException("Sector no disponible");
         }
     }
-
+    @Override
+    public String toString() {
+        return this.nombre;
+    }
     public Puesto puestoDisponible() {
         Puesto puesto = null;
         int i = 0;

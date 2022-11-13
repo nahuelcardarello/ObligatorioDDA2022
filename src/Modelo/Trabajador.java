@@ -35,6 +35,10 @@ public class Trabajador {
     public String getContrasena() {
         return contrasena;
     }
+    @Override
+    public String toString() {
+        return this.nombreCompleto;
+    }
 
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;

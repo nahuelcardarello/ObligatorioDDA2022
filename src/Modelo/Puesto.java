@@ -19,6 +19,17 @@ public class Puesto extends Observable {
     
     private static int numeroAcumulativo = 1;
 
+    private int ultimaDuracionLlamada;
+    
+    private float ultimoCosto;
+    
+    private float ultimoSaldo;
+
+
+    public float getUltimoSaldo() {
+        return ultimoSaldo;
+    }
+    
     public Puesto(int cantidadLlamadas, int tiempoPromedio, Trabajador trabajador, Sector sector, Llamada llamada) {
         this.numero = numeroAcumulativo;
         numeroAcumulativo++;
@@ -29,19 +40,27 @@ public class Puesto extends Observable {
         this.llamada = llamada;
     }
 
+    public int getUltimaDuracionLlamada() {
+        return ultimaDuracionLlamada;
+    }
+
+    public float getUltimoCosto() {
+        return ultimoCosto;
+    }
+
     public int calcularTiempoPromedio() {
         return 0;
     }
     /*tema guardar varias llamadas, calcular tiempo promedio*/
     
     
-    public boolean finalizarLlamada(String descripcion) {
+    public void finalizarLlamada(String descripcion) {
         this.llamada.finalizarLlamada(descripcion, this);
+        ultimaDuracionLlamada = llamada.calcularDuracionLlamada();
+        ultimoCosto = llamada.calcularCostoLlamada();
+        ultimoSaldo = llamada.getSaldoCliente();
         this.llamada = null;
         avisar(Observador.Eventos.FINALIZAR_LLAMADA);
-        
-        
-        return false;
     }
     public int getNumero() {
         return numero;
@@ -88,7 +107,7 @@ public class Puesto extends Observable {
     }
 
     
-    public void setLlamada(Llamada llamada) {
+    public void agregarLlamada(Llamada llamada) {
         this.llamada = llamada;
         cantidadLlamadas++;
         this.avisar(Observador.Eventos.INICIAR_LLAMADA);

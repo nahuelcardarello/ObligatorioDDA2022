@@ -11,6 +11,8 @@ import Modelo.Llamada;
 import Excepciones.LlamadaException;
 import Modelo.Puesto;
 import Modelo.Sector;
+import Observer.Observable;
+import Observer.Observador;
 import iuEscritorio.IVistaSimularLlamada;
 import iuEscritorio.VistaSimularLlamadaImpl;
 import java.time.LocalDate;
@@ -21,7 +23,7 @@ import java.util.ArrayList;
  *
  * @author matiasan-ot
  */
-public class ControladorVistaSimularLlamada {
+public class ControladorVistaSimularLlamada implements Observador {
 
     private IVistaSimularLlamada vista;
     private Fachada fachada;
@@ -38,9 +40,8 @@ public class ControladorVistaSimularLlamada {
 
     public Puesto altaLlamada(Cliente uncliente, String numeroSector, LocalDate fechaInicio, LocalTime horaInicio) throws LlamadaException {
         Sector unSector = getSector(numeroSector);
-
-        Puesto unPuesto = Fachada.getInstancia().altaLlamada(uncliente, unSector, fechaInicio, horaInicio);;
-
+        Puesto unPuesto = Fachada.getInstancia().altaLlamada(uncliente, unSector, fechaInicio, horaInicio);
+        unPuesto.agregarObservador(this);
         return unPuesto;
     }
 
@@ -79,4 +80,16 @@ public class ControladorVistaSimularLlamada {
         }
         return unSector;
     }
+
+    @Override
+    public void actualizar(Object evento, Observable origen) {
+        Eventos  e = (Eventos)evento;
+        if(e == Eventos.FINALIZAR_LLAMADA) {
+            Puesto p = (Puesto)origen;
+            p.quitarObservador(this);
+            vista.finalizarLlamada(p.getUltimaDuracionLlamada(),p.getUltimoCosto(),p.getUltimoSaldo());
+        }
+    }
+    
+    /*seguir en atender llamadas, implementar finalixar*/
 }

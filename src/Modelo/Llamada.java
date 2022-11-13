@@ -1,5 +1,6 @@
 package Modelo;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -52,7 +53,10 @@ public class Llamada {
     
     
     public void finalizarLlamada(String descripcion,Puesto p) {
-
+        this.descripcion = descripcion;
+        this.fechaFin = LocalDate.now();
+        this.horaFin = LocalTime.now();
+        this.estado = EstadoLlamada.finalizada;
     }
 
     public float calcularCostoLlamada() {
@@ -60,7 +64,7 @@ public class Llamada {
     }
 
     public int calcularDuracionLlamada() {
-        return 0;
+        return (int)Duration.between(horaFin,horaInicio).toSeconds();
     }
 
     public EstadoLlamada getEstado() {
@@ -89,6 +93,9 @@ public class Llamada {
 
     public LocalDate getFechaFin() {
         return fechaFin;
+    }
+    public float getSaldoCliente() {
+        return cliente.getSaldo();
     }
 
     public void setFechaFin(LocalDate fechaFin) {
