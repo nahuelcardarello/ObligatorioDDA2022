@@ -4,6 +4,7 @@
  */
 package Controlador;
 
+import Excepciones.CIException;
 import Logica.Fachada;
 import Modelo.Cliente;
 import Modelo.Llamada;
@@ -35,7 +36,7 @@ public class ControladorVistaSimularLlamada {
         return Fachada.getInstancia().iniciarLlamada();
     }
 
-    public Puesto altaLlamada(Cliente uncliente, String numeroSector, LocalDate fechaInicio, LocalTime horaInicio) {
+    public Puesto altaLlamada(Cliente uncliente, String numeroSector, LocalDate fechaInicio, LocalTime horaInicio) throws LlamadaException {
         Sector unSector = getSector(numeroSector);
 
         Puesto unPuesto = Fachada.getInstancia().altaLlamada(uncliente, unSector, fechaInicio, horaInicio);;
@@ -43,13 +44,13 @@ public class ControladorVistaSimularLlamada {
         return unPuesto;
     }
 
-    public Cliente ingresarUsuario(String ci) {
+    public Cliente ingresarUsuario(String ci) throws CIException {
         Cliente unC;
         unC = Fachada.getInstancia().buscarCliente(ci);
         if (unC != null) {
             return unC;
         }
-        return null;
+        throw new CIException("Cliente no registrado");
     }
 
     public ArrayList<Sector> getSectores() {

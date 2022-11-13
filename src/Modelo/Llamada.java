@@ -5,7 +5,13 @@ import java.time.LocalTime;
 
 public class Llamada {
 
-    private String estado;
+    public enum EstadoLlamada {
+        enCurso,
+        enEspera,
+        finalizada
+        
+    }
+    private EstadoLlamada estado;
 
     private LocalDate fechaInicio;
 
@@ -17,9 +23,9 @@ public class Llamada {
 
     private String descripcion;
 
-    private String numeroLlamada;
+    private int numeroLlamada;
     
-    private int ultimoNumeroLlamada;
+    private static int ultimoNumeroLlamada;
 
     private float costoTotal;
 
@@ -30,7 +36,21 @@ public class Llamada {
     private Trabajador trabajador;
     
     private final int costoPorSegundo=1;
+    
 
+    public Llamada(EstadoLlamada estado, LocalDate fechaInicio, LocalTime horaInicio, Cliente cliente, Puesto puesto, Trabajador trabajador) {
+        this.estado = estado;
+        this.fechaInicio = fechaInicio;
+        this.horaInicio = horaInicio;
+        this.numeroLlamada = ultimoNumeroLlamada;
+        ultimoNumeroLlamada++;
+        this.cliente = cliente;
+        this.puesto = puesto;
+        this.trabajador = trabajador;
+    }
+
+    
+    
     public void finalizarLlamada(String descripcion) {
 
     }
@@ -43,11 +63,11 @@ public class Llamada {
         return 0;
     }
 
-    public String getEstado() {
+    public EstadoLlamada getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(EstadoLlamada estado) {
         this.estado = estado;
     }
 
@@ -91,11 +111,11 @@ public class Llamada {
         this.descripcion = descripcion;
     }
 
-    public String getNumeroLlamada() {
+    public int getNumeroLlamada() {
         return numeroLlamada;
     }
 
-    public void setNumeroLlamada(String numeroLlamada) {
+    public void setNumeroLlamada(int numeroLlamada) {
         this.numeroLlamada = numeroLlamada;
     }
 

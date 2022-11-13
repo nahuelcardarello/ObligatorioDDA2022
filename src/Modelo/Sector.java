@@ -1,7 +1,10 @@
 package Modelo;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collection;
+import Excepciones.LlamadaException;
 
 public class Sector {
 
@@ -14,7 +17,7 @@ public class Sector {
     private ArrayList<Trabajador> trabajadores;
 
     private ArrayList<Puesto> puestos;
-    
+
     private ArrayList<Llamada> llamadas;
 
     public Sector() {
@@ -33,12 +36,27 @@ public class Sector {
 
     }
 
+    public Puesto iniciarLlamada(Cliente uncliente, LocalDate fechaInicio, LocalTime horaInicio) throws Excepciones.LlamadaException {
+        if (puestos.size() > 0) {
+            Puesto p = puestoDisponible();
+            if (p != null) {
+                Llamada llamada = new Llamada(Llamada.EstadoLlamada.enCurso, fechaInicio, horaInicio, uncliente, p, p.getTrabajador());
+                p.setLlamada(llamada);
+                return p;
+            } else {
+                return null;
+            }
+        } else {
+            throw new Excepciones.LlamadaException("Sector no disponible");
+        }
+    }
+
     public Puesto puestoDisponible() {
         Puesto puesto = null;
         int i = 0;
         while (i < puestos.size() && puesto == null) {
             Puesto p = puestos.get(i);
-            if (p.getTrabajador() == null) {
+            if (p.getTrabajador() !=  null) {
                 puesto = p;
             }
             i++;
