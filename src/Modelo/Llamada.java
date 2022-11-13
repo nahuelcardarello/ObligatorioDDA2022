@@ -51,7 +51,7 @@ public class Llamada {
 
     
     
-    public void finalizarLlamada(String descripcion) {
+    public void finalizarLlamada(String descripcion,Puesto p) {
 
     }
 
