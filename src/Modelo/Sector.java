@@ -14,10 +14,13 @@ public class Sector {
     private ArrayList<Trabajador> trabajadores;
 
     private ArrayList<Puesto> puestos;
+    
+    private ArrayList<Llamada> llamadas;
 
     public Sector() {
         this.puestos = new ArrayList<Puesto>();
         this.trabajadores = new ArrayList<Trabajador>();
+        this.llamadas = new ArrayList<Llamada>(); 
     }
 
     public Puesto altaPuestoTrabajo(Trabajador unT) {
@@ -42,6 +45,14 @@ public class Sector {
             i++;
         }
         return puesto;
+    }
+
+    public ArrayList<Llamada> getLlamadas() {
+        return llamadas;
+    }
+
+    public void setLlamadas(ArrayList<Llamada> llamadas) {
+        this.llamadas = llamadas;
     }
 
     public boolean bajaPuestoTrabajo(Trabajador unT) {

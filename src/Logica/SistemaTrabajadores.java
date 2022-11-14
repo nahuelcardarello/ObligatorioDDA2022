@@ -1,5 +1,6 @@
 package Logica;
 
+import Modelo.Llamada;
 import java.util.Collection;
 import java.util.ArrayList;
 import Modelo.Trabajador;
@@ -30,6 +31,18 @@ public class SistemaTrabajadores {
         }
         return trabajador;
     }
+        public Sector buscarSector(String nombre) {
+        Sector sector = null;
+        int i = 0;
+        while (i < sectores.size() && sector == null) {
+            Sector s = sectores.get(i);
+            if (s.getNombre().equalsIgnoreCase(nombre)) {
+                sector = s;
+            }
+            i++;
+        }
+        return sector;
+    }
 
     public Puesto login(String CI, String contrasena) throws TrabajadorException {
         Puesto puesto = null;
@@ -51,7 +64,19 @@ public class SistemaTrabajadores {
     }
 
     public ArrayList<Sector> getSectores() {
-        return sectores;
+        return this.sectores;
+    }
+    
+    public  ArrayList<Llamada> getLlamadasTotal(){
+        ArrayList<Llamada> llamadasTotal = new ArrayList<Llamada>();
+        for (int i = 0; i < this.getSectores().size(); i++) {
+            Sector sector = this.getSectores().get(i);
+            for (int j = 0; j < sector.getLlamadas().size(); j++) {
+                Llamada llamada = sector.getLlamadas().get(j);
+                llamadasTotal.add(llamada);
+            }
+        }
+        return llamadasTotal;
     }
 
     void agregarTrabajador(Trabajador t) {

@@ -6,6 +6,7 @@ import Observer.Observable;
 import Modelo.Puesto;
 import Modelo.Trabajador;
 import Modelo.Cliente;
+import Modelo.Llamada;
 import Modelo.Sector;
 import Modelo.TrabajadorException;
 
@@ -49,18 +50,23 @@ public class Fachada extends Observable {
     }
 
     public ArrayList<Sector> getSectores() {
-        return null;
+        return sistemaTrabajadores.getSectores();
     }
 
     public void AgregarTrabajador(Trabajador t) {
         sistemaTrabajadores.agregarTrabajador(t);
     }
-
+    public ArrayList<Llamada> getLlamadasTotal(){
+      return sistemaTrabajadores.getLlamadasTotal();
+    }
     void AgregarCliente(Cliente c) {
         sistemaClientes.agregar(c);
     }
 
     void AgregarSector(Sector s) {
         sistemaTrabajadores.agregarSector(s);
+    }
+    public Sector buscarSector(String nombreSector){
+     return sistemaTrabajadores.buscarSector(nombreSector);
     }
 }

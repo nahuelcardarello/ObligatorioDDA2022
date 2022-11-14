@@ -26,6 +26,16 @@ public class Llamada {
     private Puesto puesto;
 
     private Trabajador trabajador;
+    
+    private Sector sector;
+
+    public Sector getSector() {
+        return sector;
+    }
+
+    public void setSector(Sector sector) {
+        this.sector = sector;
+    }
 
     public void finalizarLlamada(String descripcion) {
 
