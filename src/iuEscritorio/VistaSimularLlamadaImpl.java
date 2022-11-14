@@ -154,6 +154,11 @@ public class VistaSimularLlamadaImpl extends javax.swing.JFrame implements IVist
         finalizarBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         finalizarBtn.setForeground(new java.awt.Color(255, 0, 51));
         finalizarBtn.setText("Finalizar");
+        finalizarBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                finalizarBtnActionPerformed(evt);
+            }
+        });
 
         salirBtn.setBackground(new java.awt.Color(255, 255, 255));
         salirBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -488,6 +493,10 @@ public class VistaSimularLlamadaImpl extends javax.swing.JFrame implements IVist
         }
         ingresarNumeroCI("#");
     }//GEN-LAST:event_hashActionPerformed
+
+    private void finalizarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finalizarBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_finalizarBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

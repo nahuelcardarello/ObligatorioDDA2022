@@ -14,13 +14,15 @@ import javax.swing.JOptionPane;
 import Modelo.Puesto;
 import Modelo.Sector;
 import Modelo.Trabajador;
+import javax.swing.JFrame;
+
 
 public class VistaAtenderLlamadaImpl extends javax.swing.JFrame implements IVistaAtenderLlamadas {
 
     private ControladorVistaAtenderLlamadas controlador;
 
     public VistaAtenderLlamadaImpl(java.awt.Frame parent, boolean modal, Puesto p) {
-        super();
+//        super(parent, modal);
         initComponents();
         setLocationRelativeTo(parent);
         this.controlador = new ControladorVistaAtenderLlamadas(this, p);

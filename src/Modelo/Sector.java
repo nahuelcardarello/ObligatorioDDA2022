@@ -39,11 +39,15 @@ public class Sector {
     public Puesto iniciarLlamada(Cliente uncliente, LocalDate fechaInicio, LocalTime horaInicio) throws Excepciones.LlamadaException {
         if (puestos.size() > 0) {
             Puesto p = puestoDisponible();
-            if (p != null) {
+            if (p.getLlamada() == null && p != null) {
                 Llamada llamada = new Llamada(Llamada.EstadoLlamada.enCurso, fechaInicio, horaInicio, uncliente, p, p.getTrabajador());
                 p.agregarLlamada(llamada);
                 return p;
-            } else {
+            } else if (p.getLlamada() != null && p != null) {
+                Llamada llamada = new Llamada(Llamada.EstadoLlamada.enEspera, fechaInicio, horaInicio, uncliente, p, p.getTrabajador());
+                p.agregarLlamada(llamada);
+                return p;
+            }else{
                 return null;
             }
         } else {
@@ -65,6 +69,38 @@ public class Sector {
             i++;
         }
         return puesto;
+    }
+    
+    public int cantidadDeLlamadasASerAtendido(){
+        int cantLlamadasEnEspera=0;
+        
+        for (Llamada Ll : llamadas) {
+            if (Ll.getEstado().equals("enEspera")) {
+                cantLlamadasEnEspera++;
+            }
+        }
+        return cantLlamadasEnEspera;
+    }
+    
+    public int cantidadDeMinutosDeEspera(){
+        int cantMinutos=0;
+        
+        if (cantidadDeLlamadasASerAtendido()>0) {
+            cantMinutos= this.cantidadDeLlamadasASerAtendido()*this.tiempoPromedioAtencionSector();
+        }
+        
+        return cantMinutos;
+    }
+    
+    public int tiempoPromedioAtencionSector(){
+        int cantMinutos=0;
+        
+        for (Puesto p : puestos) {
+            cantMinutos+=(p.getTiempoPromedio()/60);
+        }
+        cantMinutos*=puestos.size();
+        
+        return cantMinutos;
     }
 
     public boolean bajaPuestoTrabajo(Trabajador unT) {
