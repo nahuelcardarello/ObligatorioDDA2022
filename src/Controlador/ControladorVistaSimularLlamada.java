@@ -37,7 +37,9 @@ public class ControladorVistaSimularLlamada implements Observador {
     public boolean inicializar() throws LlamadaException {
         return Fachada.getInstancia().iniciarLlamada();
     }
-
+    public void finalizarLlamada(String desc) {
+        //fachada.finalizarLlamada(" ");
+    }
     public Puesto altaLlamada(Cliente uncliente, String numeroSector, LocalDate fechaInicio, LocalTime horaInicio) throws LlamadaException {
         Sector unSector = getSector(numeroSector);
         Puesto unPuesto = Fachada.getInstancia().altaLlamada(uncliente, unSector, fechaInicio, horaInicio);

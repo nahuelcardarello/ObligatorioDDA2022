@@ -69,12 +69,12 @@ public class DatosdePrueba {
         Cliente c2 = new Cliente();
         c2.setNombrecompleto("Marta");
         c2.setSaldo(50);
-        c2.setCI("55555555");
+        c2.setCI("66666666");
 
         Cliente c3 = new Cliente();
         c3.setNombrecompleto("Juan");
         c3.setSaldo(10);
-        c3.setCI("55555555");
+        c3.setCI("77777777");
 
         Fachada.getInstancia().AgregarCliente(c1);
         Fachada.getInstancia().AgregarCliente(c2);
