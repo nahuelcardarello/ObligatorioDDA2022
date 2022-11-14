@@ -19,6 +19,8 @@ public class Sector {
     private ArrayList<Puesto> puestos;
     
     private ArrayList<Llamada> llamadas;
+    
+    private ArrayList<Llamada> llamadasEnEspera;
 
     public Sector() {
         this.puestos = new ArrayList<Puesto>();
@@ -39,15 +41,15 @@ public class Sector {
 
     public Puesto iniciarLlamada(Cliente uncliente, LocalDate fechaInicio, LocalTime horaInicio) throws Excepciones.LlamadaException {
         if (puestos.size() > 0) {
-            Puesto p = puestoDisponible();
-            if (p.getLlamada() == null && p != null) {
-                Llamada llamada = new Llamada(Llamada.EstadoLlamada.enCurso, fechaInicio, horaInicio, uncliente, p, p.getTrabajador(),this);
+            Puesto p = puestoParaAtender();
+            if (p!=null) {
+                Llamada llamada = new Llamada(Llamada.EstadoLlamada.enCurso, fechaInicio, horaInicio, uncliente, p, p.getTrabajador());
                 p.agregarLlamada(llamada);
                 agregarLlamadaSector(llamada);
                 return p;
-            } else if (p.getLlamada() != null && p != null) {
-                Llamada llamada = new Llamada(Llamada.EstadoLlamada.enEspera, fechaInicio, horaInicio, uncliente, p, p.getTrabajador(),this);
-                p.agregarLlamada(llamada);
+            } else if (p == null) {
+                Llamada llamada = new Llamada(Llamada.EstadoLlamada.enEspera, fechaInicio, horaInicio, uncliente, p, p.getTrabajador());
+                llamadasEnEspera.add(llamada);
                 return p;
             }else{
                 return null;
@@ -73,6 +75,18 @@ public class Sector {
             }
             i++;
         }
+        return puesto;
+    }
+    
+    public Puesto puestoParaAtender(){
+        Puesto puesto=null;
+        
+        for (Puesto p : puestos) {
+            if (p.getLlamada()==null && p.getTrabajador()!=null) {
+                puesto=p;
+            }
+        }
+        
         return puesto;
     }
     
@@ -171,5 +185,15 @@ public class Sector {
     public void setPuestos(ArrayList<Puesto> puestos) {
         this.puestos = puestos;
     }
+
+    public ArrayList<Llamada> getLlamadasEnEspera() {
+        return llamadasEnEspera;
+    }
+
+    public void setLlamadasEnEspera(ArrayList<Llamada> llamadasEnEspera) {
+        this.llamadasEnEspera = llamadasEnEspera;
+    }
+    
+    
 
 }
