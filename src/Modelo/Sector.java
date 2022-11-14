@@ -20,8 +20,6 @@ public class Sector {
     
     private ArrayList<Llamada> llamadas;
 
-    private ArrayList<Llamada> llamadas;
-
     public Sector() {
         this.puestos = new ArrayList<Puesto>();
         this.trabajadores = new ArrayList<Trabajador>();
@@ -43,11 +41,12 @@ public class Sector {
         if (puestos.size() > 0) {
             Puesto p = puestoDisponible();
             if (p.getLlamada() == null && p != null) {
-                Llamada llamada = new Llamada(Llamada.EstadoLlamada.enCurso, fechaInicio, horaInicio, uncliente, p, p.getTrabajador());
+                Llamada llamada = new Llamada(Llamada.EstadoLlamada.enCurso, fechaInicio, horaInicio, uncliente, p, p.getTrabajador(),this);
                 p.agregarLlamada(llamada);
+                agregarLlamadaSector(llamada);
                 return p;
             } else if (p.getLlamada() != null && p != null) {
-                Llamada llamada = new Llamada(Llamada.EstadoLlamada.enEspera, fechaInicio, horaInicio, uncliente, p, p.getTrabajador());
+                Llamada llamada = new Llamada(Llamada.EstadoLlamada.enEspera, fechaInicio, horaInicio, uncliente, p, p.getTrabajador(),this);
                 p.agregarLlamada(llamada);
                 return p;
             }else{
@@ -56,6 +55,9 @@ public class Sector {
         } else {
             throw new Excepciones.LlamadaException("Sector no disponible");
         }
+    }
+    public void agregarLlamadaSector(Llamada llamada){
+        this.llamadas.add(llamada);
     }
     @Override
     public String toString() {

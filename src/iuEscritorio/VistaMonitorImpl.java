@@ -251,12 +251,15 @@ public class VistaMonitorImpl extends javax.swing.JFrame implements IVistaMonito
         if (sectorSeleccionado == null) {
             jTable.setModel(new DefaultTableModel());
         } else {
-            jTable.setModel(new DefaultTableModel());
+                    DefaultTableModel modeloDefault = new DefaultTableModel(new String[]{
+             "#llamada", "Estado", "Inicio", "Fin", "#puesto", "Trabajador", "Duracion", "Costo", "Cliente", "Saldo"
+        }, sectorSeleccionado.getLlamadas().size());
+            jTable.setModel(modeloDefault);
             TableModel modeloDatos = jTable.getModel();
             for (int i = 0; i < sectorSeleccionado.getLlamadas().size(); i++) {
                 Llamada llamada = sectorSeleccionado.getLlamadas().get(i);
                 modeloDatos.setValueAt(llamada.getNumeroLlamada(), i, 0);
-                modeloDatos.setValueAt(llamada.isEnCurso(), i, 1);
+                modeloDatos.setValueAt(llamada.getEstado(), i, 1);
                 modeloDatos.setValueAt(llamada.getFechaInicio(), i, 2);
                 modeloDatos.setValueAt(llamada.getFechaFin(), i, 3);
                 modeloDatos.setValueAt(llamada.getPuesto().getNumero(), i, 4);
@@ -281,7 +284,7 @@ public class VistaMonitorImpl extends javax.swing.JFrame implements IVistaMonito
             Llamada llamada = llamadasSectores.get(i);
             modeloDatos.setValueAt(llamada.getSector().getNombre(), i, 0);
             modeloDatos.setValueAt(llamada.getNumeroLlamada(), i, 1);
-            modeloDatos.setValueAt(llamada.isEnCurso(), i, 2);
+            modeloDatos.setValueAt(llamada.getEstado(), i, 2);
             modeloDatos.setValueAt(llamada.getFechaInicio(), i, 3);
             modeloDatos.setValueAt(llamada.getFechaFin(), i, 4);
             modeloDatos.setValueAt(llamada.getPuesto().getNumero(), i, 5);

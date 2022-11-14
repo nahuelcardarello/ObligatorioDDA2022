@@ -24,7 +24,8 @@ public class SistemaTrabajadores {
         this.sectores = new ArrayList<Sector>();
         this.trabajadores = new ArrayList<Trabajador>();
     }
-       public boolean iniciarLlamada() throws LlamadaException {
+
+    public boolean iniciarLlamada() throws LlamadaException {
         if (cantidadLlamadas < 5) {
             cantidadLlamadas++;
             return true;
@@ -32,19 +33,20 @@ public class SistemaTrabajadores {
             throw new LlamadaException("Comuníquese más tarde...");
         }
     }
+
     public Puesto altaLlamada(Cliente uncliente, Sector unSector, LocalDate fechaInicio, LocalTime horaInicio) throws LlamadaException {
-            //preguntar a matias y nahuel si no tiene sentido establecer fecha y hora al inicialixar llamada
-            try {
-                Puesto p = unSector.iniciarLlamada(uncliente, fechaInicio, horaInicio);
-                if (p != null) {
-                    return p;
-                } else {
-                    return null;
-                }
-            } catch (LlamadaException llamada) {
-                cantidadLlamadas--;
-                throw llamada;
+        //preguntar a matias y nahuel si no tiene sentido establecer fecha y hora al inicialixar llamada
+        try {
+            Puesto p = unSector.iniciarLlamada(uncliente, fechaInicio, horaInicio);
+            if (p != null) {
+                return p;
+            } else {
+                return null;
             }
+        } catch (LlamadaException llamada) {
+            cantidadLlamadas--;
+            throw llamada;
+        }
     }
 
     private Trabajador buscarTrabajador(String CI) {
@@ -59,7 +61,8 @@ public class SistemaTrabajadores {
         }
         return trabajador;
     }
-        public Sector buscarSector(String nombre) {
+
+    public Sector buscarSector(String nombre) {
         Sector sector = null;
         int i = 0;
         while (i < sectores.size() && sector == null) {
@@ -94,14 +97,16 @@ public class SistemaTrabajadores {
     public ArrayList<Sector> getSectores() {
         return this.sectores;
     }
-    
-    public  ArrayList<Llamada> getLlamadasTotal(){
+
+    public ArrayList<Llamada> getLlamadasTotal() {
         ArrayList<Llamada> llamadasTotal = new ArrayList<Llamada>();
         for (int i = 0; i < this.getSectores().size(); i++) {
             Sector sector = this.getSectores().get(i);
             for (int j = 0; j < sector.getLlamadas().size(); j++) {
                 Llamada llamada = sector.getLlamadas().get(j);
-                llamadasTotal.add(llamada);
+                if (llamada.getEstado() != Llamada.EstadoLlamada.enEspera) {
+                    llamadasTotal.add(llamada);
+                }
             }
         }
         return llamadasTotal;

@@ -40,16 +40,9 @@ public class Llamada {
 
     private final int costoPorSegundo=1;
 
-    public Sector getSector() {
-        return sector;
-    }
-
-    public void setSector(Sector sector) {
-        this.sector = sector;
-    }
 
 
-    public Llamada(EstadoLlamada estado, LocalDate fechaInicio, LocalTime horaInicio, Cliente cliente, Puesto puesto, Trabajador trabajador) {
+    public Llamada(EstadoLlamada estado, LocalDate fechaInicio, LocalTime horaInicio, Cliente cliente, Puesto puesto, Trabajador trabajador,Sector sector) {
         this.estado = estado;
         this.fechaInicio = fechaInicio;
         this.horaInicio = horaInicio;
@@ -58,6 +51,7 @@ public class Llamada {
         this.cliente = cliente;
         this.puesto = puesto;
         this.trabajador = trabajador;
+        this.sector = sector;
     }
 
     
@@ -69,6 +63,14 @@ public class Llamada {
         this.estado = EstadoLlamada.finalizada;
     }
 
+    public Sector getSector() {
+        return sector;
+    }
+
+    public void setSector(Sector sector) {
+        this.sector = sector;
+    }
+    
     public float calcularCostoLlamada() {
         return 0;
     }
