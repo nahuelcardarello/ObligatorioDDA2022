@@ -24,13 +24,18 @@ public class Sector {
         this.puestos = new ArrayList<Puesto>();
         this.trabajadores = new ArrayList<Trabajador>();
     }
-    
+
     public Puesto altaPuestoTrabajo(Trabajador unT) {
-        Puesto puesto = puestoDisponible();
-        if (puesto == null && puestos.size() < cantidadPuestos) {
-            Puesto puestoNuevo = new Puesto(0, 0, unT, this, null);
-            puesto = puestoNuevo;
-            puestos.add(puesto);
+        Puesto puesto = null;
+        if (puestos.size() < cantidadPuestos) {
+            puesto = puestoDisponible();
+            if (puesto == null) {
+                Puesto puestoNuevo = new Puesto(0, 0, unT, this, null);
+                puesto = puestoNuevo;
+                puestos.add(puesto);
+            } else {
+                puesto.setTrabajador(unT);
+            }
         }
         return puesto;
 
@@ -47,33 +52,35 @@ public class Sector {
                 Llamada llamada = new Llamada(Llamada.EstadoLlamada.enEspera, fechaInicio, horaInicio, uncliente, p, p.getTrabajador());
                 p.agregarLlamada(llamada);
                 return p;
-            }else{
+            } else {
                 return null;
             }
         } else {
             throw new Excepciones.LlamadaException("Sector no disponible");
         }
     }
+
     @Override
     public String toString() {
         return this.nombre;
     }
+
     public Puesto puestoDisponible() {
         Puesto puesto = null;
         int i = 0;
         while (i < puestos.size() && puesto == null) {
             Puesto p = puestos.get(i);
-            if (p.getTrabajador() !=  null) {
+            if (p.getTrabajador() == null) {
                 puesto = p;
             }
             i++;
         }
         return puesto;
     }
-    
-    public int cantidadDeLlamadasASerAtendido(){
-        int cantLlamadasEnEspera=0;
-        
+
+    public int cantidadDeLlamadasASerAtendido() {
+        int cantLlamadasEnEspera = 0;
+
         for (Llamada Ll : llamadas) {
             if (Ll.getEstado().equals("enEspera")) {
                 cantLlamadasEnEspera++;
@@ -81,25 +88,25 @@ public class Sector {
         }
         return cantLlamadasEnEspera;
     }
-    
-    public int cantidadDeMinutosDeEspera(){
-        int cantMinutos=0;
-        
-        if (cantidadDeLlamadasASerAtendido()>0) {
-            cantMinutos= this.cantidadDeLlamadasASerAtendido()*this.tiempoPromedioAtencionSector();
+
+    public int cantidadDeMinutosDeEspera() {
+        int cantMinutos = 0;
+
+        if (cantidadDeLlamadasASerAtendido() > 0) {
+            cantMinutos = this.cantidadDeLlamadasASerAtendido() * this.tiempoPromedioAtencionSector();
         }
-        
+
         return cantMinutos;
     }
-    
-    public int tiempoPromedioAtencionSector(){
-        int cantMinutos=0;
-        
+
+    public int tiempoPromedioAtencionSector() {
+        int cantMinutos = 0;
+
         for (Puesto p : puestos) {
-            cantMinutos+=(p.getTiempoPromedio()/60);
+            cantMinutos += (p.getTiempoPromedio() / 60);
         }
-        cantMinutos*=puestos.size();
-        
+        cantMinutos *= puestos.size();
+
         return cantMinutos;
     }
 

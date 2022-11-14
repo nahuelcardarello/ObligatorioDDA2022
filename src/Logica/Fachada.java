@@ -43,7 +43,7 @@ public class Fachada extends Observable {
 
     }
     public void finalizarLlamada() {
-        sistemaTrabajadores.finalizarLlamada();
+        //sistemaTrabajadores.finalizarLlamada();
     }
     //Se comprueba que existe lugar para comenzar una llamada
     public boolean iniciarLlamada()  throws LlamadaException {
