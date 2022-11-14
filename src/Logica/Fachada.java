@@ -7,8 +7,11 @@ import Modelo.Puesto;
 import Modelo.Trabajador;
 import Modelo.Cliente;
 import Modelo.Llamada;
+import Excepciones.LlamadaException;
 import Modelo.Sector;
 import Modelo.TrabajadorException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class Fachada extends Observable {
 
@@ -40,9 +43,14 @@ public class Fachada extends Observable {
     public void salirDeAplicacion(Trabajador unT) {
 
     }
-
-    public boolean iniciarLlamada() {
-        return false;
+    
+    //Se comprueba que existe lugar para comenzar una llamada
+    public boolean iniciarLlamada()  throws LlamadaException {
+        return sistemaTrabajadores.iniciarLlamada();
+    }
+    
+    public Puesto altaLlamada(Cliente uncliente, Sector unSector, LocalDate fechaInicio, LocalTime horaInicio) throws LlamadaException{
+        return sistemaTrabajadores.altaLlamada(uncliente, unSector, fechaInicio, horaInicio);
     }
 
     public Cliente getCliente(String ci) {
@@ -59,11 +67,15 @@ public class Fachada extends Observable {
     public ArrayList<Llamada> getLlamadasTotal(){
       return sistemaTrabajadores.getLlamadasTotal();
     }
-    void AgregarCliente(Cliente c) {
-        sistemaClientes.agregar(c);
+    public void AgregarCliente(Cliente c) {
+        sistemaClientes.agregarCliente(c);
+    }
+    
+    public Cliente buscarCliente(String CI){
+        return sistemaClientes.buscarCliente(CI);
     }
 
-    void AgregarSector(Sector s) {
+    public void AgregarSector(Sector s) {
         sistemaTrabajadores.agregarSector(s);
     }
     public Sector buscarSector(String nombreSector){

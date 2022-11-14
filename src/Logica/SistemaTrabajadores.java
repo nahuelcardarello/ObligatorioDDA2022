@@ -1,5 +1,7 @@
 package Logica;
 
+import Excepciones.LlamadaException;
+import Modelo.Cliente;
 import Modelo.Llamada;
 import java.util.Collection;
 import java.util.ArrayList;
@@ -7,6 +9,8 @@ import Modelo.Trabajador;
 import Modelo.Sector;
 import Modelo.Puesto;
 import Modelo.TrabajadorException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class SistemaTrabajadores {
 
@@ -14,9 +18,33 @@ public class SistemaTrabajadores {
 
     private ArrayList<Sector> sectores;
 
+    private int cantidadLlamadas;
+
     public SistemaTrabajadores() {
         this.sectores = new ArrayList<Sector>();
         this.trabajadores = new ArrayList<Trabajador>();
+    }
+       public boolean iniciarLlamada() throws LlamadaException {
+        if (cantidadLlamadas < 5) {
+            cantidadLlamadas++;
+            return true;
+        } else {
+            throw new LlamadaException("Comuníquese más tarde...");
+        }
+    }
+    public Puesto altaLlamada(Cliente uncliente, Sector unSector, LocalDate fechaInicio, LocalTime horaInicio) throws LlamadaException {
+            //preguntar a matias y nahuel si no tiene sentido establecer fecha y hora al inicialixar llamada
+            try {
+                Puesto p = unSector.iniciarLlamada(uncliente, fechaInicio, horaInicio);
+                if (p != null) {
+                    return p;
+                } else {
+                    return null;
+                }
+            } catch (LlamadaException llamada) {
+                cantidadLlamadas--;
+                throw llamada;
+            }
     }
 
     private Trabajador buscarTrabajador(String CI) {

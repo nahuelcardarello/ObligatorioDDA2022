@@ -1,11 +1,18 @@
 package Modelo;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class Llamada {
 
-    private boolean enCurso;
+    public enum EstadoLlamada {
+        enCurso,
+        enEspera,
+        finalizada
+        
+    }
+    private EstadoLlamada estado;
 
     private LocalDate fechaInicio;
 
@@ -17,9 +24,11 @@ public class Llamada {
 
     private String descripcion;
 
-    private String numeroLlamada;
+    private int numeroLlamada;
+    
+    private static int ultimoNumeroLlamada;
 
-    private float costo;
+    private float costoTotal;
 
     private Cliente cliente;
 
@@ -29,6 +38,8 @@ public class Llamada {
     
     private Sector sector;
 
+    private final int costoPorSegundo=1;
+
     public Sector getSector() {
         return sector;
     }
@@ -37,8 +48,25 @@ public class Llamada {
         this.sector = sector;
     }
 
-    public void finalizarLlamada(String descripcion) {
 
+    public Llamada(EstadoLlamada estado, LocalDate fechaInicio, LocalTime horaInicio, Cliente cliente, Puesto puesto, Trabajador trabajador) {
+        this.estado = estado;
+        this.fechaInicio = fechaInicio;
+        this.horaInicio = horaInicio;
+        this.numeroLlamada = ultimoNumeroLlamada;
+        ultimoNumeroLlamada++;
+        this.cliente = cliente;
+        this.puesto = puesto;
+        this.trabajador = trabajador;
+    }
+
+    
+    
+    public void finalizarLlamada(String descripcion,Puesto p) {
+        this.descripcion = descripcion;
+        this.fechaFin = LocalDate.now();
+        this.horaFin = LocalTime.now();
+        this.estado = EstadoLlamada.finalizada;
     }
 
     public float calcularCostoLlamada() {
@@ -46,15 +74,15 @@ public class Llamada {
     }
 
     public int calcularDuracionLlamada() {
-        return 0;
+        return (int)Duration.between(horaInicio,horaFin).toSeconds();
     }
 
-    public boolean isEnCurso() {
-        return enCurso;
+    public EstadoLlamada getEstado() {
+        return estado;
     }
 
-    public void setEnCurso(boolean enCurso) {
-        this.enCurso = enCurso;
+    public void setEstado(EstadoLlamada estado) {
+        this.estado = estado;
     }
 
     public LocalDate getFechaInicio() {
@@ -75,6 +103,9 @@ public class Llamada {
 
     public LocalDate getFechaFin() {
         return fechaFin;
+    }
+    public float getSaldoCliente() {
+        return cliente.getSaldo();
     }
 
     public void setFechaFin(LocalDate fechaFin) {
@@ -97,20 +128,20 @@ public class Llamada {
         this.descripcion = descripcion;
     }
 
-    public String getNumeroLlamada() {
+    public int getNumeroLlamada() {
         return numeroLlamada;
     }
 
-    public void setNumeroLlamada(String numeroLlamada) {
+    public void setNumeroLlamada(int numeroLlamada) {
         this.numeroLlamada = numeroLlamada;
     }
 
-    public float getCosto() {
-        return costo;
+    public float getCostoTotal() {
+        return costoTotal;
     }
 
-    public void setCosto(float costo) {
-        this.costo = costo;
+    public void setCostoTotal(float costo) {
+        this.costoTotal = costo;
     }
 
     public Cliente getCliente() {
