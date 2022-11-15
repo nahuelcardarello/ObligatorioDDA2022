@@ -45,8 +45,9 @@ public class ControladorVistaSimularLlamada implements Observador {
         return Fachada.getInstancia().iniciarLlamada();
     }
 
-    public void finalizarLlamada() {
-       puesto.finalizarLlamada(" ");
+     public void finalizarLlamada() {
+       String descripcionLlamada = puesto.getLlamada().getDescripcion();
+       puesto.finalizarLlamada(descripcionLlamada);
        puesto = null;
     }
 
