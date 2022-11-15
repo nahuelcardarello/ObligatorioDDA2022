@@ -24,8 +24,7 @@ public class SistemaTrabajadores {
         this.sectores = new ArrayList<Sector>();
         this.trabajadores = new ArrayList<Trabajador>();
     }
-
-    public boolean iniciarLlamada() throws LlamadaException {
+       public boolean iniciarLlamada() throws LlamadaException {
         if (cantidadLlamadas < 5) {
             cantidadLlamadas++;
             return true;
@@ -43,10 +42,6 @@ public class SistemaTrabajadores {
                 cantidadLlamadas--;
                 throw llamadaEx;
             }
-        } catch (LlamadaException llamada) {
-            cantidadLlamadas--;
-            throw llamada;
-        }
     }
 
     private Trabajador buscarTrabajador(String CI) {
@@ -60,19 +55,6 @@ public class SistemaTrabajadores {
             i++;
         }
         return trabajador;
-    }
-
-    public Sector buscarSector(String nombre) {
-        Sector sector = null;
-        int i = 0;
-        while (i < sectores.size() && sector == null) {
-            Sector s = sectores.get(i);
-            if (s.getNombre().equalsIgnoreCase(nombre)) {
-                sector = s;
-            }
-            i++;
-        }
-        return sector;
     }
 
     public Puesto login(String CI, String contrasena) throws TrabajadorException {
@@ -95,21 +77,7 @@ public class SistemaTrabajadores {
     }
 
     public ArrayList<Sector> getSectores() {
-        return this.sectores;
-    }
-
-    public ArrayList<Llamada> getLlamadasTotal() {
-        ArrayList<Llamada> llamadasTotal = new ArrayList<Llamada>();
-        for (int i = 0; i < this.getSectores().size(); i++) {
-            Sector sector = this.getSectores().get(i);
-            for (int j = 0; j < sector.getLlamadas().size(); j++) {
-                Llamada llamada = sector.getLlamadas().get(j);
-                if (llamada.getEstado() != Llamada.EstadoLlamada.enEspera) {
-                    llamadasTotal.add(llamada);
-                }
-            }
-        }
-        return llamadasTotal;
+        return sectores;
     }
 
     void agregarTrabajador(Trabajador t) {
