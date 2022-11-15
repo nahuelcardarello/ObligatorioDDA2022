@@ -1,13 +1,16 @@
 package Logica;
 
 import Excepciones.Excepcion;
+import Excepciones.LlamadaException;
 import Modelo.Cliente;
 import Modelo.Sector;
 import Modelo.Trabajador;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class DatosdePrueba {
 
-    public static void cargar() throws Excepcion {
+    public static void cargar() throws Excepcion, LlamadaException {
 
         //Precarga Sectores
         Sector s1 = new Sector();
@@ -46,12 +49,41 @@ public class DatosdePrueba {
         t3.setNombreCompleto("Nahuel Cardarello");
         t3.setContrasena("1234");
         t3.setCI("33333333");
-        t3.setSector(s3);
+        t3.setSector(s2);
+
+        //Prueba trabajador que no puede ingresar ya que no hay lugar en el sector
+        Trabajador t4 = new Trabajador();
+        t4.setNombreCompleto("Carlos");
+        t4.setContrasena("1234");
+        t4.setCI("44444444");
+        t4.setSector(s1);
 
         Fachada.getInstancia().AgregarTrabajador(t1);
         Fachada.getInstancia().AgregarTrabajador(t2);
         Fachada.getInstancia().AgregarTrabajador(t3);
+        Fachada.getInstancia().AgregarTrabajador(t4);
 
+        //Agregar Clientes
+        Cliente c1 = new Cliente();
+        c1.setNombrecompleto("Maria");
+        c1.setSaldo(100);
+        c1.setCI("55555555");
+
+        Cliente c2 = new Cliente();
+        c2.setNombrecompleto("Marta");
+        c2.setSaldo(50);
+        c2.setCI("66666666");
+
+        Cliente c3 = new Cliente();
+        c3.setNombrecompleto("Juan");
+        c3.setSaldo(10);
+        c3.setCI("77777777");
+
+        Fachada.getInstancia().AgregarCliente(c1);
+        Fachada.getInstancia().AgregarCliente(c2);
+        Fachada.getInstancia().AgregarCliente(c3);
+
+//        Fachada.getInstancia().altaLlamada(c3, s3, LocalDate.MIN, LocalTime.MIN);
     }
 
 }

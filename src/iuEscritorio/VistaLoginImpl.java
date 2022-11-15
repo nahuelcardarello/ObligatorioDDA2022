@@ -12,14 +12,11 @@ import Modelo.Puesto;
 
 public class VistaLoginImpl extends javax.swing.JDialog implements IVistaLogin {
 
-    /**
-     * Creates new form DialogoLogin
-     */
     public VistaLoginImpl(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(parent);
-        this.controlador = new ControladorVistaLogin(this);
+        this.setControlador(new ControladorVistaLogin(this));
     }
 
     private ControladorVistaLogin controlador;
@@ -156,8 +153,7 @@ public class VistaLoginImpl extends javax.swing.JDialog implements IVistaLogin {
 
     @Override
     public void ejecutarCasoDeUsoInicial(Puesto unP) {
-        Puesto p = unP;
-        VistaAtenderLlamadaImpl vista = new VistaAtenderLlamadaImpl(null, false, p);
+        VistaAtenderLlamadaImpl vista = new VistaAtenderLlamadaImpl((java.awt.Frame) this.getParent(), false, unP);
         vista.setVisible(true);
         cerrarVista();
     }
