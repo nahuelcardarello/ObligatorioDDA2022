@@ -19,12 +19,12 @@ public class Sector {
     private ArrayList<Puesto> puestos;
 
     private ArrayList<Llamada> llamadas;
-    
-    private ArrayList<Llamada> llamadasEnEspera;
 
+    //private ArrayList<Llamada> llamadasEnEspera;
     public Sector() {
         this.puestos = new ArrayList<Puesto>();
         this.trabajadores = new ArrayList<Trabajador>();
+        this.llamadas = new ArrayList<Llamada>();
     }
 
     public Puesto altaPuestoTrabajo(Trabajador unT) {
@@ -46,15 +46,14 @@ public class Sector {
     public Puesto iniciarLlamada(Cliente uncliente, LocalDate fechaInicio, LocalTime horaInicio) throws Excepciones.LlamadaException {
         if (puestos.size() > 0) {
             Puesto p = puestoParaAtender();
-            if (p!=null) {
+            if (p != null) {
                 Llamada llamada = new Llamada(Llamada.EstadoLlamada.enCurso, fechaInicio, horaInicio, uncliente, p, p.getTrabajador());
                 p.agregarLlamada(llamada);
-                return p;
-            } else if (p == null) {
-                Llamada llamada = new Llamada(Llamada.EstadoLlamada.enEspera, fechaInicio, horaInicio, uncliente, p, p.getTrabajador());
-                llamadasEnEspera.add(llamada);
+                llamadas.add(llamada);
                 return p;
             } else {
+                Llamada llamada = new Llamada(Llamada.EstadoLlamada.enEspera, fechaInicio, horaInicio, uncliente, null, null);
+                llamadas.add(llamada);
                 return null;
             }
         } else {
@@ -79,24 +78,24 @@ public class Sector {
         }
         return puesto;
     }
-    
-    public Puesto puestoParaAtender(){
-        Puesto puesto=null;
-        
+
+    public Puesto puestoParaAtender() {
+        Puesto puesto = null;
+
         for (Puesto p : puestos) {
-            if (p.getLlamada()==null && p.getTrabajador()!=null) {
-                puesto=p;
+            if (p.getLlamada() == null && p.getTrabajador() != null) {
+                puesto = p;
             }
         }
-        
+
         return puesto;
     }
-    
-    public int cantidadDeLlamadasASerAtendido(){
-        int cantLlamadasEnEspera=0;
-        
+
+    public int cantidadDeLlamadasASerAtendido() {
+        int cantLlamadasEnEspera = 0;
+
         for (Llamada Ll : llamadas) {
-            if (Ll.getEstado().equals("enEspera")) {
+            if (Ll.getEstado() == Llamada.EstadoLlamada.enEspera) {
                 cantLlamadasEnEspera++;
             }
         }
@@ -179,15 +178,5 @@ public class Sector {
     public void setPuestos(ArrayList<Puesto> puestos) {
         this.puestos = puestos;
     }
-
-    public ArrayList<Llamada> getLlamadasEnEspera() {
-        return llamadasEnEspera;
-    }
-
-    public void setLlamadasEnEspera(ArrayList<Llamada> llamadasEnEspera) {
-        this.llamadasEnEspera = llamadasEnEspera;
-    }
-    
-    
 
 }

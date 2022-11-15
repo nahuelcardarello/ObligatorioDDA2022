@@ -37,14 +37,19 @@ public class ControladorVistaSimularLlamada implements Observador {
     public boolean inicializar() throws LlamadaException {
         return Fachada.getInstancia().iniciarLlamada();
     }
+
     public void finalizarLlamada(String desc) {
         //fachada.finalizarLlamada(" ");
     }
+
     public Puesto altaLlamada(Cliente uncliente, String numeroSector, LocalDate fechaInicio, LocalTime horaInicio) throws LlamadaException {
         Sector unSector = getSector(numeroSector);
         Puesto unPuesto = Fachada.getInstancia().altaLlamada(uncliente, unSector, fechaInicio, horaInicio);
-        unPuesto.agregarObservador(this);
+        if (unPuesto != null) {
+            unPuesto.agregarObservador(this);
+        }
         return unPuesto;
+
     }
 
     public Cliente ingresarUsuario(String ci) throws CIException {
@@ -85,13 +90,13 @@ public class ControladorVistaSimularLlamada implements Observador {
 
     @Override
     public void actualizar(Object evento, Observable origen) {
-        Eventos  e = (Eventos)evento;
-        if(e == Eventos.FINALIZAR_LLAMADA) {
-            Puesto p = (Puesto)origen;
+        Eventos e = (Eventos) evento;
+        if (e == Eventos.FINALIZAR_LLAMADA) {
+            Puesto p = (Puesto) origen;
             p.quitarObservador(this);
-            vista.finalizarLlamada(p.getUltimaDuracionLlamada(),p.getUltimoCosto(),p.getUltimoSaldo());
+            vista.finalizarLlamada(p.getUltimaDuracionLlamada(), p.getUltimoCosto(), p.getUltimoSaldo());
         }
     }
-    
+
     /*seguir en atender llamadas, implementar finalixar*/
 }
