@@ -16,6 +16,7 @@ import Controlador.ControladorVistaSimularLlamada;
 import Excepciones.CIException;
 import Excepciones.LlamadaException;
 import Modelo.Cliente;
+import Modelo.Llamada;
 import Modelo.Sector;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -27,8 +28,6 @@ public class VistaSimularLlamadaImpl extends javax.swing.JFrame implements IVist
     /**
      * Creates new form VistaAtenderLlamadasImpl
      */
-  
-    
     public VistaSimularLlamadaImpl(java.awt.Frame parent, boolean modal) {
         initComponents();
         setLocationRelativeTo(parent);
@@ -36,7 +35,7 @@ public class VistaSimularLlamadaImpl extends javax.swing.JFrame implements IVist
         this.finalizarBtn.setEnabled(false);
         this.controlador = new ControladorVistaSimularLlamada(this);
     }
-    
+
     private ControladorVistaSimularLlamada controlador;
 
     /**
@@ -468,7 +467,7 @@ public class VistaSimularLlamadaImpl extends javax.swing.JFrame implements IVist
         if (controlador.getEstaCiIngresada()) {
             //Cambiar por un error. Si presiona un * para ingresar por sector
             jTextAreaMensaje.setText("INGRESE UN NUMERO DE SECTOR VALIDO");
-            
+
         }
         ingresarNumeroCI("*");
     }//GEN-LAST:event_asteriskActionPerformed
@@ -477,7 +476,7 @@ public class VistaSimularLlamadaImpl extends javax.swing.JFrame implements IVist
         if (controlador.getEstaCiIngresada()) {
             //Cambiar por un error. Si presiona un 0 para ingresar por sector
             jTextAreaMensaje.setText("INGRESE UN NUMERO DE SECTOR VALIDO");
-            
+
         }
         ingresarNumeroCI("0");
     }//GEN-LAST:event_zeroActionPerformed
@@ -486,13 +485,13 @@ public class VistaSimularLlamadaImpl extends javax.swing.JFrame implements IVist
         if (controlador.getEstaCiIngresada()) {
             //Cambiar por un error. Si presiona un # para ingresar por sector
             jTextAreaMensaje.setText("INGRESE UN NUMERO DE SECTOR VALIDO");
-            
+
         }
         ingresarNumeroCI("#");
     }//GEN-LAST:event_hashActionPerformed
 
     private void finalizarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finalizarBtnActionPerformed
-       controlador.finalizarLlamada();
+        controlador.finalizarLlamada();
     }//GEN-LAST:event_finalizarBtnActionPerformed
 
 
@@ -534,24 +533,25 @@ public class VistaSimularLlamadaImpl extends javax.swing.JFrame implements IVist
     public void inicializar() throws LlamadaException {
         controlador.inicializar();
     }
-    
+
     @Override
     public void reset() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
     @Override
     public void altaLlamada(String numeroSectorElegido) {
         LocalDate fecha = controlador.getFechaInicio();
         LocalTime hora = controlador.getHoraInicio();
         try {
-            Puesto unPuesto = controlador.altaLlamada(numeroSectorElegido);
+            Llamada llamada = controlador.altaLlamada(numeroSectorElegido);
             Sector unSector = controlador.getSector(numeroSectorElegido);
-            
-            if (unPuesto != null) {
+
+            if (llamada.getPuesto() != null) {
+                mostrarDatosLlamada(llamada.getPuesto());
                 String msg = "Llamada en curso... ud. se está comunicando con el sector ";
-                msg += unPuesto.getSector() + "\n";
-                msg += "Y está siendo atendido por " + unPuesto.getTrabajador() + "\n";
+                msg += unSector.getNombre() + "\n";
+                msg += "Y está siendo atendido por " + llamada.getTrabajador() + "\n";
                 msg += " Su llamada se ha iniciado en " + fecha + " " + hora;
                 jTextAreaMensaje.setText(msg);
                 this.finalizarBtn.setEnabled(true);
@@ -565,9 +565,18 @@ public class VistaSimularLlamadaImpl extends javax.swing.JFrame implements IVist
         } catch (LlamadaException ex) {
             mostrarError(ex.getMessage());
         }
-        
+
     }
-    
+    @Override
+    public void mostrarDatosLlamada(Puesto p) {
+        String msg = "Llamada en curso... ud. se está comunicando con el sector ";
+        msg += p.getSector() + "\n";
+        msg += "Y está siendo atendido por " + p.getTrabajador() + "\n";
+        msg += " Su llamada se ha iniciado en " + controlador.getFechaInicio() + " " + controlador.getHoraInicio();
+        jTextAreaMensaje.setText(msg);
+        this.finalizarBtn.setEnabled(true);
+    }
+
     @Override
     public void finalizarLlamada(int ultimaDuracionLlamada, float ultimoCosto, float ultimoSaldo) {
         String msg = "Llamada finalizada...Duracion: " + ultimaDuracionLlamada + "\n ";
@@ -577,9 +586,7 @@ public class VistaSimularLlamadaImpl extends javax.swing.JFrame implements IVist
         controlador.resetDatos();
         iniciarBtn.setEnabled(true);
     }
-    
-    
-    
+
     @Override
     public void mostrarSectores() {
         bloquearNumeros();
@@ -588,23 +595,23 @@ public class VistaSimularLlamadaImpl extends javax.swing.JFrame implements IVist
         String salt = System.getProperty("line.separator");
         String msj = "Para comunicarse con: " + salt;
         int i = 1;
-        
+
         for (Sector s : sectores) {
             //Va desbloqueando los botones relacionados al numero de sector
             desbloquearBotonNumeroSector(i);
-            
+
             msj += s.getNombre() + " digite" + i + salt;
             i++;
         }
         jTextAreaMensaje.setText(msj);
     }
-    
+
     public void mostrarError(String msg) {
         JOptionPane.showMessageDialog(this, msg);
     }
-    
+
     private void desbloquearBotonNumeroSector(int numero) {
-        
+
         switch (numero) {
             case 1:
                 one.setEnabled(true);
@@ -635,7 +642,7 @@ public class VistaSimularLlamadaImpl extends javax.swing.JFrame implements IVist
                 break;
         }
     }
-    
+
     private void bloquearNumeros() {
         one.setEnabled(false);
         two.setEnabled(false);
@@ -650,7 +657,7 @@ public class VistaSimularLlamadaImpl extends javax.swing.JFrame implements IVist
         asterisk.setEnabled(false);
         hash.setEnabled(false);
     }
-    
+
     private void desbloquearNumeros() {
         one.setEnabled(true);
         two.setEnabled(true);
@@ -665,15 +672,15 @@ public class VistaSimularLlamadaImpl extends javax.swing.JFrame implements IVist
         asterisk.setEnabled(true);
         hash.setEnabled(true);
     }
-    
-    private void ingresarNumeroCI(String numero) { 
+
+    private void ingresarNumeroCI(String numero) {
         if (numero.equals("#")) {
             try {
                 controlador.validaCI();
                 controlador.ingresarUsuario();
                 controlador.setEstaCiIngresada(true);
                 mostrarSectores();
-            } catch(CIException ex) {
+            } catch (CIException ex) {
                 controlador.vaciarCi();
                 mostrarError(ex.getMessage());
             }
@@ -681,11 +688,10 @@ public class VistaSimularLlamadaImpl extends javax.swing.JFrame implements IVist
             controlador.agregarNumeroCi(numero);
         }
     }
-    
+
     @Override
     public void ingresarUsuario() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    
 }

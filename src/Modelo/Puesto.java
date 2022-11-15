@@ -61,8 +61,6 @@ public class Puesto extends Observable {
         ultimoSaldo = llamada.getSaldoCliente();
         tiempoPromedio = (tiempoPromedio + ultimaDuracionLlamada) / cantidadLlamadas;
         this.llamada.setEstado(Llamada.EstadoLlamada.finalizada);
-        
-        
         this.llamada = null;
         avisar(Observador.Eventos.FINALIZAR_LLAMADA);
         sector.asignarLlamadaEnEspera(this);

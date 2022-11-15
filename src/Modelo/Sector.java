@@ -7,10 +7,11 @@ import java.util.Collection;
 import Excepciones.LlamadaException;
 import Observer.Observable;
 
-public class Sector extends Observable{
-public enum EventosSector {
-    ASIGNAR_LLAMADA
-}
+public class Sector extends Observable {
+
+    public enum EventosSector {
+        ASIGNAR_LLAMADA
+    }
     private String nombre;
 
     private int numero;
@@ -46,18 +47,18 @@ public enum EventosSector {
 
     }
 
-    public Puesto iniciarLlamada(Cliente uncliente, LocalDate fechaInicio, LocalTime horaInicio) throws Excepciones.LlamadaException {
+    public Llamada iniciarLlamada(Cliente uncliente, LocalDate fechaInicio, LocalTime horaInicio) throws Excepciones.LlamadaException {
         if (puestos.size() > 0) {
             Puesto p = puestoParaAtender();
             if (p != null) {
                 Llamada llamada = new Llamada(Llamada.EstadoLlamada.enCurso, fechaInicio, horaInicio, uncliente, p, p.getTrabajador());
                 p.agregarLlamada(llamada);
                 llamadas.add(llamada);
-                return p;
+                return llamada;
             } else {
                 Llamada llamada = new Llamada(Llamada.EstadoLlamada.enEspera, fechaInicio, horaInicio, uncliente, null, null);
                 llamadas.add(llamada);
-                return null;
+                return llamada;
             }
         } else {
             throw new Excepciones.LlamadaException("Sector no disponible");
@@ -82,10 +83,18 @@ public enum EventosSector {
         return puesto;
     }
 
-    
     public void asignarLlamadaEnEspera(Puesto p) {
-        //avisar()
+        Llamada llamada = getPrimeraLlamadaEnEspera();
+        if(llamada != null) {
+            llamada.setPuesto(p);
+            llamada.setTrabajador(p.getTrabajador());
+            llamada.setTrabajador(p.getTrabajador());
+            p.agregarLlamada(llamada);
+            
+        }
+        
     }
+
     public Puesto puestoParaAtender() {
         Puesto puesto = null;
 
@@ -109,7 +118,7 @@ public enum EventosSector {
         return cantLlamadasEnEspera;
     }
 
-    public Llamada getPrimeraLLamadaEnEspera() {
+    public Llamada getPrimeraLlamadaEnEspera() {
         Llamada llamada = null;
         int i = 0;
         while (i < llamadas.size() && llamada == null) {
@@ -117,9 +126,11 @@ public enum EventosSector {
             if (l.getEstado() == Llamada.EstadoLlamada.enEspera) {
                 llamada = l;
             }
+            i++;
         }
         return llamada;
     }
+
     public int cantidadDeMinutosDeEspera() {
         int cantMinutos = 0;
 

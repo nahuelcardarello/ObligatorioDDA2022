@@ -7,6 +7,7 @@ import Modelo.Puesto;
 import Modelo.Trabajador;
 import Modelo.Cliente;
 import Excepciones.LlamadaException;
+import Modelo.Llamada;
 import Modelo.Sector;
 import Modelo.TrabajadorException;
 import java.time.LocalDate;
@@ -50,7 +51,7 @@ public class Fachada extends Observable {
         return sistemaTrabajadores.iniciarLlamada();
     }
     
-    public Puesto altaLlamada(Cliente uncliente, Sector unSector, LocalDate fechaInicio, LocalTime horaInicio) throws LlamadaException{
+    public Llamada altaLlamada(Cliente uncliente, Sector unSector, LocalDate fechaInicio, LocalTime horaInicio) throws LlamadaException{
         return sistemaTrabajadores.altaLlamada(uncliente, unSector, fechaInicio, horaInicio);
     }
 

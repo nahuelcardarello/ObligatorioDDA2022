@@ -9,6 +9,7 @@ package iuEscritorio;
  * @author matiasan-ot
  */
 import Excepciones.LlamadaException;
+import Modelo.Llamada;
 import Modelo.Puesto;
 
 public interface IVistaSimularLlamada {
@@ -25,4 +26,5 @@ public interface IVistaSimularLlamada {
 
     public void finalizarLlamada(int ultimaDuracionLlamada, float ultimoCosto, float ultimoSaldo);
     
+    public void mostrarDatosLlamada(Puesto p);
 }

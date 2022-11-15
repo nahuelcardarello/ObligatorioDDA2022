@@ -1,10 +1,12 @@
 package Modelo;
 
+import Observer.Observable;
+import Observer.Observador;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class Llamada {
+public class Llamada extends Observable {
 
     public enum EstadoLlamada {
         enCurso,
@@ -23,9 +25,9 @@ public class Llamada {
     private LocalDate fechaFin;
 
     private LocalTime horaFin;
-    
+
     private LocalTime horaComienzoEspera;
-    
+
     private LocalTime horaComienzoLlamada;
 
     private String descripcion;
@@ -156,10 +158,6 @@ public class Llamada {
         return puesto;
     }
 
-    public void setPuesto(Puesto puesto) {
-        this.puesto = puesto;
-    }
-
     public Trabajador getTrabajador() {
         return trabajador;
     }
@@ -168,4 +166,11 @@ public class Llamada {
         this.trabajador = trabajador;
     }
 
+    public void setPuesto(Puesto p) {
+        puesto = p;
+        if (this.estado.equals(EstadoLlamada.enEspera)) {
+            this.estado = EstadoLlamada.enCurso;
+            avisar(Observador.Eventos.QUITAR_DE_ESPERA);
+        }
+    }
 }

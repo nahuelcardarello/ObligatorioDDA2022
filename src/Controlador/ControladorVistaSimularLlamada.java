@@ -47,16 +47,26 @@ public class ControladorVistaSimularLlamada implements Observador {
 
     public void finalizarLlamada() {
        puesto.finalizarLlamada(" ");
+       puesto = null;
     }
 
-    public Puesto altaLlamada(String numeroSector) throws LlamadaException {
+    public Llamada altaLlamada(String numeroSector) throws LlamadaException {
         Sector unSector = getSector(numeroSector);
-        Puesto unPuesto = Fachada.getInstancia().altaLlamada(this.unCliente, unSector, this.fechaInicio, this.horaInicio);
-        this.puesto = unPuesto;
-        if (unPuesto != null) {
-            unPuesto.agregarObservador(this);
+        Llamada llamada = fachada.altaLlamada(this.unCliente, unSector, this.fechaInicio, this.horaInicio);
+        Puesto p = llamada.getPuesto();
+        if(p != null) {
+            puesto = p;
+            p.agregarObservador(this);
+        } else {
+            llamada.agregarObservador(this);
         }
-        return unPuesto;
+        /*Sector unSector = getSector(numeroSector);
+        Puesto unPuesto = Fachada.getInstancia().altaLlamada(this.unCliente, unSector, this.fechaInicio, this.horaInicio).get;
+        if (unPuesto != null && llamada != null) {
+            unPuesto.agregarObservador(this);
+            llamada.agregarObservador(this);
+        }*/
+        return llamada;
 
     }
 
@@ -116,6 +126,13 @@ public class ControladorVistaSimularLlamada implements Observador {
             Puesto p = (Puesto) origen;
             p.quitarObservador(this);
             vista.finalizarLlamada(p.getUltimaDuracionLlamada(), p.getUltimoCosto(), p.getUltimoSaldo());
+        } else if(e == Eventos.QUITAR_DE_ESPERA) {
+            Llamada llamada = (Llamada) origen;
+            Puesto p = llamada.getPuesto();
+            llamada.quitarObservador(this);
+            p.agregarObservador(this);
+            this.puesto = p;
+            vista.mostrarDatosLlamada(p);
         }
     }
 
