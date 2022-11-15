@@ -350,6 +350,7 @@ public class VistaAtenderLlamadaImpl extends javax.swing.JFrame implements IVist
         btnFinalizarLlamada.setEnabled(false);
 
     }
+    //pasar tiempo promedio a controlador
 
     public void mostrarError(String msg) {
         JOptionPane.showMessageDialog(this, msg);

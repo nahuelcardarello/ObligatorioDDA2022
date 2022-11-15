@@ -9,5 +9,5 @@ package Modelo;
  * @author matiasan-ot
  */
 public abstract class TipoCliente {
-    public abstract float calculoDeCostos(int duracion);
+    public abstract float calculoDeCostos(Llamada llamada);
 }

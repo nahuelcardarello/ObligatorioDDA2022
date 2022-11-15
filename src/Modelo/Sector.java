@@ -5,9 +5,13 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import Excepciones.LlamadaException;
+import Observer.Observable;
 
-public class Sector {
+public class Sector extends Observable {
 
+    public enum EventosSector {
+        ASIGNAR_LLAMADA
+    }
     private String nombre;
 
     private int numero;
@@ -19,40 +23,42 @@ public class Sector {
     private ArrayList<Puesto> puestos;
     
     private ArrayList<Llamada> llamadas;
-    
-    private ArrayList<Llamada> llamadasEnEspera;
 
+    //private ArrayList<Llamada> llamadasEnEspera;
     public Sector() {
         this.puestos = new ArrayList<Puesto>();
         this.trabajadores = new ArrayList<Trabajador>();
-        this.llamadas = new ArrayList<Llamada>(); 
+        this.llamadas = new ArrayList<Llamada>();
     }
-    
+
     public Puesto altaPuestoTrabajo(Trabajador unT) {
-        Puesto puesto = puestoDisponible();
-        if (puesto == null && puestos.size() < cantidadPuestos) {
-            Puesto puestoNuevo = new Puesto(0, 0, unT, this, null);
-            puesto = puestoNuevo;
-            puestos.add(puesto);
+        Puesto puesto = null;
+        if (puestos.size() < cantidadPuestos) {
+            puesto = puestoDisponible();
+            if (puesto == null) {
+                Puesto puestoNuevo = new Puesto(0, 0, unT, this, null);
+                puesto = puestoNuevo;
+                puestos.add(puesto);
+            } else {
+                puesto.setTrabajador(unT);
+            }
         }
         return puesto;
 
     }
 
-    public Puesto iniciarLlamada(Cliente uncliente, LocalDate fechaInicio, LocalTime horaInicio) throws Excepciones.LlamadaException {
+    public Llamada iniciarLlamada(Cliente uncliente, LocalDate fechaInicio, LocalTime horaInicio) throws Excepciones.LlamadaException {
         if (puestos.size() > 0) {
             Puesto p = puestoParaAtender();
-            if (p!=null) {
-                Llamada llamada = new Llamada(Llamada.EstadoLlamada.enCurso, fechaInicio, horaInicio, uncliente, p, p.getTrabajador(),this);
+            if (p != null) {
+                Llamada llamada = new Llamada(Llamada.EstadoLlamada.enCurso, fechaInicio, horaInicio, uncliente, p, p.getTrabajador());
                 p.agregarLlamada(llamada);
-                agregarLlamadaSector(llamada);
-                return p;
-            } else if (p == null) {
-                Llamada llamada = new Llamada(Llamada.EstadoLlamada.enEspera, fechaInicio, horaInicio, uncliente, p, p.getTrabajador(),this);
-                llamadasEnEspera.add(llamada);
-                return p;
-            }else{
-                return null;
+                llamadas.add(llamada);
+                return llamada;
+            } else {
+                Llamada llamada = new Llamada(Llamada.EstadoLlamada.enEspera, fechaInicio, horaInicio, uncliente, null, null);
+                llamadas.add(llamada);
+                return llamada;
             }
         } else {
             throw new Excepciones.LlamadaException("Sector no disponible");
@@ -65,60 +71,86 @@ public class Sector {
     public String toString() {
         return this.nombre;
     }
+
     public Puesto puestoDisponible() {
         Puesto puesto = null;
         int i = 0;
         while (i < puestos.size() && puesto == null) {
             Puesto p = puestos.get(i);
-            if (p.getTrabajador() !=  null) {
+            if (p.getTrabajador() == null) {
                 puesto = p;
             }
             i++;
         }
         return puesto;
     }
-    
-    public Puesto puestoParaAtender(){
-        Puesto puesto=null;
-        
-        for (Puesto p : puestos) {
-            if (p.getLlamada()==null && p.getTrabajador()!=null) {
-                puesto=p;
-            }
+
+    public void asignarLlamadaEnEspera(Puesto p) {
+        Llamada llamada = getPrimeraLlamadaEnEspera();
+        if(llamada != null) {
+            llamada.setPuesto(p);
+            llamada.setTrabajador(p.getTrabajador());
+            llamada.setTrabajador(p.getTrabajador());
+            p.agregarLlamada(llamada);
+            
         }
         
+    }
+
+    public Puesto puestoParaAtender() {
+        Puesto puesto = null;
+
+        for (Puesto p : puestos) {
+            if (p.getLlamada() == null && p.getTrabajador() != null) {
+                puesto = p;
+            }
+        }
+
         return puesto;
     }
-    
-    public int cantidadDeLlamadasASerAtendido(){
-        int cantLlamadasEnEspera=0;
-        
+
+    public int cantidadDeLlamadasASerAtendido() {
+        int cantLlamadasEnEspera = 0;
+
         for (Llamada Ll : llamadas) {
-            if (Ll.getEstado().equals("enEspera")) {
+            if (Ll.getEstado() == Llamada.EstadoLlamada.enEspera) {
                 cantLlamadasEnEspera++;
             }
         }
         return cantLlamadasEnEspera;
     }
-    
-    public int cantidadDeMinutosDeEspera(){
-        int cantMinutos=0;
-        
-        if (cantidadDeLlamadasASerAtendido()>0) {
-            cantMinutos= this.cantidadDeLlamadasASerAtendido()*this.tiempoPromedioAtencionSector();
+
+    public Llamada getPrimeraLlamadaEnEspera() {
+        Llamada llamada = null;
+        int i = 0;
+        while (i < llamadas.size() && llamada == null) {
+            Llamada l = llamadas.get(i);
+            if (l.getEstado() == Llamada.EstadoLlamada.enEspera) {
+                llamada = l;
+            }
+            i++;
         }
-        
+        return llamada;
+    }
+
+    public int cantidadDeMinutosDeEspera() {
+        int cantMinutos = 0;
+
+        if (cantidadDeLlamadasASerAtendido() > 0) {
+            cantMinutos = this.cantidadDeLlamadasASerAtendido() * this.tiempoPromedioAtencionSector();
+        }
+
         return cantMinutos;
     }
-    
-    public int tiempoPromedioAtencionSector(){
-        int cantMinutos=0;
-        
+
+    public int tiempoPromedioAtencionSector() {
+        int cantMinutos = 0;
+
         for (Puesto p : puestos) {
-            cantMinutos+=(p.getTiempoPromedio()/60);
+            cantMinutos += (p.getTiempoPromedio() / 60);
         }
-        cantMinutos*=puestos.size();
-        
+        cantMinutos *= puestos.size();
+
         return cantMinutos;
     }
 
@@ -185,15 +217,5 @@ public class Sector {
     public void setPuestos(ArrayList<Puesto> puestos) {
         this.puestos = puestos;
     }
-
-    public ArrayList<Llamada> getLlamadasEnEspera() {
-        return llamadasEnEspera;
-    }
-
-    public void setLlamadasEnEspera(ArrayList<Llamada> llamadasEnEspera) {
-        this.llamadasEnEspera = llamadasEnEspera;
-    }
-    
-    
 
 }

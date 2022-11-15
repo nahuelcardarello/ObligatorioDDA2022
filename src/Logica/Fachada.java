@@ -8,6 +8,7 @@ import Modelo.Trabajador;
 import Modelo.Cliente;
 import Modelo.Llamada;
 import Excepciones.LlamadaException;
+import Modelo.Llamada;
 import Modelo.Sector;
 import Modelo.TrabajadorException;
 import java.time.LocalDate;
@@ -43,13 +44,15 @@ public class Fachada extends Observable {
     public void salirDeAplicacion(Trabajador unT) {
 
     }
-    
+    public void finalizarLlamada() {
+        //sistemaTrabajadores.finalizarLlamada();
+    }
     //Se comprueba que existe lugar para comenzar una llamada
     public boolean iniciarLlamada()  throws LlamadaException {
         return sistemaTrabajadores.iniciarLlamada();
     }
     
-    public Puesto altaLlamada(Cliente uncliente, Sector unSector, LocalDate fechaInicio, LocalTime horaInicio) throws LlamadaException{
+    public Llamada altaLlamada(Cliente uncliente, Sector unSector, LocalDate fechaInicio, LocalTime horaInicio) throws LlamadaException{
         return sistemaTrabajadores.altaLlamada(uncliente, unSector, fechaInicio, horaInicio);
     }
 

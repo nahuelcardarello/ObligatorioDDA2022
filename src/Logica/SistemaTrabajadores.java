@@ -34,14 +34,14 @@ public class SistemaTrabajadores {
         }
     }
        
-    public Puesto altaLlamada(Cliente uncliente, Sector unSector, LocalDate fechaInicio, LocalTime horaInicio) throws LlamadaException {
-        //preguntar a matias y nahuel si no tiene sentido establecer fecha y hora al inicialixar llamada
-        try {
-            Puesto p = unSector.iniciarLlamada(uncliente, fechaInicio, horaInicio);
-            if (p != null) {
-                return p;
-            } else {
-                return null;
+    public Llamada altaLlamada(Cliente uncliente, Sector unSector, LocalDate fechaInicio, LocalTime horaInicio) throws LlamadaException {
+            //preguntar a matias y nahuel si no tiene sentido establecer fecha y hora al inicialixar llamada
+            try {
+                Llamada llamada = unSector.iniciarLlamada(uncliente, fechaInicio, horaInicio);
+                return llamada;
+            } catch (LlamadaException llamadaEx) {
+                cantidadLlamadas--;
+                throw llamadaEx;
             }
         } catch (LlamadaException llamada) {
             cantidadLlamadas--;

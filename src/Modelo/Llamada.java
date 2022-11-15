@@ -1,17 +1,21 @@
 package Modelo;
 
+import Observer.Observable;
+import Observer.Observador;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class Llamada {
+public class Llamada extends Observable {
 
     public enum EstadoLlamada {
         enCurso,
         enEspera,
         finalizada
-        
+
     }
+    private int duracion;
+
     private EstadoLlamada estado;
 
     private LocalDate fechaInicio;
@@ -22,10 +26,14 @@ public class Llamada {
 
     private LocalTime horaFin;
 
+    private LocalTime horaComienzoEspera;
+
+    private LocalTime horaComienzoLlamada;
+
     private String descripcion;
 
     private int numeroLlamada;
-    
+
     private static int ultimoNumeroLlamada;
 
     private float costoTotal;
@@ -54,13 +62,16 @@ public class Llamada {
         this.sector = sector;
     }
 
-    
-    
-    public void finalizarLlamada(String descripcion,Puesto p) {
+    public void finalizarLlamada(String descripcion, Puesto p) {
         this.descripcion = descripcion;
         this.fechaFin = LocalDate.now();
         this.horaFin = LocalTime.now();
         this.estado = EstadoLlamada.finalizada;
+        this.duracion = calcularDuracionLlamada();
+        if (this.estado == EstadoLlamada.enCurso) {
+            this.costoTotal = calcularCostoLlamada();
+        }
+
     }
 
     public Sector getSector() {
@@ -72,11 +83,12 @@ public class Llamada {
     }
     
     public float calcularCostoLlamada() {
+        cliente.calculoDeCostos(this);
         return 0;
     }
 
     public int calcularDuracionLlamada() {
-        return (int)Duration.between(horaInicio,horaFin).toSeconds();
+        return (int) Duration.between(horaInicio, horaFin).toSeconds();
     }
 
     public EstadoLlamada getEstado() {
@@ -106,6 +118,7 @@ public class Llamada {
     public LocalDate getFechaFin() {
         return fechaFin;
     }
+
     public float getSaldoCliente() {
         return cliente.getSaldo();
     }
@@ -158,10 +171,6 @@ public class Llamada {
         return puesto;
     }
 
-    public void setPuesto(Puesto puesto) {
-        this.puesto = puesto;
-    }
-
     public Trabajador getTrabajador() {
         return trabajador;
     }
@@ -170,4 +179,11 @@ public class Llamada {
         this.trabajador = trabajador;
     }
 
+    public void setPuesto(Puesto p) {
+        puesto = p;
+        if (this.estado.equals(EstadoLlamada.enEspera)) {
+            this.estado = EstadoLlamada.enCurso;
+            avisar(Observador.Eventos.QUITAR_DE_ESPERA);
+        }
+    }
 }

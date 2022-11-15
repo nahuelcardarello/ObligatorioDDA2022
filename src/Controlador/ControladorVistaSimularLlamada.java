@@ -27,10 +27,17 @@ public class ControladorVistaSimularLlamada implements Observador {
 
     private IVistaSimularLlamada vista;
     private Fachada fachada;
+    private LocalDate fechaInicio;
+    private LocalTime horaInicio;
+    private boolean estaCiIngresada = false;
+    private String ci = "";
+    private Cliente unCliente = null;
+    private Puesto puesto;
 
     public ControladorVistaSimularLlamada(VistaSimularLlamadaImpl vista) {
         this.vista = vista;
         this.fachada = Fachada.getInstancia();
+
     }
 
     //Se comprueba que existe lugar para comenzar una llamada
@@ -38,20 +45,40 @@ public class ControladorVistaSimularLlamada implements Observador {
         return Fachada.getInstancia().iniciarLlamada();
     }
 
-    public Puesto altaLlamada(Cliente uncliente, String numeroSector, LocalDate fechaInicio, LocalTime horaInicio) throws LlamadaException {
-        Sector unSector = getSector(numeroSector);
-        Puesto unPuesto = Fachada.getInstancia().altaLlamada(uncliente, unSector, fechaInicio, horaInicio);
-        unPuesto.agregarObservador(this);
-        return unPuesto;
+    public void finalizarLlamada() {
+       puesto.finalizarLlamada(" ");
+       puesto = null;
     }
 
-    public Cliente ingresarUsuario(String ci) throws CIException {
+    public Llamada altaLlamada(String numeroSector) throws LlamadaException {
+        Sector unSector = getSector(numeroSector);
+        Llamada llamada = fachada.altaLlamada(this.unCliente, unSector, this.fechaInicio, this.horaInicio);
+        Puesto p = llamada.getPuesto();
+        if(p != null) {
+            puesto = p;
+            p.agregarObservador(this);
+        } else {
+            llamada.agregarObservador(this);
+        }
+        /*Sector unSector = getSector(numeroSector);
+        Puesto unPuesto = Fachada.getInstancia().altaLlamada(this.unCliente, unSector, this.fechaInicio, this.horaInicio).get;
+        if (unPuesto != null && llamada != null) {
+            unPuesto.agregarObservador(this);
+            llamada.agregarObservador(this);
+        }*/
+        return llamada;
+
+    }
+
+    public void ingresarUsuario() throws CIException {
         Cliente unC;
         unC = Fachada.getInstancia().buscarCliente(ci);
         if (unC != null) {
-            return unC;
+            this.unCliente = unC;
+        } else {
+            throw new CIException("Cliente no registrado");
         }
-        throw new CIException("Cliente no registrado");
+
     }
 
     public ArrayList<Sector> getSectores() {
@@ -62,10 +89,21 @@ public class ControladorVistaSimularLlamada implements Observador {
 
     }
 
-    public boolean validaCI(String CI) {
-        String str = CI;
-        boolean isNumeric = str.matches("[+-]?\\d*(\\.\\d+)?");
-        return (CI.length() == 7 || CI.length() == 8) && isNumeric;
+    public void resetDatos() {
+        fechaInicio = null;
+        horaInicio = null;
+        vaciarCi();
+        estaCiIngresada = false;
+        unCliente = null;
+    }
+
+    public boolean validaCI() throws CIException {
+        boolean isNumeric = ci.matches("[+-]?\\d*(\\.\\d+)?");
+        if ((ci.length() == 7 || ci.length() == 8) && isNumeric) {
+            return true;
+        } else {
+            throw new CIException("Formato de CI no valido");
+        }
     }
 
     public Sector getSector(String numero) {
@@ -83,13 +121,55 @@ public class ControladorVistaSimularLlamada implements Observador {
 
     @Override
     public void actualizar(Object evento, Observable origen) {
-        Eventos  e = (Eventos)evento;
-        if(e == Eventos.FINALIZAR_LLAMADA) {
-            Puesto p = (Puesto)origen;
+        Eventos e = (Eventos) evento;
+        if (e == Eventos.FINALIZAR_LLAMADA) {
+            Puesto p = (Puesto) origen;
             p.quitarObservador(this);
-            vista.finalizarLlamada(p.getUltimaDuracionLlamada(),p.getUltimoCosto(),p.getUltimoSaldo());
+            vista.finalizarLlamada(p.getUltimaDuracionLlamada(), p.getUltimoCosto(), p.getUltimoSaldo());
+        } else if(e == Eventos.QUITAR_DE_ESPERA) {
+            Llamada llamada = (Llamada) origen;
+            Puesto p = llamada.getPuesto();
+            llamada.quitarObservador(this);
+            p.agregarObservador(this);
+            this.puesto = p;
+            vista.mostrarDatosLlamada(p);
         }
     }
-    
+
+    public boolean getEstaCiIngresada() {
+        return estaCiIngresada;
+    }
+
+    public void setEstaCiIngresada(boolean ingresada) {
+        this.estaCiIngresada = ingresada;
+    }
+
+    public String getCi() {
+        return ci;
+    }
+
+    public void agregarNumeroCi(String ci) {
+        this.ci += ci;
+    }
+
+    public void vaciarCi() {
+        this.ci = "";
+    }
+
     /*seguir en atender llamadas, implementar finalixar*/
+    public LocalDate getFechaInicio() {
+        return fechaInicio;
+    }
+
+    public void setFechaInicio(LocalDate fechaInicio) {
+        this.fechaInicio = fechaInicio;
+    }
+
+    public LocalTime getHoraInicio() {
+        return horaInicio;
+    }
+
+    public void setHoraInicio(LocalTime horaInicio) {
+        this.horaInicio = horaInicio;
+    }
 }

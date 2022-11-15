@@ -13,7 +13,8 @@ public interface Observador {
     
     public enum Eventos {
         INICIAR_LLAMADA,
-        FINALIZAR_LLAMADA
+        FINALIZAR_LLAMADA,
+        QUITAR_DE_ESPERA
     }
     public void actualizar(Object evento,Observable origen);
     
