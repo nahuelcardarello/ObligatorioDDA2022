@@ -10,8 +10,10 @@ public class Llamada {
         enCurso,
         enEspera,
         finalizada
-        
+
     }
+    private int duracion;
+
     private EstadoLlamada estado;
 
     private LocalDate fechaInicio;
@@ -21,11 +23,15 @@ public class Llamada {
     private LocalDate fechaFin;
 
     private LocalTime horaFin;
+    
+    private LocalTime horaComienzoEspera;
+    
+    private LocalTime horaComienzoLlamada;
 
     private String descripcion;
 
     private int numeroLlamada;
-    
+
     private static int ultimoNumeroLlamada;
 
     private float costoTotal;
@@ -35,9 +41,8 @@ public class Llamada {
     private Puesto puesto;
 
     private Trabajador trabajador;
-    
-    private final int costoPorSegundo=1;
-    
+
+    private final int costoPorSegundo = 1;
 
     public Llamada(EstadoLlamada estado, LocalDate fechaInicio, LocalTime horaInicio, Cliente cliente, Puesto puesto, Trabajador trabajador) {
         this.estado = estado;
@@ -50,21 +55,25 @@ public class Llamada {
         this.trabajador = trabajador;
     }
 
-    
-    
-    public void finalizarLlamada(String descripcion,Puesto p) {
+    public void finalizarLlamada(String descripcion, Puesto p) {
         this.descripcion = descripcion;
         this.fechaFin = LocalDate.now();
         this.horaFin = LocalTime.now();
         this.estado = EstadoLlamada.finalizada;
+        this.duracion = calcularDuracionLlamada();
+        if (this.estado == EstadoLlamada.enCurso) {
+            this.costoTotal = calcularCostoLlamada();
+        }
+
     }
 
     public float calcularCostoLlamada() {
+        cliente.calculoDeCostos(this);
         return 0;
     }
 
     public int calcularDuracionLlamada() {
-        return (int)Duration.between(horaInicio,horaFin).toSeconds();
+        return (int) Duration.between(horaInicio, horaFin).toSeconds();
     }
 
     public EstadoLlamada getEstado() {
@@ -94,6 +103,7 @@ public class Llamada {
     public LocalDate getFechaFin() {
         return fechaFin;
     }
+
     public float getSaldoCliente() {
         return cliente.getSaldo();
     }

@@ -17,8 +17,8 @@ public class Cliente {
 
     private TipoCliente tipoCliente;
 
-    public float calculoDeCostos(int duracion) {
-        return 0;
+    public float calculoDeCostos(Llamada llamada) {
+        return tipoCliente.calculoDeCostos(llamada);
     }
 
     public String getCI() {

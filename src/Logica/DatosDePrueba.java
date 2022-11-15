@@ -2,7 +2,9 @@ package Logica;
 
 import Excepciones.Excepcion;
 import Modelo.Cliente;
+import Modelo.Exonerado;
 import Modelo.Sector;
+import Modelo.TipoCliente;
 import Modelo.Trabajador;
 
 public class DatosdePrueba {
@@ -59,7 +61,7 @@ public class DatosdePrueba {
         Fachada.getInstancia().AgregarTrabajador(t2);
         Fachada.getInstancia().AgregarTrabajador(t3);
         Fachada.getInstancia().AgregarTrabajador(t4);
-
+        Exonerado e = new Exonerado();
         //Agregar Clientes
         Cliente c1 = new Cliente();
         c1.setNombrecompleto("Maria");
@@ -76,6 +78,9 @@ public class DatosdePrueba {
         c3.setSaldo(10);
         c3.setCI("77777777");
 
+        c1.setTipoCliente(e);
+        c2.setTipoCliente(e);
+        c3.setTipoCliente(e);
         Fachada.getInstancia().AgregarCliente(c1);
         Fachada.getInstancia().AgregarCliente(c2);
         Fachada.getInstancia().AgregarCliente(c3);

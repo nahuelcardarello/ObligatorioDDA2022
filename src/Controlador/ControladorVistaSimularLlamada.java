@@ -27,10 +27,17 @@ public class ControladorVistaSimularLlamada implements Observador {
 
     private IVistaSimularLlamada vista;
     private Fachada fachada;
+    private LocalDate fechaInicio;
+    private LocalTime horaInicio;
+    private boolean estaCiIngresada = false;
+    private String ci = "";
+    private Cliente unCliente = null;
+    private Puesto puesto;
 
     public ControladorVistaSimularLlamada(VistaSimularLlamadaImpl vista) {
         this.vista = vista;
         this.fachada = Fachada.getInstancia();
+
     }
 
     //Se comprueba que existe lugar para comenzar una llamada
@@ -38,13 +45,14 @@ public class ControladorVistaSimularLlamada implements Observador {
         return Fachada.getInstancia().iniciarLlamada();
     }
 
-    public void finalizarLlamada(String desc) {
-        //fachada.finalizarLlamada(" ");
+    public void finalizarLlamada() {
+       puesto.finalizarLlamada(" ");
     }
 
-    public Puesto altaLlamada(Cliente uncliente, String numeroSector, LocalDate fechaInicio, LocalTime horaInicio) throws LlamadaException {
+    public Puesto altaLlamada(String numeroSector) throws LlamadaException {
         Sector unSector = getSector(numeroSector);
-        Puesto unPuesto = Fachada.getInstancia().altaLlamada(uncliente, unSector, fechaInicio, horaInicio);
+        Puesto unPuesto = Fachada.getInstancia().altaLlamada(this.unCliente, unSector, this.fechaInicio, this.horaInicio);
+        this.puesto = unPuesto;
         if (unPuesto != null) {
             unPuesto.agregarObservador(this);
         }
@@ -52,13 +60,15 @@ public class ControladorVistaSimularLlamada implements Observador {
 
     }
 
-    public Cliente ingresarUsuario(String ci) throws CIException {
+    public void ingresarUsuario() throws CIException {
         Cliente unC;
         unC = Fachada.getInstancia().buscarCliente(ci);
         if (unC != null) {
-            return unC;
+            this.unCliente = unC;
+        } else {
+            throw new CIException("Cliente no registrado");
         }
-        throw new CIException("Cliente no registrado");
+
     }
 
     public ArrayList<Sector> getSectores() {
@@ -69,10 +79,21 @@ public class ControladorVistaSimularLlamada implements Observador {
 
     }
 
-    public boolean validaCI(String CI) {
-        String str = CI;
-        boolean isNumeric = str.matches("[+-]?\\d*(\\.\\d+)?");
-        return (CI.length() == 7 || CI.length() == 8) && isNumeric;
+    public void resetDatos() {
+        fechaInicio = null;
+        horaInicio = null;
+        vaciarCi();
+        estaCiIngresada = false;
+        unCliente = null;
+    }
+
+    public boolean validaCI() throws CIException {
+        boolean isNumeric = ci.matches("[+-]?\\d*(\\.\\d+)?");
+        if ((ci.length() == 7 || ci.length() == 8) && isNumeric) {
+            return true;
+        } else {
+            throw new CIException("Formato de CI no valido");
+        }
     }
 
     public Sector getSector(String numero) {
@@ -98,5 +119,40 @@ public class ControladorVistaSimularLlamada implements Observador {
         }
     }
 
+    public boolean getEstaCiIngresada() {
+        return estaCiIngresada;
+    }
+
+    public void setEstaCiIngresada(boolean ingresada) {
+        this.estaCiIngresada = ingresada;
+    }
+
+    public String getCi() {
+        return ci;
+    }
+
+    public void agregarNumeroCi(String ci) {
+        this.ci += ci;
+    }
+
+    public void vaciarCi() {
+        this.ci = "";
+    }
+
     /*seguir en atender llamadas, implementar finalixar*/
+    public LocalDate getFechaInicio() {
+        return fechaInicio;
+    }
+
+    public void setFechaInicio(LocalDate fechaInicio) {
+        this.fechaInicio = fechaInicio;
+    }
+
+    public LocalTime getHoraInicio() {
+        return horaInicio;
+    }
+
+    public void setHoraInicio(LocalTime horaInicio) {
+        this.horaInicio = horaInicio;
+    }
 }

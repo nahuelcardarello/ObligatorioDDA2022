@@ -5,9 +5,12 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import Excepciones.LlamadaException;
+import Observer.Observable;
 
-public class Sector {
-
+public class Sector extends Observable{
+public enum EventosSector {
+    ASIGNAR_LLAMADA
+}
     private String nombre;
 
     private int numero;
@@ -79,6 +82,10 @@ public class Sector {
         return puesto;
     }
 
+    
+    public void asignarLlamadaEnEspera(Puesto p) {
+        //avisar()
+    }
     public Puesto puestoParaAtender() {
         Puesto puesto = null;
 
@@ -102,6 +109,17 @@ public class Sector {
         return cantLlamadasEnEspera;
     }
 
+    public Llamada getPrimeraLLamadaEnEspera() {
+        Llamada llamada = null;
+        int i = 0;
+        while (i < llamadas.size() && llamada == null) {
+            Llamada l = llamadas.get(i);
+            if (l.getEstado() == Llamada.EstadoLlamada.enEspera) {
+                llamada = l;
+            }
+        }
+        return llamada;
+    }
     public int cantidadDeMinutosDeEspera() {
         int cantMinutos = 0;
 
