@@ -165,7 +165,9 @@ public class VistaSimularLlamadaImpl extends javax.swing.JFrame implements IVist
         salirBtn.setText("Salir");
 
         one.setBackground(new java.awt.Color(255, 255, 255));
+        one.setForeground(new java.awt.Color(0, 0, 0));
         one.setText("1");
+        one.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         one.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 oneActionPerformed(evt);
@@ -173,6 +175,7 @@ public class VistaSimularLlamadaImpl extends javax.swing.JFrame implements IVist
         });
 
         four.setBackground(new java.awt.Color(255, 255, 255));
+        four.setForeground(new java.awt.Color(0, 0, 0));
         four.setText("4");
         four.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -181,6 +184,7 @@ public class VistaSimularLlamadaImpl extends javax.swing.JFrame implements IVist
         });
 
         seven.setBackground(new java.awt.Color(255, 255, 255));
+        seven.setForeground(new java.awt.Color(0, 0, 0));
         seven.setText("7");
         seven.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -189,6 +193,7 @@ public class VistaSimularLlamadaImpl extends javax.swing.JFrame implements IVist
         });
 
         asterisk.setBackground(new java.awt.Color(255, 255, 255));
+        asterisk.setForeground(new java.awt.Color(0, 0, 0));
         asterisk.setText("*");
         asterisk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -197,6 +202,7 @@ public class VistaSimularLlamadaImpl extends javax.swing.JFrame implements IVist
         });
 
         two.setBackground(new java.awt.Color(255, 255, 255));
+        two.setForeground(new java.awt.Color(0, 0, 0));
         two.setText("2");
         two.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -205,6 +211,7 @@ public class VistaSimularLlamadaImpl extends javax.swing.JFrame implements IVist
         });
 
         five.setBackground(new java.awt.Color(255, 255, 255));
+        five.setForeground(new java.awt.Color(0, 0, 0));
         five.setText("5");
         five.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -213,6 +220,7 @@ public class VistaSimularLlamadaImpl extends javax.swing.JFrame implements IVist
         });
 
         eight.setBackground(new java.awt.Color(255, 255, 255));
+        eight.setForeground(new java.awt.Color(0, 0, 0));
         eight.setText("8");
         eight.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -221,6 +229,7 @@ public class VistaSimularLlamadaImpl extends javax.swing.JFrame implements IVist
         });
 
         zero.setBackground(new java.awt.Color(255, 255, 255));
+        zero.setForeground(new java.awt.Color(0, 0, 0));
         zero.setText("0");
         zero.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -229,6 +238,7 @@ public class VistaSimularLlamadaImpl extends javax.swing.JFrame implements IVist
         });
 
         three.setBackground(new java.awt.Color(255, 255, 255));
+        three.setForeground(new java.awt.Color(0, 0, 0));
         three.setText("3");
         three.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -237,6 +247,7 @@ public class VistaSimularLlamadaImpl extends javax.swing.JFrame implements IVist
         });
 
         six.setBackground(new java.awt.Color(255, 255, 255));
+        six.setForeground(new java.awt.Color(0, 0, 0));
         six.setText("6");
         six.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -245,6 +256,7 @@ public class VistaSimularLlamadaImpl extends javax.swing.JFrame implements IVist
         });
 
         nine.setBackground(new java.awt.Color(255, 255, 255));
+        nine.setForeground(new java.awt.Color(0, 0, 0));
         nine.setText("9");
         nine.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -253,6 +265,7 @@ public class VistaSimularLlamadaImpl extends javax.swing.JFrame implements IVist
         });
 
         hash.setBackground(new java.awt.Color(255, 255, 255));
+        hash.setForeground(new java.awt.Color(0, 0, 0));
         hash.setText("#");
         hash.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -290,38 +303,27 @@ public class VistaSimularLlamadaImpl extends javax.swing.JFrame implements IVist
                                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(19, 19, 19))))
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(245, 245, 245)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(one, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(two, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(three, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(four, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(five, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(six, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(seven, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(eight, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(nine, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(asterisk, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(zero, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(hash, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(salirBtn)
-                        .addGap(22, 22, 22))))
+                .addGap(236, 236, 236)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(asterisk, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+                    .addComponent(seven, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(four, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(one, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(zero, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
+                    .addComponent(two, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(five, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(eight, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(six, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+                    .addComponent(three, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(hash, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(nine, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(salirBtn)
+                .addGap(22, 22, 22))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -346,10 +348,11 @@ public class VistaSimularLlamadaImpl extends javax.swing.JFrame implements IVist
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(one)
-                            .addComponent(two)
-                            .addComponent(three))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(two)
+                                .addComponent(three))
+                            .addComponent(one, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(four)

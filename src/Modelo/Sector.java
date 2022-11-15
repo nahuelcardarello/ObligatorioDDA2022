@@ -43,12 +43,12 @@ public class Sector {
         if (puestos.size() > 0) {
             Puesto p = puestoParaAtender();
             if (p!=null) {
-                Llamada llamada = new Llamada(Llamada.EstadoLlamada.enCurso, fechaInicio, horaInicio, uncliente, p, p.getTrabajador());
+                Llamada llamada = new Llamada(Llamada.EstadoLlamada.enCurso, fechaInicio, horaInicio, uncliente, p, p.getTrabajador(),this);
                 p.agregarLlamada(llamada);
                 agregarLlamadaSector(llamada);
                 return p;
             } else if (p == null) {
-                Llamada llamada = new Llamada(Llamada.EstadoLlamada.enEspera, fechaInicio, horaInicio, uncliente, p, p.getTrabajador());
+                Llamada llamada = new Llamada(Llamada.EstadoLlamada.enEspera, fechaInicio, horaInicio, uncliente, p, p.getTrabajador(),this);
                 llamadasEnEspera.add(llamada);
                 return p;
             }else{
