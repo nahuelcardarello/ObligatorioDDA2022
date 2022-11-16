@@ -4,6 +4,7 @@
  */
 package Controlador;
 
+import Logica.Fachada;
 import Modelo.Puesto;
 import Observer.Observable;
 import Observer.Observador;
@@ -16,10 +17,12 @@ import iuEscritorio.IVistaAtenderLlamadas;
 public class ControladorVistaAtenderLlamadas implements Observador {
     private IVistaAtenderLlamadas vista;
     private Puesto modelo;
+    private Fachada fachada;
     
     public ControladorVistaAtenderLlamadas(IVistaAtenderLlamadas vista, Puesto modelo) {
         this.vista = vista;
         this.modelo = modelo;
+        this.fachada = Fachada.getInstancia();
         modelo.agregarObservador(this);
     }
     public void inicializar()
@@ -40,6 +43,7 @@ public class ControladorVistaAtenderLlamadas implements Observador {
                 vista.iniciarLlamada((Puesto) origen);
             break;
             case FINALIZAR_LLAMADA:
+                fachada.finalizarLlamada();
                 vista.finalizarLlamada((Puesto) origen);
             break;
                 

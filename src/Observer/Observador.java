@@ -14,7 +14,9 @@ public interface Observador {
     public enum Eventos {
         INICIAR_LLAMADA,
         FINALIZAR_LLAMADA,
-        QUITAR_DE_ESPERA
+        QUITAR_DE_ESPERA,
+        ACTUALIZAR_SECTOR,
+        ACTUALIZAR_SECTORES
     }
     public void actualizar(Object evento,Observable origen);
     

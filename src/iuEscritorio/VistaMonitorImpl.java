@@ -278,6 +278,7 @@ public class VistaMonitorImpl extends javax.swing.JFrame implements IVistaMonito
 
     @Override
     public void mostrarLlamadasSector(Sector sectorSeleccionado) {
+        controlador.setSectorSeleccionado(true);
         if (sectorSeleccionado == null) {
             jTable.setModel(new DefaultTableModel());
         } else {
@@ -305,6 +306,7 @@ public class VistaMonitorImpl extends javax.swing.JFrame implements IVistaMonito
 
     @Override
     public void mostrarLlamadasSectores(ArrayList<Llamada> llamadasSectores) {
+        controlador.setSectorSeleccionado(false);
         DefaultTableModel modeloDefault = new DefaultTableModel(new String[]{
             "Sector", "#llamada", "Estado", "Inicio", "Fin", "#puesto", "Trabajador", "Duracion", "Costo", "Cliente", "Saldo"
         }, llamadasSectores.size());

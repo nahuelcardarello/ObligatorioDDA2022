@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import Excepciones.LlamadaException;
 import Observer.Observable;
+import Observer.Observador;
 
 public class Sector extends Observable {
 
@@ -55,6 +56,7 @@ public class Sector extends Observable {
                 p.agregarLlamada(llamada);
               //  agregarLlamadaSector(llamada);
                 llamadas.add(llamada);
+                this.avisar(Observador.Eventos.ACTUALIZAR_SECTOR);
                 return llamada;
             } else {
                 Llamada llamada = new Llamada(Llamada.EstadoLlamada.enEspera, fechaInicio, horaInicio, uncliente, null, null,this);
@@ -89,10 +91,12 @@ public class Sector extends Observable {
     public void asignarLlamadaEnEspera(Puesto p) {
         Llamada llamada = getPrimeraLlamadaEnEspera();
         if(llamada != null) {
+            
             llamada.setPuesto(p);
             llamada.setTrabajador(p.getTrabajador());
             llamada.setTrabajador(p.getTrabajador());
             p.agregarLlamada(llamada);
+            this.avisar(Observador.Eventos.ACTUALIZAR_SECTOR);
             
         }
         
@@ -109,7 +113,9 @@ public class Sector extends Observable {
 
         return puesto;
     }
-
+    public void emitirEventoLlamadaFinalizada() {
+        avisar(Observador.Eventos.ACTUALIZAR_SECTOR);
+    }
     public int cantidadDeLlamadasASerAtendido() {
         int cantLlamadasEnEspera = 0;
 

@@ -63,6 +63,8 @@ public class Puesto extends Observable {
         this.llamada.setEstado(Llamada.EstadoLlamada.finalizada);
         this.llamada = null;
         avisar(Observador.Eventos.FINALIZAR_LLAMADA);
+        sector.emitirEventoLlamadaFinalizada();
+        
         sector.asignarLlamadaEnEspera(this);
     }
     public int getNumero() {

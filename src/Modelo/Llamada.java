@@ -43,14 +43,12 @@ public class Llamada extends Observable {
     private Puesto puesto;
 
     private Trabajador trabajador;
-    
+
     private Sector sector;
 
-    private final int costoPorSegundo=1;
+    private final int costoPorSegundo = 1;
 
-
-
-public Llamada(EstadoLlamada estado, LocalDate fechaInicio, LocalTime horaInicio, Cliente cliente, Puesto puesto, Trabajador trabajador, Sector sector) {
+    public Llamada(EstadoLlamada estado, LocalDate fechaInicio, LocalTime horaInicio, Cliente cliente, Puesto puesto, Trabajador trabajador, Sector sector) {
         this.estado = estado;
         this.fechaInicio = fechaInicio;
         this.horaInicio = horaInicio;
@@ -81,7 +79,7 @@ public Llamada(EstadoLlamada estado, LocalDate fechaInicio, LocalTime horaInicio
     public void setSector(Sector sector) {
         this.sector = sector;
     }
-    
+
     public int getDuracion() {
         return duracion;
     }
@@ -124,7 +122,11 @@ public Llamada(EstadoLlamada estado, LocalDate fechaInicio, LocalTime horaInicio
     }
 
     public int calcularDuracionLlamada() {
-        return (int) Duration.between(horaInicio, horaFin).toSeconds();
+        int duracion = 0;
+        if (horaFin != null) {
+            duracion = (int) Duration.between(horaInicio, horaFin).toSeconds();
+        }
+        return (int) duracion;
     }
 
     public EstadoLlamada getEstado() {

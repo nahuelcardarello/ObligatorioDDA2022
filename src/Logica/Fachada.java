@@ -11,6 +11,7 @@ import Excepciones.LlamadaException;
 import Modelo.Llamada;
 import Modelo.Sector;
 import Modelo.TrabajadorException;
+import Observer.Observador;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -44,16 +45,22 @@ public class Fachada extends Observable {
     public void salirDeAplicacion(Trabajador unT) {
 
     }
+
     public void finalizarLlamada() {
-        //sistemaTrabajadores.finalizarLlamada();
+        avisar(Observador.Eventos.ACTUALIZAR_SECTORES);
     }
+
     //Se comprueba que existe lugar para comenzar una llamada
-    public boolean iniciarLlamada()  throws LlamadaException {
+    public boolean iniciarLlamada() throws LlamadaException {
         return sistemaTrabajadores.iniciarLlamada();
     }
-    
-    public Llamada altaLlamada(Cliente uncliente, Sector unSector, LocalDate fechaInicio, LocalTime horaInicio) throws LlamadaException{
-        return sistemaTrabajadores.altaLlamada(uncliente, unSector, fechaInicio, horaInicio);
+
+    public Llamada altaLlamada(Cliente uncliente, Sector unSector, LocalDate fechaInicio, LocalTime horaInicio) throws LlamadaException {
+        Llamada llamada = sistemaTrabajadores.altaLlamada(uncliente, unSector, fechaInicio, horaInicio);
+        if (llamada.getEstado() != Llamada.EstadoLlamada.enEspera) {
+            avisar(Observador.Eventos.ACTUALIZAR_SECTORES);
+        }
+        return llamada;
     }
 
     public Cliente getCliente(String ci) {
@@ -67,21 +74,24 @@ public class Fachada extends Observable {
     public void AgregarTrabajador(Trabajador t) {
         sistemaTrabajadores.agregarTrabajador(t);
     }
-    public ArrayList<Llamada> getLlamadasTotal(){
-      return sistemaTrabajadores.getLlamadasTotal();
+
+    public ArrayList<Llamada> getLlamadasTotal() {
+        return sistemaTrabajadores.getLlamadasTotal();
     }
+
     public void AgregarCliente(Cliente c) {
         sistemaClientes.agregarCliente(c);
     }
-    
-    public Cliente buscarCliente(String CI){
+
+    public Cliente buscarCliente(String CI) {
         return sistemaClientes.buscarCliente(CI);
     }
 
     public void AgregarSector(Sector s) {
         sistemaTrabajadores.agregarSector(s);
     }
-    public Sector buscarSector(String nombreSector){
-     return sistemaTrabajadores.buscarSector(nombreSector);
+
+    public Sector buscarSector(String nombreSector) {
+        return sistemaTrabajadores.buscarSector(nombreSector);
     }
 }
