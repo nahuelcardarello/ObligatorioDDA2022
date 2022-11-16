@@ -28,6 +28,7 @@ public class ControladorVistaSimularLlamada implements Observador {
     private IVistaSimularLlamada vista;
     private Fachada fachada;
     private LocalDate fechaInicio;
+    private LocalTime horaComienzoLlamada;
     private LocalTime horaInicio;
     private boolean estaCiIngresada = false;
     private String ci = "";
@@ -42,20 +43,25 @@ public class ControladorVistaSimularLlamada implements Observador {
 
     //Se comprueba que existe lugar para comenzar una llamada
     public boolean inicializar() throws LlamadaException {
+        boolean inicio = false;
+        if (Fachada.getInstancia().iniciarLlamada()) {
+            inicio = true;
+        }
         return Fachada.getInstancia().iniciarLlamada();
     }
 
-     public void finalizarLlamada() {
-       String descripcionLlamada = puesto.getLlamada().getDescripcion();
-       puesto.finalizarLlamada(descripcionLlamada);
-       puesto = null;
+    public void finalizarLlamada() {
+        String descripcionLlamada = puesto.getLlamada().getDescripcion();
+        puesto.finalizarLlamada(descripcionLlamada);
+        puesto = null;
     }
 
     public Llamada altaLlamada(String numeroSector) throws LlamadaException {
         Sector unSector = getSector(numeroSector);
-        Llamada llamada = fachada.altaLlamada(this.unCliente, unSector, this.fechaInicio, this.horaInicio);
+        this.setHoraComienzoLlamada((LocalTime.now()));
+        Llamada llamada = fachada.altaLlamada(this.unCliente, unSector, this.fechaInicio, this.horaComienzoLlamada, this.horaInicio);
         Puesto p = llamada.getPuesto();
-        if(p != null) {
+        if (p != null) {
             puesto = p;
             p.agregarObservador(this);
         } else {
@@ -93,6 +99,7 @@ public class ControladorVistaSimularLlamada implements Observador {
     public void resetDatos() {
         fechaInicio = null;
         horaInicio = null;
+        horaComienzoLlamada = null;
         vaciarCi();
         estaCiIngresada = false;
         unCliente = null;
@@ -127,7 +134,7 @@ public class ControladorVistaSimularLlamada implements Observador {
             Puesto p = (Puesto) origen;
             p.quitarObservador(this);
             vista.finalizarLlamada(p.getUltimaDuracionLlamada(), p.getUltimoCosto(), p.getUltimoSaldo());
-        } else if(e == Eventos.QUITAR_DE_ESPERA) {
+        } else if (e == Eventos.QUITAR_DE_ESPERA) {
             Llamada llamada = (Llamada) origen;
             Puesto p = llamada.getPuesto();
             llamada.quitarObservador(this);
@@ -173,4 +180,14 @@ public class ControladorVistaSimularLlamada implements Observador {
     public void setHoraInicio(LocalTime horaInicio) {
         this.horaInicio = horaInicio;
     }
+
+    public LocalTime getHoraComienzoLlamada() {
+        return horaComienzoLlamada;
+    }
+
+    public void setHoraComienzoLlamada(LocalTime horaComienzoLlamada) {
+        this.horaComienzoLlamada = horaComienzoLlamada;
+    }
+    
+    
 }

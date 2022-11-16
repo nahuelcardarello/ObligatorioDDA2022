@@ -33,10 +33,10 @@ public class SistemaTrabajadores {
         }
     }
        
-    public Llamada altaLlamada(Cliente uncliente, Sector unSector, LocalDate fechaInicio, LocalTime horaInicio) throws LlamadaException {
+    public Llamada altaLlamada(Cliente uncliente, Sector unSector, LocalDate fechaInicio, LocalTime horaInicio, LocalTime horaComienzoLlamada) throws LlamadaException {
             //preguntar a matias y nahuel si no tiene sentido establecer fecha y hora al inicialixar llamada
             try {
-                Llamada llamada = unSector.iniciarLlamada(uncliente, fechaInicio, horaInicio);
+                Llamada llamada = unSector.iniciarLlamada(uncliente, fechaInicio, horaInicio, horaComienzoLlamada);
                 return llamada;
             } catch (LlamadaException llamadaEx) {
                 cantidadLlamadas--;

@@ -46,27 +46,16 @@ public class Llamada extends Observable {
 
     private final int costoPorSegundo = 1;
 
-    public Llamada(EstadoLlamada estado, LocalDate fechaInicio, LocalTime horaInicio, Cliente cliente, Puesto puesto, Trabajador trabajador) {
+    public Llamada(EstadoLlamada estado, LocalDate fechaInicio, LocalTime horaInicio, LocalTime horaComienzoLlamada, Cliente cliente, Puesto puesto, Trabajador trabajador) {
         this.estado = estado;
         this.fechaInicio = fechaInicio;
         this.horaInicio = horaInicio;
+        this.horaComienzoLlamada = horaComienzoLlamada;
         this.numeroLlamada = ultimoNumeroLlamada;
         ultimoNumeroLlamada++;
         this.cliente = cliente;
         this.puesto = puesto;
         this.trabajador = trabajador;
-    }
-
-    public void finalizarLlamada(String descripcion, Puesto p) {
-        this.descripcion = descripcion;
-        this.fechaFin = LocalDate.now();
-        this.horaFin = LocalTime.now();
-        this.estado = EstadoLlamada.finalizada;
-        this.duracion = calcularDuracionLlamada();
-        if (this.estado == EstadoLlamada.enCurso) {
-            this.costoTotal = calcularCostoLlamada();
-        }
-
     }
 
     public int getDuracion() {
@@ -103,15 +92,6 @@ public class Llamada extends Observable {
 
     public static void setUltimoNumeroLlamada(int ultimoNumeroLlamada) {
         Llamada.ultimoNumeroLlamada = ultimoNumeroLlamada;
-    }
-
-    public float calcularCostoLlamada() {
-        cliente.calculoDeCostos(this);
-        return 0;
-    }
-
-    public int calcularDuracionLlamada() {
-        return (int) Duration.between(horaInicio, horaFin).toSeconds();
     }
 
     public EstadoLlamada getEstado() {
@@ -210,12 +190,47 @@ public class Llamada extends Observable {
         }
     }
 
-    boolean unMinutoDeTiempoDeEspera() {
-        int duracion = (int) Duration.between(horaComienzoEspera, horaComienzoLlamada).toSeconds();
-
-        if (duracion >= 60) {
-            return true;
+    public void finalizarLlamada(String descripcion, Puesto p) {
+        this.descripcion = descripcion;
+        this.fechaFin = LocalDate.now();
+        this.horaFin = LocalTime.now();
+        this.estado = EstadoLlamada.finalizada;
+        this.duracion = calcularDuracionLlamada();
+        if (this.estado == EstadoLlamada.enCurso) {
+            this.costoTotal = calcularCostoLlamada();
+            this.cliente.descontarCosto(this.costoTotal);
         }
+
+    }
+
+    public boolean unMinutoDeTiempoDeEspera() {
+        if (horaComienzoEspera != null && horaComienzoLlamada != null) {
+            int duracion = (int) Duration.between(horaComienzoEspera, horaComienzoLlamada).toSeconds();
+
+            if (duracion >= 60) {
+                return true;
+            }
+        }
+
         return false;
+    }
+
+    public int cantSegundosEnEspera() {
+        if (horaComienzoEspera != null && horaComienzoLlamada != null) {
+            return (int) Duration.between(horaComienzoEspera, horaComienzoLlamada).toSeconds();
+        } else {
+            return 0;
+        }
+    }
+
+    public float calcularCostoLlamada() {
+        return cliente.calculoDeCostos(this);
+    }
+
+    public int calcularDuracionLlamada() {
+        if (horaComienzoLlamada != null && horaFin != null) {
+            return (int) Duration.between(horaComienzoLlamada, horaFin).toSeconds();
+        }
+        return 0;
     }
 }

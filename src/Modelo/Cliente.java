@@ -61,4 +61,11 @@ public class Cliente {
         this.tipoCliente = tipoCliente;
     }
 
+    void descontarCosto(float costoTotal) {
+        if (costoTotal>saldo) {
+            saldo=0;
+        }
+        saldo-=costoTotal;
+    }
+
 }
