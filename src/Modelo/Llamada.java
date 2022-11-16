@@ -50,7 +50,7 @@ public class Llamada extends Observable {
 
 
 
-public Llamada(EstadoLlamada estado, LocalDate fechaInicio, LocalTime horaInicio, Cliente cliente, Puesto puesto, Trabajador trabajador) {
+public Llamada(EstadoLlamada estado, LocalDate fechaInicio, LocalTime horaInicio, Cliente cliente, Puesto puesto, Trabajador trabajador, Sector sector) {
         this.estado = estado;
         this.fechaInicio = fechaInicio;
         this.horaInicio = horaInicio;
@@ -59,6 +59,7 @@ public Llamada(EstadoLlamada estado, LocalDate fechaInicio, LocalTime horaInicio
         this.cliente = cliente;
         this.puesto = puesto;
         this.trabajador = trabajador;
+        this.sector = sector;
     }
 
     public void finalizarLlamada(String descripcion, Puesto p) {
