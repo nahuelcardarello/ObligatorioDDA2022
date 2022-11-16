@@ -259,8 +259,7 @@ public class VistaMonitorImpl extends javax.swing.JFrame implements IVistaMonito
 
     private void sectorSeleccionado() {
         String nombreSector = (String) jListSectores.getSelectedValue();
-        Sector sectorSeleccionado = Fachada.getInstancia().buscarSector(nombreSector);
-        controlador.sectorSeleccionado(sectorSeleccionado);
+        controlador.sectorSeleccionado(nombreSector);
     }
 
     private void sectoresSeleccionados() {

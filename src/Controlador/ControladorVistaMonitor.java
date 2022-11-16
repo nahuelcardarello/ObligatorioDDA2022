@@ -17,9 +17,11 @@ import iuEscritorio.IVistaMonitor;
 public class ControladorVistaMonitor  {
 
     private IVistaMonitor vista;
+    private Fachada modelo; 
 
     public ControladorVistaMonitor(IVistaMonitor vista) {
         this.vista = vista;
+        modelo = Fachada.getInstancia();
     }
 
     public void inicialiar() {
@@ -27,11 +29,12 @@ public class ControladorVistaMonitor  {
         vista.mostrarSectores(fachada.getInstancia().getSectores());
     }
 
-    public void sectorSeleccionado(Sector sectorSeleccionado) {
-        vista.mostrarLlamadasSector(sectorSeleccionado);
+    public void sectorSeleccionado(String nombreSector) {
+       Sector sector =  modelo.buscarSector(nombreSector);
+        vista.mostrarLlamadasSector(sector);
     }
     public void sectoresSeleccionados() {
-        vista.mostrarLlamadasSectores(Fachada.getInstancia().getLlamadasTotal());
+        vista.mostrarLlamadasSectores(modelo.getLlamadasTotal());
     }
 
 }
