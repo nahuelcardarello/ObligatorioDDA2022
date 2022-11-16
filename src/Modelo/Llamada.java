@@ -82,6 +82,42 @@ public Llamada(EstadoLlamada estado, LocalDate fechaInicio, LocalTime horaInicio
         this.sector = sector;
     }
     
+    public int getDuracion() {
+        return duracion;
+    }
+
+    public LocalTime getHoraComienzoEspera() {
+        return horaComienzoEspera;
+    }
+
+    public LocalTime getHoraComienzoLlamada() {
+        return horaComienzoLlamada;
+    }
+
+    public static int getUltimoNumeroLlamada() {
+        return ultimoNumeroLlamada;
+    }
+
+    public int getCostoPorSegundo() {
+        return costoPorSegundo;
+    }
+
+    public void setDuracion(int duracion) {
+        this.duracion = duracion;
+    }
+
+    public void setHoraComienzoEspera(LocalTime horaComienzoEspera) {
+        this.horaComienzoEspera = horaComienzoEspera;
+    }
+
+    public void setHoraComienzoLlamada(LocalTime horaComienzoLlamada) {
+        this.horaComienzoLlamada = horaComienzoLlamada;
+    }
+
+    public static void setUltimoNumeroLlamada(int ultimoNumeroLlamada) {
+        Llamada.ultimoNumeroLlamada = ultimoNumeroLlamada;
+    }
+
     public float calcularCostoLlamada() {
         cliente.calculoDeCostos(this);
         return 0;
@@ -185,5 +221,14 @@ public Llamada(EstadoLlamada estado, LocalDate fechaInicio, LocalTime horaInicio
             this.estado = EstadoLlamada.enCurso;
             avisar(Observador.Eventos.QUITAR_DE_ESPERA);
         }
+    }
+
+    boolean unMinutoDeTiempoDeEspera() {
+        int duracion = (int) Duration.between(horaComienzoEspera, horaComienzoLlamada).toSeconds();
+
+        if (duracion >= 60) {
+            return true;
+        }
+        return false;
     }
 }

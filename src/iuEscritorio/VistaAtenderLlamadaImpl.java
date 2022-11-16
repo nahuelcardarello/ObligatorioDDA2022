@@ -16,7 +16,6 @@ import Modelo.Sector;
 import Modelo.Trabajador;
 import javax.swing.JFrame;
 
-
 public class VistaAtenderLlamadaImpl extends javax.swing.JFrame implements IVistaAtenderLlamadas {
 
     private ControladorVistaAtenderLlamadas controlador;
@@ -26,6 +25,7 @@ public class VistaAtenderLlamadaImpl extends javax.swing.JFrame implements IVist
         initComponents();
         setLocationRelativeTo(parent);
         this.controlador = new ControladorVistaAtenderLlamadas(this, p);
+        setDefaultCloseOperation(0);
         inicializar();
     }
 
@@ -261,14 +261,14 @@ public class VistaAtenderLlamadaImpl extends javax.swing.JFrame implements IVist
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnFinalizarLlamadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarLlamadaActionPerformed
-        if(controlador.enLlamada()) {
+        if (controlador.enLlamada()) {
             finalizarLlamada();
         }
-        
+
     }//GEN-LAST:event_btnFinalizarLlamadaActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
 
 

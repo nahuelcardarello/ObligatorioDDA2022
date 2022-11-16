@@ -34,6 +34,7 @@ public class VistaSimularLlamadaImpl extends javax.swing.JFrame implements IVist
         bloquearNumeros();
         this.finalizarBtn.setEnabled(false);
         this.controlador = new ControladorVistaSimularLlamada(this);
+        setDefaultCloseOperation(0);
     }
 
     private ControladorVistaSimularLlamada controlador;
@@ -54,6 +55,7 @@ public class VistaSimularLlamadaImpl extends javax.swing.JFrame implements IVist
         jTextArea2 = new javax.swing.JTextArea();
         jTextField1 = new javax.swing.JTextField();
         buttonGroup1 = new javax.swing.ButtonGroup();
+        jOptionPane1 = new javax.swing.JOptionPane();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -159,6 +161,11 @@ public class VistaSimularLlamadaImpl extends javax.swing.JFrame implements IVist
         salirBtn.setBackground(new java.awt.Color(255, 255, 255));
         salirBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         salirBtn.setText("Salir");
+        salirBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salirBtnActionPerformed(evt);
+            }
+        });
 
         one.setBackground(new java.awt.Color(255, 255, 255));
         one.setForeground(new java.awt.Color(0, 0, 0));
@@ -495,7 +502,12 @@ public class VistaSimularLlamadaImpl extends javax.swing.JFrame implements IVist
 
     private void finalizarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finalizarBtnActionPerformed
         controlador.finalizarLlamada();
+        this.bloquearNumeros();
     }//GEN-LAST:event_finalizarBtnActionPerformed
+
+    private void salirBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirBtnActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_salirBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -512,6 +524,7 @@ public class VistaSimularLlamadaImpl extends javax.swing.JFrame implements IVist
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JOptionPane jOptionPane1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -549,7 +562,7 @@ public class VistaSimularLlamadaImpl extends javax.swing.JFrame implements IVist
         try {
             Llamada llamada = controlador.altaLlamada(numeroSectorElegido);
             Sector unSector = controlador.getSector(numeroSectorElegido);
-
+            this.bloquearNumeros();
             if (llamada.getPuesto() != null) {
                 mostrarDatosLlamada(llamada.getPuesto());
                 String msg = "Llamada en curso... ud. se está comunicando con el sector ";
@@ -570,6 +583,7 @@ public class VistaSimularLlamadaImpl extends javax.swing.JFrame implements IVist
         }
 
     }
+
     @Override
     public void mostrarDatosLlamada(Puesto p) {
         String msg = "Llamada en curso... ud. se está comunicando con el sector ";
