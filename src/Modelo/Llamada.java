@@ -213,19 +213,6 @@ public class Llamada extends Observable {
         }
     }
 
-    public void finalizarLlamada(String descripcion, Puesto p) {
-        this.descripcion = descripcion;
-        this.fechaFin = LocalDate.now();
-        this.horaFin = LocalTime.now();
-        this.estado = EstadoLlamada.finalizada;
-        this.duracion = calcularDuracionLlamada();
-        if (this.estado == EstadoLlamada.enCurso) {
-            this.costoTotal = calcularCostoLlamada();
-            this.cliente.sumarCosto(this.costoTotal);
-        }
-
-    }
-
     public boolean unMinutoDeTiempoDeEspera() {
         if (horaComienzoEspera != null && horaComienzoLlamada != null) {
             int duracion = (int) Duration.between(horaComienzoEspera, horaComienzoLlamada).toSeconds();
