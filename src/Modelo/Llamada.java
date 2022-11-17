@@ -198,7 +198,7 @@ public class Llamada extends Observable {
         this.duracion = calcularDuracionLlamada();
         if (this.estado == EstadoLlamada.enCurso) {
             this.costoTotal = calcularCostoLlamada();
-            this.cliente.descontarCosto(this.costoTotal);
+            this.cliente.sumarCosto(this.costoTotal);
         }
 
     }
