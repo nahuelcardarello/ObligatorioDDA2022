@@ -48,18 +48,18 @@ public class Sector extends Observable {
 
     }
 
-    public Llamada iniciarLlamada(Cliente uncliente, LocalDate fechaInicio, LocalTime horaInicio) throws Excepciones.LlamadaException {
+    public Llamada iniciarLlamada(Cliente uncliente, LocalDate fechaInicio, LocalTime horaInicio, LocalTime horaComienzoLlamada) throws Excepciones.LlamadaException {
         if (puestos.size() > 0) {
             Puesto p = puestoParaAtender();
             if (p != null) {
-                Llamada llamada = new Llamada(Llamada.EstadoLlamada.enCurso, fechaInicio, horaInicio, uncliente, p, p.getTrabajador(),this);
+                Llamada llamada = new Llamada(Llamada.EstadoLlamada.enCurso, fechaInicio, horaInicio, horaComienzoLlamada,uncliente, p, p.getTrabajador(),this);
                 p.agregarLlamada(llamada);
               //  agregarLlamadaSector(llamada);
                 llamadas.add(llamada);
                 this.avisar(Observador.Eventos.ACTUALIZAR_SECTOR);
                 return llamada;
             } else {
-                Llamada llamada = new Llamada(Llamada.EstadoLlamada.enEspera, fechaInicio, horaInicio, uncliente, null, null,this);
+                Llamada llamada = new Llamada(Llamada.EstadoLlamada.enEspera, fechaInicio, horaInicio, null, uncliente, null, null,this);
                 llamadas.add(llamada);
                 return llamada;
             }

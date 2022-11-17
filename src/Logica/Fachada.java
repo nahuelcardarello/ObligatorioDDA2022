@@ -54,13 +54,9 @@ public class Fachada extends Observable {
     public boolean iniciarLlamada() throws LlamadaException {
         return sistemaTrabajadores.iniciarLlamada();
     }
-
-    public Llamada altaLlamada(Cliente uncliente, Sector unSector, LocalDate fechaInicio, LocalTime horaInicio) throws LlamadaException {
-        Llamada llamada = sistemaTrabajadores.altaLlamada(uncliente, unSector, fechaInicio, horaInicio);
-        if (llamada.getEstado() != Llamada.EstadoLlamada.enEspera) {
-            avisar(Observador.Eventos.ACTUALIZAR_SECTORES);
-        }
-        return llamada;
+    
+    public Llamada altaLlamada(Cliente uncliente, Sector unSector, LocalDate fechaInicio, LocalTime horaInicio, LocalTime horaComienzoLlamada) throws LlamadaException{
+        return sistemaTrabajadores.altaLlamada(uncliente, unSector, fechaInicio, horaInicio, horaComienzoLlamada);
     }
 
     public Cliente getCliente(String ci) {

@@ -602,6 +602,7 @@ public class VistaSimularLlamadaImpl extends javax.swing.JFrame implements IVist
         jTextAreaMensaje.setText(msg);
         controlador.resetDatos();
         iniciarBtn.setEnabled(true);
+        finalizarBtn.setEnabled(false);
     }
 
     @Override

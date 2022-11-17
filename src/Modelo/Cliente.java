@@ -61,4 +61,8 @@ public class Cliente {
         this.tipoCliente = tipoCliente;
     }
 
+    public void sumarCosto(float costoTotal) {
+        saldo+=costoTotal;
+    }
+
 }

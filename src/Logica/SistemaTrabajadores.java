@@ -33,16 +33,16 @@ public class SistemaTrabajadores {
             throw new LlamadaException("Comuníquese más tarde...");
         }
     }
-
-    public Llamada altaLlamada(Cliente uncliente, Sector unSector, LocalDate fechaInicio, LocalTime horaInicio) throws LlamadaException {
-        //preguntar a matias y nahuel si no tiene sentido establecer fecha y hora al inicialixar llamada
-        try {
-            Llamada llamada = unSector.iniciarLlamada(uncliente, fechaInicio, horaInicio);
-            return llamada;
-        } catch (LlamadaException llamadaEx) {
-            cantidadLlamadas--;
-            throw llamadaEx;
-        }
+       
+    public Llamada altaLlamada(Cliente uncliente, Sector unSector, LocalDate fechaInicio, LocalTime horaInicio, LocalTime horaComienzoLlamada) throws LlamadaException {
+            //preguntar a matias y nahuel si no tiene sentido establecer fecha y hora al inicialixar llamada
+            try {
+                Llamada llamada = unSector.iniciarLlamada(uncliente, fechaInicio, horaInicio, horaComienzoLlamada);
+                return llamada;
+            } catch (LlamadaException llamadaEx) {
+                cantidadLlamadas--;
+                throw llamadaEx;
+            }
     }
 
     private Trabajador buscarTrabajador(String CI) {

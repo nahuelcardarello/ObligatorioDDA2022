@@ -1,7 +1,6 @@
 package Logica;
 
 import Excepciones.Excepcion;
-import Excepciones.LlamadaException;
 import Modelo.Cliente;
 import Modelo.ConCosto;
 import Modelo.Exonerado;
@@ -9,12 +8,10 @@ import Modelo.Gestores;
 import Modelo.Sector;
 import Modelo.TipoCliente;
 import Modelo.Trabajador;
-import java.time.LocalDate;
-import java.time.LocalTime;
 
 public class DatosdePrueba {
 
-    public static void cargar() throws Excepcion, LlamadaException {
+    public static void cargar() throws Excepcion {
 
         //Precarga Sectores
         Sector s1 = new Sector();
@@ -92,7 +89,6 @@ public class DatosdePrueba {
         Fachada.getInstancia().AgregarCliente(c2);
         Fachada.getInstancia().AgregarCliente(c3);
 
-//        Fachada.getInstancia().altaLlamada(c3, s3, LocalDate.MIN, LocalTime.MIN);
     }
 
 }
